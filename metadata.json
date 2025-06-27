@@ -1,0 +1,6 @@
+{
+  "name": "TetrAIs",
+  "description": "A hyperminimalist Tetris game with a stark black-and-white aesthetic and a persistent chromatic glitch effect, as if viewed through 3D glasses.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
