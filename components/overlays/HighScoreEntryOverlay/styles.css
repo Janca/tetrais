@@ -1,0 +1,36 @@
+.highscore-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.name-input {
+    font-family: 'Share Tech Mono', monospace;
+    background: transparent;
+    border: 1px solid var(--foreground);
+    color: var(--foreground);
+    font-size: 1.5rem;
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+    padding: 0.5rem;
+    margin-bottom: 0rem; /* Button provides margin-top */
+    outline: none;
+    box-shadow: 
+        var(--glitch-r-x2) var(--glitch-r-y2) 0px var(--glitch-red), 
+        var(--glitch-c-x2) var(--glitch-c-y2) 0px var(--glitch-cyan);
+    transition: all 150ms ease-in-out;
+}
+
+.name-input::selection {
+    background-color: var(--foreground);
+    color: var(--background);
+}
+
+.name-input:focus {
+   box-shadow: 
+      var(--glitch-r-x1) var(--glitch-r-y1) 0px var(--glitch-red), 
+      var(--glitch-c-x1) var(--glitch-c-y1) 0px var(--glitch-cyan);
+}

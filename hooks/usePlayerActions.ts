@@ -1,29 +1,28 @@
-
-
-
 import { useCallback } from 'react';
-import { Player, Board, MoveAction } from '../types';
+import { Player, MinoBoard, MoveAction } from '../types';
 import { soundManager } from '../services/SoundManager';
 import { isColliding, rotate } from '../gameLogic';
+import { GameState } from '../App';
 
 interface PlayerActionsProps {
     player: Player;
-    board: Board;
+    board: MinoBoard;
     updatePlayerPos: (props: { x?: number; y?: number; collided?: boolean }) => void;
     setPlayer: React.Dispatch<React.SetStateAction<Player>>;
-    gameState: 'IDLE' | 'PLAYING' | 'GAME_OVER';
+    gameState: GameState;
     isPaused: boolean;
     isSettingsOpen: boolean;
+    isHighScoresOpen: boolean;
     dropTime: number | null;
     onHardDrop?: (pieceCenter: number) => void;
     recordMove: (action: MoveAction, playerState: Player, details?: any) => void;
 }
 
 export const usePlayerActions = ({
-    player, board, updatePlayerPos, setPlayer, gameState, isPaused, isSettingsOpen, dropTime, onHardDrop, recordMove
+    player, board, updatePlayerPos, setPlayer, gameState, isPaused, isSettingsOpen, isHighScoresOpen, dropTime, onHardDrop, recordMove
 }: PlayerActionsProps) => {
 
-    const canPerformAction = gameState === 'PLAYING' && !isPaused && !isSettingsOpen;
+    const canPerformAction = gameState === 'PLAYING' && !isPaused && !isSettingsOpen && !isHighScoresOpen;
 
     const movePlayer = useCallback((dir: -1 | 1) => {
         if (!canPerformAction) return;
@@ -34,26 +33,32 @@ export const usePlayerActions = ({
         }
     }, [canPerformAction, player, board, updatePlayerPos, recordMove]);
 
-    const rotatePlayer = useCallback(() => {
+    const rotatePlayer = useCallback((direction: 'cw' | 'ccw') => {
         if (!canPerformAction) return;
         
-        const clonedPlayer = JSON.parse(JSON.stringify(player));
-        clonedPlayer.tetromino.shape = rotate(clonedPlayer.tetromino.shape);
+        const prospectivePlayer = {
+            ...player,
+            pos: { ...player.pos }, // Important: shallow copy for mutation during wall kick
+            mino: {
+                ...player.mino,
+                shape: rotate(player.mino.shape, direction),
+            },
+        };
 
         // Wall kick logic
-        const originalX = clonedPlayer.pos.x;
+        const originalX = prospectivePlayer.pos.x;
         let offset = 1;
-        while(isColliding(clonedPlayer, board, {x: 0, y: 0})) {
-            clonedPlayer.pos.x += offset;
+        while(isColliding(prospectivePlayer, board, {x: 0, y: 0})) {
+            prospectivePlayer.pos.x += offset;
             offset = -(offset + (offset > 0 ? 1 : -1));
             // If offset is too large, rotation is not possible
-            if (Math.abs(offset) > clonedPlayer.tetromino.shape[0].length + 1) {
+            if (Math.abs(offset) > prospectivePlayer.mino.shape[0].length + 1) {
                 return; // Abort rotation
             }
         }
         
-        recordMove('rotate', player);
-        setPlayer(clonedPlayer);
+        recordMove('rotate', player, { direction });
+        setPlayer(prospectivePlayer);
         soundManager.playRotateSound();
     }, [canPerformAction, player, board, setPlayer, recordMove]);
 
@@ -83,7 +88,7 @@ export const usePlayerActions = ({
         updatePlayerPos({ y, collided: true });
 
         // Calculate piece center for shake effect
-        const shape = player.tetromino.shape;
+        const shape = player.mino.shape;
         let minC = shape[0].length;
         let maxC = -1;
         let hasBlocks = false;

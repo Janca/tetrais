@@ -1,17 +1,30 @@
+import { Mino } from '../types';
+import { MINOS, PIECE_KEYS } from '../constants';
 
-import { Tetromino, PieceKey } from '../types';
-import { TETROMINOS, PIECE_KEYS } from '../constants';
-
-export const selectBiasedPiece = (suggestions: Tetromino[]): Tetromino => {
+export const selectBiasedPiece = (suggestions: Mino[], weights: number[]): Mino => {
     if (!suggestions || suggestions.length === 0) {
         const randomKey = PIECE_KEYS[Math.floor(Math.random() * PIECE_KEYS.length)];
-        return TETROMINOS[randomKey];
+        return MINOS[randomKey];
     }
-    // Bias towards the "worse" pieces (earlier in the suggestions array)
-    const biasedRandom = Math.max(Math.random(), Math.random());
-    const index = Math.floor(biasedRandom * suggestions.length);
-    const safeIndex = Math.max(0, Math.min(suggestions.length - 1, index));
-    return suggestions[safeIndex];
+    
+    // Fallback if weights are not provided correctly
+    if (!weights || weights.length !== suggestions.length) {
+        console.warn('Piece suggestion weights are invalid. Falling back to random selection.');
+        const randomIndex = Math.floor(Math.random() * suggestions.length);
+        return suggestions[randomIndex];
+    }
+
+    let r = Math.random();
+    let cumulativeProbability = 0;
+    for (let i = 0; i < weights.length; i++) {
+        cumulativeProbability += weights[i];
+        if (r <= cumulativeProbability) {
+            return suggestions[i];
+        }
+    }
+
+    // Fallback in case of floating point inaccuracies or if weights don't sum to 1
+    return suggestions[suggestions.length - 1];
 };
 
 export const calculateDropTime = (linesCleared: number): number => {

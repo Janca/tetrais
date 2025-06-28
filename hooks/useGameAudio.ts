@@ -1,12 +1,13 @@
-
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { soundManager } from '../services/SoundManager';
 import { settingsService } from '../services/settingsService';
+import { GameState } from '../App';
 
 export const useGameAudio = (
-    gameState: 'IDLE' | 'PLAYING' | 'GAME_OVER',
+    gameState: GameState,
     isPaused: boolean,
-    isSettingsOpen: boolean
+    isSettingsOpen: boolean,
+    isHighScoresOpen: boolean
 ) => {
     const [initialSettings] = useState(() => {
         const settings = settingsService.getSettings();
@@ -100,15 +101,15 @@ export const useGameAudio = (
     useEffect(() => {
         if (!userInteracted) return;
 
-        const canPlayMusic = gameState === 'PLAYING' || gameState === 'IDLE';
-        const shouldPlayMusic = (canPlayMusic && !isPaused) || (isSettingsOpen && canPlayMusic);
+        const canPlayMusic = gameState === 'PLAYING' || gameState === 'IDLE' || gameState === 'CASCADING';
+        const shouldPlayMusic = (canPlayMusic && !isPaused) || ((isSettingsOpen || isHighScoresOpen) && canPlayMusic);
 
         if (shouldPlayMusic) {
             soundManager.startMusic();
         } else {
             soundManager.stopMusic();
         }
-    }, [userInteracted, gameState, isPaused, isSettingsOpen]);
+    }, [userInteracted, gameState, isPaused, isSettingsOpen, isHighScoresOpen]);
 
     // Cleanup timers and music on unmount
     useEffect(() => {

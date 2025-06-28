@@ -1,18 +1,18 @@
-import { Board, Tetromino, PieceKey } from './types';
+import { MinoBoard, Mino, PieceKey } from './types';
 
 export const BOARD_WIDTH = 10;
 export const BOARD_HEIGHT = 20;
 
-export const createEmptyBoard = (): Board => 
+export const createEmptyMinoBoard = (): MinoBoard => 
     Array.from({ length: BOARD_HEIGHT }, (): [0, 'clear'][] => 
         Array(BOARD_WIDTH).fill([0, 'clear'])
     );
 
-type TetrominoCollection = {
-    [key: string]: Tetromino;
+type MinoCollection = {
+    [key: string]: Mino;
 };
 
-export const TETROMINOS: TetrominoCollection = {
+export const MINOS: MinoCollection = {
     '0': { key: '0', shape: [[0]], color: 'transparent' },
     'I': {
         key: 'I',

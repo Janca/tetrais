@@ -1,0 +1,22 @@
+.minimal-button {
+    font-family: 'Share Tech Mono', monospace;
+    background: transparent;
+    border: 1px solid var(--foreground);
+    color: var(--foreground);
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 2rem;
+    text-shadow: 
+      calc(var(--glitch-r-x2) * -1) calc(var(--glitch-r-y2) * -1) 0 var(--glitch-red),
+      calc(var(--glitch-c-x2) * -1) calc(var(--glitch-c-y2) * -1) 0 var(--glitch-cyan);
+}
+
+.minimal-button:hover, .minimal-button:focus {
+    background: var(--foreground);
+    color: var(--background);
+    text-shadow: 1px 1px 0px var(--glitch-red), -1px -1px 0px var(--glitch-cyan);
+    outline: none;
+}

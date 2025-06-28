@@ -1,10 +1,10 @@
 export type PieceKey = 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
-export type CellValue = 0 | PieceKey;
-export type CellState = 'clear' | 'merged' | 'ghost';
-export type CellData = [CellValue, CellState];
-export type Board = CellData[][];
+export type MinoCellValue = 0 | PieceKey;
+export type CellState = 'clear' | 'merged' | 'ghost' | 'falling';
+export type MinoCellData = [MinoCellValue, CellState];
+export type MinoBoard = MinoCellData[][];
 
-export interface Tetromino {
+export interface Mino {
     shape: number[][];
     color: string;
     key: PieceKey | '0';
@@ -12,7 +12,7 @@ export interface Tetromino {
 
 export interface Player {
     pos: { x: number; y: number };
-    tetromino: Tetromino;
+    mino: Mino;
     collided: boolean;
 }
 
@@ -22,4 +22,11 @@ export interface MoveRecord {
     action: MoveAction;
     player: Player;
     details?: any;
+}
+
+export interface HighScoreEntry {
+    name: string;
+    score: number;
+    lines: number;
+    date: string;
 }

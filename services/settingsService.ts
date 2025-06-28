@@ -1,29 +1,38 @@
+import { HighScoreEntry } from "../types";
+
 export interface AppSettings {
     musicVolume: number;
     effectsVolume: number;
-    highScore: number;
-    highLines: number;
     melodyVolume: number;
     bassVolume: number;
     percussionVolume: number;
     padVolume: number;
     otherVolume: number;
+    pieceSuggestionWeights: number[];
+    physicsEnabled: boolean;
+    lowMotionEnabled: boolean;
+    highScores: HighScoreEntry[];
+    lastPlayerName: string;
 }
 
 const STORAGE_KEY = 'tetrais-settings';
+const MAX_HIGH_SCORES = 5;
 
 class SettingsService {
     private settings: AppSettings;
     private readonly defaultSettings: AppSettings = {
         musicVolume: 0.5,
         effectsVolume: 1.0,
-        highScore: 0,
-        highLines: 0,
         melodyVolume: 1.0,
         bassVolume: 1.0,
         percussionVolume: 0.8,
         padVolume: 1.0,
         otherVolume: 0.7,
+        pieceSuggestionWeights: [0.60, 0.15, 0.10, 0.05, 0.05, 0.025, 0.025],
+        physicsEnabled: false,
+        lowMotionEnabled: false,
+        highScores: [],
+        lastPlayerName: 'Player'
     };
 
     constructor() {
@@ -60,21 +69,30 @@ class SettingsService {
         (this.settings[key] as AppSettings[K]) = value;
         this.saveSettings();
     }
+    
+    public isHighScore(score: number): boolean {
+        if (score <= 0) return false;
+        const highScores = this.settings.highScores;
+        if (highScores.length < MAX_HIGH_SCORES) {
+            return true;
+        }
+        const lowestHighScore = highScores[highScores.length - 1]?.score ?? 0;
+        return score > lowestHighScore;
+    }
 
-    public checkAndSetHighScore(score: number, lines: number): boolean {
-        let updated = false;
-        if (score > this.settings.highScore) {
-            this.settings.highScore = score;
-            updated = true;
-        }
-        if (lines > this.settings.highLines) {
-            this.settings.highLines = lines;
-            updated = true;
-        }
-        if (updated) {
-            this.saveSettings();
-        }
-        return updated;
+    public addHighScore(name: string, score: number, lines: number): void {
+        const newEntry: HighScoreEntry = {
+            name,
+            score,
+            lines,
+            date: new Date().toISOString().split('T')[0],
+        };
+        
+        const newHighScores = [...this.settings.highScores, newEntry];
+        newHighScores.sort((a, b) => b.score - a.score);
+        this.settings.highScores = newHighScores.slice(0, MAX_HIGH_SCORES);
+        this.updateSetting('lastPlayerName', name);
+        this.saveSettings();
     }
 }
 

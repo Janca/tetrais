@@ -1,5 +1,6 @@
 
 
+
 class SoundManager {
     private audioContext: AudioContext | null = null;
 
@@ -334,6 +335,7 @@ class SoundManager {
     public playRotateSound = () => this.playTone(440, 0.05, 'sine', 0.2);
     public playMoveSound = () => this.playTone(660, 0.05, 'sine', 0.15);
     public playSoftDropSound = () => this.playTone(150, 0.05, 'square', 0.1);
+    public playCascadeSound = () => this.playTone(120, 0.05, 'square', 0.15);
     public playGameOverSound = (stopMusicFirst: boolean = true) => {
         if (stopMusicFirst) {
             this.stopMusic();

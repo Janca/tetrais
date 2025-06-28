@@ -7,8 +7,26 @@ const setStyleProperty = (name: string, value: string) => {
     }
 };
 
-export const useGlitchEffect = () => {
+export const useGlitchEffect = (lowMotionEnabled: boolean) => {
     useEffect(() => {
+        const resetGlitchStyles = () => {
+            setStyleProperty('--glitch-main-x', '0px');
+            setStyleProperty('--glitch-main-y', '0px');
+            setStyleProperty('--glitch-r-x1', '2.5px');
+            setStyleProperty('--glitch-r-y1', '2.5px');
+            setStyleProperty('--glitch-c-x1', '-2.5px');
+            setStyleProperty('--glitch-c-y1', '-2.5px');
+            setStyleProperty('--glitch-r-x2', '-1.5px');
+            setStyleProperty('--glitch-r-y2', '1.5px');
+            setStyleProperty('--glitch-c-x2', '1.5px');
+            setStyleProperty('--glitch-c-y2', '-1.5px');
+        };
+
+        if (lowMotionEnabled) {
+            resetGlitchStyles();
+            return;
+        }
+
         const glitchInterval = setInterval(() => {
             if (Math.random() > 0.8) {
                 const mainX = (Math.random() - 0.5) * 6;
@@ -26,32 +44,13 @@ export const useGlitchEffect = () => {
                 setStyleProperty('--glitch-c-x2', `${2 + (Math.random() - 0.5) * 4}px`);
                 setStyleProperty('--glitch-c-y2', `${-2 + (Math.random() - 0.5) * 4}px`);
             } else {
-                setStyleProperty('--glitch-main-x', '0px');
-                setStyleProperty('--glitch-main-y', '0px');
-                setStyleProperty('--glitch-r-x1', '2.5px');
-                setStyleProperty('--glitch-r-y1', '2.5px');
-                setStyleProperty('--glitch-c-x1', '-2.5px');
-                setStyleProperty('--glitch-c-y1', '-2.5px');
-                setStyleProperty('--glitch-r-x2', '-1.5px');
-                setStyleProperty('--glitch-r-y2', '1.5px');
-                setStyleProperty('--glitch-c-x2', '1.5px');
-                setStyleProperty('--glitch-c-y2', '-1.5px');
+                resetGlitchStyles();
             }
         }, 120);
 
         return () => {
             clearInterval(glitchInterval);
-            // Reset to default values on unmount
-            setStyleProperty('--glitch-main-x', '0px');
-            setStyleProperty('--glitch-main-y', '0px');
-            setStyleProperty('--glitch-r-x1', '2.5px');
-            setStyleProperty('--glitch-r-y1', '2.5px');
-            setStyleProperty('--glitch-c-x1', '-2.5px');
-            setStyleProperty('--glitch-c-y1', '-2.5px');
-            setStyleProperty('--glitch-r-x2', '-1.5px');
-            setStyleProperty('--glitch-r-y2', '1.5px');
-            setStyleProperty('--glitch-c-x2', '1.5px');
-            setStyleProperty('--glitch-c-y2', '-1.5px');
+            resetGlitchStyles();
         };
-    }, []);
+    }, [lowMotionEnabled]);
 };

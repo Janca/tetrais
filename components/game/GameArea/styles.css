@@ -1,0 +1,52 @@
+.game-panel {
+    /* This is now a simple container whose size is defined by its parent */
+}
+.game-area-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the board */
+    width:100%;
+    height: 100%;
+}
+.gameboard-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 2;
+    border: 1px solid var(--foreground);
+    box-shadow: 
+        var(--glitch-r-x2) var(--glitch-r-y2) 0px var(--glitch-red), 
+        var(--glitch-c-x2) var(--glitch-c-y2) 0px var(--glitch-cyan);
+    transition: box-shadow 50ms ease-in-out;
+}
+.settings-button,
+.highscore-button {
+    background: none;
+    border: none;
+    font-family: 'Share Tech Mono', monospace;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--foreground-light);
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+.settings-button:hover, .settings-button:focus,
+.highscore-button:hover, .highscore-button:focus {
+    color: var(--foreground);
+    border-color: var(--foreground);
+    outline: none;
+    text-shadow: 
+        1px 1px 0px var(--glitch-red), 
+        -1px -1px 0px var(--glitch-cyan);
+}
+
+@media (max-width: 1024px) {
+  .game-panel {
+    /* No longer needs special sizing here */
+  }
+}

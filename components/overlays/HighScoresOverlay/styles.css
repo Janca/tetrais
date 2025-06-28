@@ -1,0 +1,26 @@
+.close-button {
+    position: absolute;
+    top: 0rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--foreground);
+    z-index: 11;
+}
+
+/* In the high scores overlay, the panel is directly under a large title,
+   so we reduce the top margin to avoid excessive empty space. */
+.overlay-content-box .highscore-panel {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+/* The main overlay already has a title, so we can hide the one in the panel */
+.overlay-content-box .highscore-panel .highscore-title {
+    display: none;
+}

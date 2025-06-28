@@ -1,18 +1,19 @@
 
-import { Board, Player, PieceKey, CellData } from './types';
+
+import { MinoBoard, Player, PieceKey, MinoCellData } from './types';
 import { BOARD_WIDTH, BOARD_HEIGHT } from './constants';
 
 /**
  * Checks if a player's piece is colliding with board boundaries or merged cells.
- * @param player The player object with tetromino and position.
+ * @param player The player object with mino and position.
  * @param board The game board.
  * @param move The attempted move coordinates.
  * @returns True if there is a collision, false otherwise.
  */
-export const isColliding = (player: Player, board: Board, { x: moveX, y: moveY }: { x: number; y: number }): boolean => {
-    for (let y = 0; y < player.tetromino.shape.length; y += 1) {
-        for (let x = 0; x < player.tetromino.shape[y].length; x += 1) {
-            if (player.tetromino.shape[y][x] !== 0) {
+export const isColliding = (player: Player, board: MinoBoard, { x: moveX, y: moveY }: { x: number; y: number }): boolean => {
+    for (let y = 0; y < player.mino.shape.length; y += 1) {
+        for (let x = 0; x < player.mino.shape[y].length; x += 1) {
+            if (player.mino.shape[y][x] !== 0) {
                 const newY = y + player.pos.y + moveY;
                 const newX = x + player.pos.x + moveX;
 
@@ -32,14 +33,22 @@ export const isColliding = (player: Player, board: Board, { x: moveX, y: moveY }
 };
 
 /**
- * Rotates a 2D matrix (tetromino shape) 90 degrees clockwise.
+ * Rotates a 2D matrix (mino shape) 90 degrees.
  * @param shape The matrix to rotate.
+ * @param direction The direction of rotation ('cw' or 'ccw').
  * @returns The new rotated matrix.
  */
-export const rotate = (shape: number[][]): number[][] => {
-    // Transpose and reverse rows to rotate
-    const rotated = shape[0].map((_, colIndex) => shape.map(row => row[colIndex]));
-    return rotated.map(row => row.reverse());
+export const rotate = (shape: number[][], direction: 'cw' | 'ccw' = 'cw'): number[][] => {
+    // Transpose the matrix
+    const transposed = shape[0].map((_, colIndex) => shape.map(row => row[colIndex]));
+
+    if (direction === 'cw') {
+        // For clockwise, reverse the elements of each row of the transposed matrix
+        return transposed.map(row => row.reverse());
+    } else {
+        // For counter-clockwise, reverse the rows of the transposed matrix
+        return transposed.reverse();
+    }
 };
 
 /**
@@ -48,15 +57,15 @@ export const rotate = (shape: number[][]): number[][] => {
  * @param board The current board.
  * @returns A new board state with the player's piece merged.
  */
-export const mergePlayerToBoard = (player: Player, board: Board): Board => {
-    const newBoard = board.map(row => row.map(cell => [...cell] as CellData));
-    player.tetromino.shape.forEach((row, y) => {
+export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard): MinoBoard => {
+    const newBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    player.mino.shape.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
                 const boardY = player.pos.y + y;
                 const boardX = player.pos.x + x;
                 if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
-                    newBoard[boardY][boardX] = [player.tetromino.key as PieceKey, 'merged'];
+                    newBoard[boardY][boardX] = [player.mino.key as PieceKey, 'merged'];
                 }
             }
         });
@@ -69,7 +78,7 @@ export const mergePlayerToBoard = (player: Player, board: Board): Board => {
  * @param board The board to process.
  * @returns An object with the new board and the number of lines cleared.
  */
-export const clearLines = (board: Board): { newBoard: Board; linesCleared: number } => {
+export const clearLines = (board: MinoBoard): { newBoard: MinoBoard; linesCleared: number } => {
     let linesCleared = 0;
     const newBoard = board.reduce((ack, row) => {
         if (row.every(cell => cell[1] === 'merged')) {
@@ -79,6 +88,104 @@ export const clearLines = (board: Board): { newBoard: Board; linesCleared: numbe
         }
         ack.push(row);
         return ack;
-    }, [] as Board);
+    }, [] as MinoBoard);
     return { newBoard, linesCleared };
+};
+
+/**
+ * Identifies blocks that are no longer supported and marks them as 'falling'.
+ * Uses a BFS approach starting from blocks touching the ground.
+ * @param board The board to process.
+ * @returns A new board with floating blocks marked.
+ */
+export const markFloatingBlocks = (board: MinoBoard): MinoBoard => {
+    const newBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    const supported = new Set<string>();
+    const queue: {x: number, y: number}[] = [];
+
+    // 1. Find all blocks resting on the floor.
+    for (let x = 0; x < BOARD_WIDTH; x++) {
+        if (newBoard[BOARD_HEIGHT - 1][x][1] === 'merged') {
+            const key = `${x},${BOARD_HEIGHT - 1}`;
+            if (!supported.has(key)) {
+                supported.add(key);
+                queue.push({ x, y: BOARD_HEIGHT - 1 });
+            }
+        }
+    }
+
+    // 2. BFS to find all connected, supported blocks.
+    let head = 0;
+    while (head < queue.length) {
+        const { x, y } = queue[head++];
+        
+        // Check neighbors (up, left, right that could be supported by this block)
+        const neighbors = [
+            { nx: x, ny: y - 1 }, // block above
+            { nx: x - 1, ny: y }, // block to the left
+            { nx: x + 1, ny: y }, // block to the right
+        ];
+
+        for (const { nx, ny } of neighbors) {
+            if (nx >= 0 && nx < BOARD_WIDTH && ny >= 0 && ny < BOARD_HEIGHT) {
+                if (newBoard[ny][nx][1] === 'merged') {
+                    const key = `${nx},${ny}`;
+                    if (!supported.has(key)) {
+                        supported.add(key);
+                        queue.push({ x: nx, y: ny });
+                    }
+                }
+            }
+        }
+    }
+    
+    // 3. Mark all non-supported 'merged' blocks as 'falling'.
+    for (let y = 0; y < BOARD_HEIGHT; y++) {
+        for (let x = 0; x < BOARD_WIDTH; x++) {
+            if (newBoard[y][x][1] === 'merged' && !supported.has(`${x},${y}`)) {
+                newBoard[y][x][1] = 'falling';
+            }
+        }
+    }
+
+    return newBoard;
+};
+
+/**
+ * Moves all 'falling' blocks down by one step if possible.
+ * @param board The board to process.
+ * @returns An object with the new board and a flag indicating if any blocks moved.
+ */
+export const stepCascade = (board: MinoBoard): { nextBoard: MinoBoard, moved: boolean } => {
+    const nextBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    let moved = false;
+    
+    // Iterate from the bottom up to prevent blocks from moving more than once per step
+    for (let y = BOARD_HEIGHT - 2; y >= 0; y--) {
+        for (let x = 0; x < BOARD_WIDTH; x++) {
+            if (nextBoard[y][x][1] === 'falling' && nextBoard[y + 1][x][1] === 'clear') {
+                nextBoard[y + 1][x] = nextBoard[y][x];
+                nextBoard[y][x] = [0, 'clear'];
+                moved = true;
+            }
+        }
+    }
+    return { nextBoard, moved };
+};
+
+/**
+ * Changes the state of all 'falling' blocks to 'merged'.
+ * @param board The board to process.
+ * @returns A new board with all falling blocks settled.
+ */
+export const freezeFallingBlocks = (board: MinoBoard): MinoBoard => {
+    const newBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    for (let y = 0; y < BOARD_HEIGHT; y++) {
+        for (let x = 0; x < BOARD_WIDTH; x++) {
+            if (newBoard[y][x][1] === 'falling') {
+                newBoard[y][x][1] = 'merged';
+            }
+        }
+    }
+    return newBoard;
 };

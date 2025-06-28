@@ -1,73 +1,81 @@
-
-
-
 import { useCallback, useRef } from 'react';
-import { Player, MoveAction } from '../types';
+import { GameState } from '../App';
 
 interface GameControlProps {
-    gameState: 'IDLE' | 'PLAYING' | 'GAME_OVER';
+    gameState: GameState;
     isPaused: boolean;
     isSettingsOpen: boolean;
+    isHighScoresOpen: boolean;
     movePlayer: (dir: -1 | 1) => void;
-    rotatePlayer: () => void;
+    rotatePlayer: (direction: 'cw' | 'ccw') => void;
     hardDrop: () => void;
     togglePause: () => void;
-    setDropTime: (time: number | null) => void;
-    resetDropTime: () => void;
-    player: Player;
-    recordMove: (action: MoveAction, playerState: Player, details?: any) => void;
+    softDropStart: () => void;
+    softDropEnd: () => void;
 }
 
 export const useGameControls = ({
-    gameState, isPaused, isSettingsOpen, movePlayer, rotatePlayer,
-    hardDrop, togglePause, setDropTime, resetDropTime,
-    player, recordMove
+    gameState, isPaused, isSettingsOpen, isHighScoresOpen, movePlayer, rotatePlayer,
+    hardDrop, togglePause, softDropStart, softDropEnd
 }: GameControlProps) => {
-    const keysDown = useRef<Set<number>>(new Set());
+    const keysDown = useRef<Set<string>>(new Set());
 
     const handleKeyDown = useCallback((event: KeyboardEvent) => {
-        if (isSettingsOpen) return;
-        const { keyCode } = event;
+        if (isSettingsOpen || isHighScoresOpen) return;
+        const { code } = event;
 
-        // Use a ref to prevent multiple triggers for hold-down keys unless intended
-        if (keysDown.current.has(keyCode)) {
+        // Use a ref to prevent multiple triggers for hold-down keys
+        if (keysDown.current.has(code)) {
             return;
         }
 
-        if (keyCode === 80) { // 'P' to pause
+        if (code === 'KeyP') {
             togglePause();
-            keysDown.current.add(keyCode);
+            keysDown.current.add(code);
             return;
         }
 
         if (gameState !== 'PLAYING' || isPaused) return;
         
-        keysDown.current.add(keyCode);
+        keysDown.current.add(code);
 
-        switch (keyCode) {
-            case 65: movePlayer(-1); break; // A
-            case 68: movePlayer(1); break; // D
-            case 83: 
-                recordMove('softDrop_start', player);
-                setDropTime(50); 
-                break; // S (soft drop)
-            case 81: rotatePlayer(); break; // Q
-            case 69: rotatePlayer(); break; // E
-            case 87: case 32: hardDrop(); break; // W or Space
+        switch (code) {
+            case 'KeyA':
+            case 'ArrowLeft':
+                movePlayer(-1);
+                break;
+            case 'KeyD':
+            case 'ArrowRight':
+                movePlayer(1);
+                break;
+            case 'KeyS':
+            case 'ArrowDown':
+                softDropStart();
+                break;
+            case 'KeyQ':
+                rotatePlayer('ccw');
+                break;
+            case 'KeyE':
+            case 'ArrowUp':
+                rotatePlayer('cw');
+                break;
+            case 'Space':
+            case 'KeyW':
+                hardDrop();
+                break;
         }
-    }, [gameState, isSettingsOpen, isPaused, togglePause, movePlayer, setDropTime, rotatePlayer, hardDrop, player, recordMove]);
+    }, [gameState, isSettingsOpen, isHighScoresOpen, isPaused, togglePause, movePlayer, rotatePlayer, hardDrop, softDropStart]);
 
     const handleKeyUp = useCallback((event: KeyboardEvent) => {
-        const { keyCode } = event;
-        keysDown.current.delete(keyCode);
+        const { code } = event;
+        keysDown.current.delete(code);
 
-        if (isSettingsOpen || gameState !== 'PLAYING' || isPaused) return;
+        if (isSettingsOpen || isHighScoresOpen || gameState !== 'PLAYING' || isPaused) return;
 
-        if (keyCode === 83) { // 'S' key release
-            recordMove('softDrop_end', player);
-            resetDropTime();
+        if (code === 'KeyS' || code === 'ArrowDown') {
+            softDropEnd();
         }
-    }, [isSettingsOpen, gameState, isPaused, resetDropTime, player, recordMove]);
+    }, [isSettingsOpen, isHighScoresOpen, gameState, isPaused, softDropEnd]);
     
     return { handleKeyDown, handleKeyUp };
 };
