@@ -1,14 +1,13 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Mino } from '@/types';
 import { MiniBlock } from '@components/ui/MiniBlock';
 import './styles.css';
 
-interface TetrominoPreviewProps {
+interface MinoPreviewProps {
     piece: Mino | null;
 }
 
-export const TetrominoPreview: React.FC<TetrominoPreviewProps> = ({ piece }) => {
+export const MinoPreview: React.FC<MinoPreviewProps> = ({ piece }) => {
     const gridRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {

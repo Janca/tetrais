@@ -4,13 +4,13 @@
  */
 import React from 'react';
 import { Mino } from '@/types';
-import { TetrominoPreview } from '@components/ui';
-import '@components/ui/TetrominoPreview/styles.css';
+import { MinoPreview } from '@components/ui';
+import '@components/ui/MinoPreview/styles.css';
 
 interface HeldPiecePreviewProps {
     piece: Mino | null;
 }
 
 export const HeldPiecePreview: React.FC<HeldPiecePreviewProps> = ({ piece }) => {
-    return <TetrominoPreview piece={piece} />;
+    return <MinoPreview piece={piece} />;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mino } from '@/types';
-import { TetrominoPreview } from '@components/ui';
+import { MinoPreview } from '@components/ui';
 import './styles.css';
 
 export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number[] }> = ({ pieces, weights }) => {
@@ -20,7 +20,7 @@ export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number
 
                         return (
                             <div key={piece.key} className="piece-odds-wrapper">
-                                <TetrominoPreview piece={piece} />
+                                <MinoPreview piece={piece} />
                                 <span className="piece-odds-percentage">{`${weightPercentage}%`}</span>
                             </div>
                         );
