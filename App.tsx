@@ -117,60 +117,7 @@ const App: React.FC = () => {
         startGame();
     }, [handleUserInteraction, startGame]);
 
-    const handleDebugDump = useCallback(() => {
-        if (!gameOverData) {
-            console.warn("No game over data to dump.");
-            return;
-        }
-
-        const cleanedHistory = gameOverData.moveHistory.map((move: MoveRecord) => ({
-            ...move,
-            player: {
-                pos: move.player.pos,
-                minoKey: move.player.mino.key,
-                collided: move.player.collided,
-            }
-        }));
-
-        const cleanedCollidingPlayer = {
-            pos: gameOverData.collidingPlayer.pos,
-            minoKey: gameOverData.collidingPlayer.mino.key,
-            collided: gameOverData.collidingPlayer.collided,
-        };
-
-        const cleanedSuggestions = gameOverData.finalSuggestions.map((p: Mino) => p.key);
-
-        const debugData = {
-            ...gameOverData,
-            collidingPlayer: cleanedCollidingPlayer,
-            moveHistory: cleanedHistory,
-            finalSuggestions: cleanedSuggestions,
-        };
-
-        const jsonString = JSON.stringify(debugData, null, 2);
-
-        const blob = new Blob([jsonString], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `MinoAIs-debug-dump-${new Date().toISOString().replace(/:/g, '-')}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, [gameOverData]);
-
-    const handleHighScoreSubmit = useCallback((name: string) => {
-        if (gameOverData && gameOverData.finalScore !== undefined) {
-            settingsService.addHighScore(name, gameOverData.finalScore, gameOverData.finalLines);
-            setGameState('GAME_OVER');
-        }
-    }, [gameOverData, setGameState]);
-
-    const handleRestart = (event: React.MouseEvent<HTMLButtonElement>) => {
-        if (event.shiftKey) {
-            handleDebugDump();
-        }
+    const handleRestart = () => {
         fullStartGame();
     };
 

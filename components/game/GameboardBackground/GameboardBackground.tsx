@@ -1,5 +1,6 @@
 import React from 'react';
 import { MinoBoard } from '../../../types';
+import './styles.css';
 
 const EffectCell: React.FC = () => {
     const style: React.CSSProperties = {
@@ -12,7 +13,8 @@ const EffectCell: React.FC = () => {
 };
 
 const GameboardBackground: React.FC<{ board: MinoBoard }> = ({ board }) => {
-    const cells = board.flatMap((row, y) =>
+    const visibleBoard = board.slice(2); // Slice the board to align with the foreground
+    const cells = visibleBoard.flatMap((row, y) =>
         row.map((cell, x) => {
             const coordKey = `${y}-${x}`;
             if (cell[1] === 'merged') {
