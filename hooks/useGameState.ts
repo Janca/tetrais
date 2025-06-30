@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { MinoBoard, Player, Mino, MoveRecord, MoveAction, MinoCellData, PieceKey } from '../types';
 import { createEmptyMinoBoard, BOARD_WIDTH, MINOS, BOARD_HEIGHT } from '../constants';
-import { getPieceSuggestions, selectBiasedPiece, calculateDropTime, logToFile } from '../utils';
+import { getPieceSuggestions, selectBiasedPiece, calculateDropTime } from '../utils';
 import { settingsService, soundManager } from '../services';
 import { calculateGhostPosition, isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate } from '../gameLogic';
 import { GameState } from '../App';
@@ -73,8 +73,6 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
                 level,
             };
             setGameOverData(finalGameOverData);
-            logToFile('game_over.debug', { newPlayer, currentBoard });
-            logToFile('move_history.debug', moveHistory);
             setDropTime(null);
             soundManager.playGameOverSound(true);
             setGameState(settingsService.isHighScore(score) ? 'HIGH_SCORE_ENTRY' : 'GAME_OVER');
