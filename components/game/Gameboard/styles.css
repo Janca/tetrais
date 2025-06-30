@@ -1,4 +1,6 @@
 .gameboard-grid {
+    --mino-color: var(--foreground);
+
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(20, 1fr);
@@ -14,7 +16,7 @@
 }
 
 .gameboard-cell.merged {
-    background-color: #888;
+    background-color: var(--mino-color);
 }
 
 .player-piece {
@@ -23,11 +25,11 @@
     box-shadow: 1px 1px 0 var(--glitch-red), -1px -1px 0 var(--glitch-cyan);
 }
 
-.mino-I { background-color: #00ffff; }
-.mino-J { background-color: #0000ff; }
-.mino-L { background-color: #ff7f00; }
-.mino-O { background-color: #ffff00; }
-.mino-S { background-color: #00ff00; }
-.mino-T { background-color: #800080; }
-.mino-Z { background-color: #ff0000; }
+.mino-I { background-color: var(--mino-color); }
+.mino-J { background-color: var(--mino-color); }
+.mino-L { background-color: var(--mino-color); }
+.mino-O { background-color: var(--mino-color); }
+.mino-S { background-color: var(--mino-color); }
+.mino-T { background-color: var(--mino-color); }
+.mino-Z { background-color: var(--mino-color); }
 .mino-0 { background-color: transparent; }

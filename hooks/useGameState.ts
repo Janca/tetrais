@@ -1,20 +1,18 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { MinoBoard, Player, Mino, MoveRecord, MoveAction, MinoCellData } from '../types';
+import { MinoBoard, Player, Mino, MoveRecord, MoveAction, MinoCellData, PieceKey } from '../types';
 import { createEmptyMinoBoard, BOARD_WIDTH, MINOS, BOARD_HEIGHT } from '../constants';
-import { getPieceSuggestions } from '../services/minosService';
-import { selectBiasedPiece, calculateDropTime } from '../utils/gameHelpers';
-import { soundManager } from '../services/SoundManager';
-import { logToFile } from '../utils/logging';
-import { isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks } from '../gameLogic';
-import { settingsService } from '../services/settingsService';
+import { getPieceSuggestions, settingsService, soundManager } from '../services';
+import { selectBiasedPiece, calculateDropTime, logToFile } from '../utils';
+import { calculateGhostPosition, isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate } from '../gameLogic';
 import { GameState } from '../App';
 
 
 interface UseGameStateProps {
     physicsEnabled: boolean;
+    onHardDrop?: (pieceCenter: number) => void;
 }
 
-export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
+export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) => {
     const [board, setBoard] = useState<MinoBoard>(createEmptyMinoBoard());
     const [player, setPlayer] = useState<Player>({
         pos: { x: 0, y: 0 },
@@ -29,12 +27,12 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
     const [dropTime, setDropTime] = useState<number | null>(1000);
     const [moveHistory, setMoveHistory] = useState<MoveRecord[]>([]);
     const [gameOverData, setGameOverData] = useState<any>(null);
+    const [displayBoard, setDisplayBoard] = useState<MinoBoard>(createEmptyMinoBoard());
 
     const cascadeTimerRef = useRef<number | null>(null);
     const cascadeTimeRef = useRef(0);
 
     const recordMove = useCallback((action: MoveAction, playerState: Player, details?: any) => {
-        // Deep copy player state to avoid mutation issues with stale closures
         const playerCopy = JSON.parse(JSON.stringify(playerState));
         setMoveHistory(prev => [...prev, {
             gameTime: Date.now(),
@@ -58,18 +56,11 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
 
         const weights = settingsService.getSettings().pieceSuggestionWeights;
         const newPiece = selectBiasedPiece(suggestions, weights);
-
-        // Adjust spawn position to be fully in the "negative" space
         const spawnY = -newPiece.shape.filter(row => row.some(cell => cell !== 0)).length + 1;
         const spawnPos = { x: Math.floor(BOARD_WIDTH / 2) - 2, y: spawnY };
         
-        const newPlayer: Player = {
-            pos: spawnPos,
-            mino: newPiece,
-            collided: false,
-        };
+        const newPlayer: Player = { pos: spawnPos, mino: newPiece, collided: false };
 
-        // If the new piece collides immediately, it's game over.
         if (isColliding(newPlayer, currentBoard, { x: 0, y: 0 })) {
             const finalGameOverData = {
                 timestamp: new Date().toISOString(),
@@ -82,26 +73,15 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
                 level,
             };
             setGameOverData(finalGameOverData);
-
-            logToFile('game_over.debug', {
-                newPlayer,
-                currentBoard,
-            });
+            logToFile('game_over.debug', { newPlayer, currentBoard });
             logToFile('move_history.debug', moveHistory);
-            
             setDropTime(null);
             soundManager.playGameOverSound(true);
-            
-            if (settingsService.isHighScore(score)) {
-                setGameState('HIGH_SCORE_ENTRY');
-            } else {
-                setGameState('GAME_OVER');
-            }
+            setGameState(settingsService.isHighScore(score) ? 'HIGH_SCORE_ENTRY' : 'GAME_OVER');
             return;
         }
         
         setPlayer(newPlayer);
-
     }, [score, lines, level, moveHistory]);
 
     const startGame = useCallback(() => {
@@ -111,26 +91,89 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
         setLines(0);
         setLevel(0);
         setDropTime(calculateDropTime(0));
-        setMoveHistory([]); // Reset history
-        setGameOverData(null); // Reset game over data
+        setMoveHistory([]);
+        setGameOverData(null);
         resetPlayer(startBoard);
         setGameState('PLAYING');
     }, [resetPlayer]);
 
-    const handleLineClear = useCallback((boardWithPiece: MinoBoard, player: Player) => {
+    // Player Actions
+    const movePlayer = useCallback((dir: -1 | 1) => {
+        if (gameState !== 'PLAYING') return;
+        if (!isColliding(player, board, { x: dir, y: 0 })) {
+            recordMove('move', player, { dir });
+            updatePlayerPos({ x: dir });
+            soundManager.playMoveSound();
+        }
+    }, [gameState, player, board, updatePlayerPos, recordMove]);
+
+    const rotatePlayer = useCallback((direction: 'cw' | 'ccw') => {
+        if (gameState !== 'PLAYING') return;
+        
+        const prospectivePlayer = { ...player, mino: { ...player.mino, shape: rotate(player.mino.shape, direction) } };
+        let offset = 1;
+        while (isColliding(prospectivePlayer, board, { x: 0, y: 0 })) {
+            prospectivePlayer.pos.x += offset;
+            offset = -(offset + (offset > 0 ? 1 : -1));
+            if (Math.abs(offset) > prospectivePlayer.mino.shape[0].length + 1) return;
+        }
+        
+        recordMove('rotate', player, { direction });
+        setPlayer(prospectivePlayer);
+        soundManager.playRotateSound();
+    }, [gameState, player, board, setPlayer, recordMove]);
+
+    const drop = useCallback(() => {
+        if (gameState !== 'PLAYING') return;
+        
+        recordMove('drop', player);
+        if (!isColliding(player, board, { x: 0, y: 1 })) {
+            updatePlayerPos({ y: 1, collided: false });
+            if (dropTime !== null && dropTime <= 50) soundManager.playSoftDropSound();
+        } else {
+            soundManager.playLockSound();
+            updatePlayerPos({ collided: true });
+        }
+    }, [gameState, player, board, updatePlayerPos, dropTime, recordMove]);
+
+    const hardDrop = useCallback(() => {
+        if (gameState !== 'PLAYING') return;
+        let y = 0;
+        while (!isColliding(player, board, { x: 0, y: y + 1 })) y++;
+        
+        recordMove('hardDrop', player);
+        soundManager.playHardLockSound();
+        updatePlayerPos({ y, collided: true });
+
+        const shape = player.mino.shape;
+        let minC = shape[0].length, maxC = -1, hasBlocks = false;
+        for (let r = 0; r < shape.length; r++) {
+            for (let c = 0; c < shape[r].length; c++) {
+                if (shape[r][c] === 1) {
+                    hasBlocks = true;
+                    if (c < minC) minC = c;
+                    if (c > maxC) maxC = c;
+                }
+            }
+        }
+        
+        if (hasBlocks) {
+            onHardDrop?.(player.pos.x + (minC + maxC) / 2.0);
+        } else {
+            onHardDrop?.(player.pos.x);
+        }
+    }, [gameState, player, board, updatePlayerPos, onHardDrop, recordMove]);
+
+    const handleLineClear = useCallback((boardWithPiece: MinoBoard) => {
         if (!physicsEnabled) {
-            // --- Traditional Gameplay ---
             const { newBoard, linesCleared } = clearLines(boardWithPiece, player);
             if (linesCleared > 0) {
                 soundManager.playLineClearSound();
-                const linePoints = [40, 100, 300, 1200];
-                const pointsEarned = (linePoints[linesCleared - 1] || 0) * (level + 1);
+                const pointsEarned = [40, 100, 300, 1200][linesCleared - 1] * (level + 1);
                 setScore(prev => prev + pointsEarned);
-
                 const newTotalLines = lines + linesCleared;
                 setLines(newTotalLines);
                 setLevel(Math.floor(newTotalLines / 5));
-
                 setBoard(newBoard);
                 resetPlayer(newBoard);
             } else {
@@ -140,41 +183,30 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
             return;
         }
 
-        // --- Physics-Enabled Gameplay ---
         let clearedRowsIndexes: number[] = [];
         boardWithPiece.forEach((row, y) => {
-            if (row.every(cell => cell[1] === 'merged')) {
-                clearedRowsIndexes.push(y);
-            }
+            if (row.every(cell => cell[1] === 'merged')) clearedRowsIndexes.push(y);
         });
         const linesCleared = clearedRowsIndexes.length;
 
         if (linesCleared > 0) {
             soundManager.playLineClearSound();
-            const linePoints = [40, 100, 300, 1200];
-            const pointsEarned = (linePoints[linesCleared - 1] || 0) * (level + 1);
+            const pointsEarned = [40, 100, 300, 1200][linesCleared - 1] * (level + 1);
             setScore(prev => prev + pointsEarned);
-
             const newTotalLines = lines + linesCleared;
             setLines(newTotalLines);
             setLevel(Math.floor(newTotalLines / 5));
             
-            const boardWithEmptyRows = boardWithPiece.map((row, y) => {
-                if (clearedRowsIndexes.includes(y)) {
-                    return Array(BOARD_WIDTH).fill([0, 'clear'] as MinoCellData);
-                }
-                return row;
-            });
+            const boardWithEmptyRows = boardWithPiece.map((row, y) => 
+                clearedRowsIndexes.includes(y) ? Array(BOARD_WIDTH).fill([0, 'clear'] as MinoCellData) : row
+            );
             
             const boardToCascade = markFloatingBlocks(boardWithEmptyRows);
-            const hasFallingBlocks = boardToCascade.some(row => row.some(cell => cell[1] === 'falling'));
-
-            if (hasFallingBlocks) {
+            if (boardToCascade.some(row => row.some(cell => cell[1] === 'falling'))) {
                 setBoard(boardToCascade);
-                setPlayer(prev => ({...prev, mino: MINOS['0']})); // Hide player piece
+                setPlayer(prev => ({...prev, mino: MINOS['0']}));
                 setGameState('CASCADING');
             } else {
-                 // No blocks are falling, but we need to compact the board from the clear.
                 const compactedBoard = boardWithEmptyRows.filter(row => row.some(cell => cell[1] !== 'clear'));
                 while(compactedBoard.length < BOARD_HEIGHT) {
                     compactedBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
@@ -186,75 +218,56 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
             setBoard(boardWithPiece);
             resetPlayer(boardWithPiece);
         }
-    }, [lines, level, physicsEnabled, resetPlayer]);
+    }, [lines, level, physicsEnabled, resetPlayer, player]);
 
-
-    // Piece collision and line clearing
     useEffect(() => {
-        if (!player.collided || gameState !== 'PLAYING') {
-            return;
-        }
+        if (!player.collided || gameState !== 'PLAYING') return;
         const boardWithPiece = mergePlayerToMinoBoard(player, board);
-        handleLineClear(boardWithPiece, player);
+        setBoard(boardWithPiece);
+        setPlayer(prev => ({ ...prev, mino: MINOS['0'] }));
+        setGameState('PROCESSING_BOARD');
+    }, [player.collided, gameState, board]);
 
-    }, [player.collided, gameState, board, handleLineClear]);
+    useEffect(() => {
+        if (gameState !== 'PROCESSING_BOARD') return;
+        handleLineClear(board);
+        setGameState(prev => prev === 'PROCESSING_BOARD' ? 'PLAYING' : prev);
+    }, [gameState, board, handleLineClear]);
     
     const runCascade = useCallback(() => {
         setBoard(currentBoard => {
             const { nextBoard: steppedBoard, moved } = stepCascade(currentBoard);
-            
-            // If blocks are still falling, continue the animation.
             if (moved) {
                 soundManager.playCascadeSound();
                 return steppedBoard;
             }
     
-            // --- Cascade step has finished, blocks have settled ---
-            if (cascadeTimerRef.current) {
-                cancelAnimationFrame(cascadeTimerRef.current);
-                cascadeTimerRef.current = null;
-            }
+            if (cascadeTimerRef.current) cancelAnimationFrame(cascadeTimerRef.current);
+            cascadeTimerRef.current = null;
     
             const frozenBoard = freezeFallingBlocks(steppedBoard);
-            
-            // Check if the settled blocks created new lines.
             let clearedRowsIndexes: number[] = [];
             frozenBoard.forEach((row, y) => {
-                if (row.every(cell => cell[1] === 'merged')) {
-                    clearedRowsIndexes.push(y);
-                }
+                if (row.every(cell => cell[1] === 'merged')) clearedRowsIndexes.push(y);
             });
             const linesCleared = clearedRowsIndexes.length;
     
             if (linesCleared > 0) {
-                // --- CHAIN REACTION ---
                 soundManager.playLineClearSound();
-                const linePoints = [40, 100, 300, 1200];
-                const pointsEarned = (linePoints[linesCleared - 1] || 0) * (level + 1) * 1.5; // Cascade bonus
+                const pointsEarned = [40, 100, 300, 1200][linesCleared - 1] * (level + 1) * 1.5;
                 setScore(prev => prev + pointsEarned);
-    
                 const newTotalLines = lines + linesCleared;
                 setLines(newTotalLines);
                 setLevel(Math.floor(newTotalLines / 5));
     
-                // Create a new board with the newly cleared lines empty
-                const boardWithEmptyRows = frozenBoard.map((row, y) => {
-                    if (clearedRowsIndexes.includes(y)) {
-                        return Array(BOARD_WIDTH).fill([0, 'clear'] as MinoCellData);
-                    }
-                    return row;
-                });
+                const boardWithEmptyRows = frozenBoard.map((row, y) => 
+                    clearedRowsIndexes.includes(y) ? Array(BOARD_WIDTH).fill([0, 'clear'] as MinoCellData) : row
+                );
     
-                // Mark any new floating blocks to start the next cascade cycle
                 const boardToCascadeAgain = markFloatingBlocks(boardWithEmptyRows);
-                const hasFallingBlocks = boardToCascadeAgain.some(row => row.some(cell => cell[1] === 'falling'));
-                
-                if (hasFallingBlocks) {
-                    // There are more blocks to fall, so we continue the CASCADING state
-                    // by returning the new board. The useEffect will start a new animation loop.
+                if (boardToCascadeAgain.some(row => row.some(cell => cell[1] === 'falling'))) {
                     return boardToCascadeAgain;
                 } else {
-                    // Edge case: a clear didn't cause more falling. Compact and end turn.
                     const compactedBoard = boardWithEmptyRows.filter(row => row.some(cell => cell[1] !== 'clear'));
                     while (compactedBoard.length < BOARD_HEIGHT) {
                         compactedBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
@@ -264,10 +277,8 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
                     return compactedBoard as MinoBoard;
                 }
             } else {
-                // --- CASCADE ENDS, NO NEW LINES ---
-                // The board might have empty rows from previous clears that need removal.
                 const compactedBoard = frozenBoard.filter(row => row.some(cell => cell[1] !== 'clear'));
-                 while (compactedBoard.length < BOARD_HEIGHT) {
+                while (compactedBoard.length < BOARD_HEIGHT) {
                     compactedBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
                 }
                 setGameState('PLAYING');
@@ -277,26 +288,20 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
         });
     }, [lines, level, resetPlayer]);
 
-
-    // useEffect to manage the cascade animation loop
     useEffect(() => {
         if (gameState !== 'CASCADING') {
-            if (cascadeTimerRef.current) {
-                cancelAnimationFrame(cascadeTimerRef.current);
-                cascadeTimerRef.current = null;
-            }
+            if (cascadeTimerRef.current) cancelAnimationFrame(cascadeTimerRef.current);
             return;
         }
         
         if (!cascadeTimerRef.current) {
             cascadeTimeRef.current = 0;
             let lastTime = 0;
-            
             const loop = (time: number) => {
                 if (lastTime > 0) {
                     const deltaTime = time - lastTime;
                     cascadeTimeRef.current += deltaTime;
-                    if (cascadeTimeRef.current > 500) { // cascade step speed
+                    if (cascadeTimeRef.current > 500) {
                         runCascade();
                         cascadeTimeRef.current = 0;
                     }
@@ -306,19 +311,51 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
             };
             cascadeTimerRef.current = requestAnimationFrame(loop);
         }
-
         return () => {
-            if (cascadeTimerRef.current) {
-                cancelAnimationFrame(cascadeTimerRef.current);
-                cascadeTimerRef.current = null;
-            }
-        }
+            if (cascadeTimerRef.current) cancelAnimationFrame(cascadeTimerRef.current);
+        };
     }, [gameState, runCascade]);
 
+    useEffect(() => {
+        const newDisplayBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+        const ghostY = calculateGhostPosition(player, board);
+
+        if (gameState === 'PLAYING') {
+            // Draw ghost piece
+            player.mino.shape.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        const boardY = ghostY + y;
+                        const boardX = player.pos.x + x;
+                        if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
+                            if (newDisplayBoard[boardY][boardX][1] === 'clear') {
+                                newDisplayBoard[boardY][boardX] = [player.mino.key as PieceKey, 'ghost'];
+                            }
+                        }
+                    }
+                });
+            });
+
+            // Draw player piece
+            player.mino.shape.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        const boardY = player.pos.y + y;
+                        const boardX = player.pos.x + x;
+                        if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
+                            newDisplayBoard[boardY][boardX] = [player.mino.key as PieceKey, 'player'];
+                        }
+                    }
+                });
+            });
+        }
+        setDisplayBoard(newDisplayBoard);
+    }, [player, board, gameState]);
 
     return {
-        board, player, pieceSuggestions, score, lines, level, gameState, dropTime,
-        gameOverData, recordMove,
-        setDropTime, setGameState, startGame, updatePlayerPos, setPlayer,
+        board: displayBoard,
+        player, pieceSuggestions, score, lines, level, gameState, dropTime,
+        gameOverData, recordMove, setDropTime, setGameState, startGame, 
+        movePlayer, rotatePlayer, drop, hardDrop,
     };
 };

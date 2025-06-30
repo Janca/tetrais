@@ -1,23 +1,25 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './styles.css';
 
-import { useGameState } from './hooks/useGameState';
-import { usePlayerActions } from './hooks/usePlayerActions';
-import { useGameControls } from './hooks/useGameControls';
-import { useGameLoop } from './hooks/useGameLoop';
-import { useGameAudio } from './hooks/useGameAudio';
-import { useGlitchEffect } from './hooks/useGlitchEffect';
+import {
+    useGameState,
+    useGameControls,
+    useGameLoop,
+    useGameAudio,
+    useGlitchEffect,
+} from './hooks';
 
-import { SettingsOverlay } from './components/overlays/SettingsOverlay/SettingsOverlay';
-import { HighScoreEntryOverlay } from './components/overlays/HighScoreEntryOverlay/HighScoreEntryOverlay';
-import { HighScoresOverlay } from './components/overlays/HighScoresOverlay/HighScoresOverlay';
-import { GameArea } from './components/game/GameArea/GameArea';
-import { PieceSuggestionsPreview } from './components/info/PieceSuggestionsPreview/PieceSuggestionsPreview';
-import { ControlsInfo } from './components/info/ControlsInfo/ControlsInfo';
-import DebugOverlay from './components/ui/DebugOverlay/DebugOverlay';
-import { calculateDropTime } from './utils/gameHelpers';
-import { settingsService } from './services/settingsService';
-import { soundManager } from './services/SoundManager';
+import {
+    SettingsOverlay,
+    HighScoreEntryOverlay,
+    HighScoresOverlay,
+    GameArea,
+    PieceSuggestionsPreview,
+    ControlsInfo,
+    DebugOverlay,
+} from './components';
+import { calculateDropTime } from './utils';
+import { settingsService, soundManager } from './services';
 import { MoveRecord, Mino } from './types';
 
 export type ShakeType =
@@ -27,7 +29,7 @@ export type ShakeType =
     | 'left-2' | 'center-2' | 'right-2'
     | 'left-3' | 'center-3' | 'right-3';
 
-export type GameState = 'IDLE' | 'PLAYING' | 'GAME_OVER' | 'CASCADING' | 'HIGH_SCORE_ENTRY';
+export type GameState = 'IDLE' | 'PLAYING' | 'GAME_OVER' | 'CASCADING' | 'HIGH_SCORE_ENTRY' | 'PROCESSING_BOARD';
 
 const App: React.FC = () => {
     // UI State
@@ -38,10 +40,10 @@ const App: React.FC = () => {
     const appContainerRef = useRef<HTMLDivElement>(null);
 
     // Persisted Settings State
-    const [pieceSuggestionWeights] = useState(() => settingsService.getSettings().pieceSuggestionWeights);
     const [physicsEnabled] = useState(() => settingsService.getSettings().physicsEnabled);
     const [lowMotionEnabled, setLowMotionEnabled] = useState(() => settingsService.getSettings().lowMotionEnabled);
     const [hapticsEnabled, setHapticsEnabled] = useState(() => settingsService.getSettings().hapticsEnabled);
+    const [pieceSuggestionWeights] = useState(() => settingsService.getSettings().pieceSuggestionWeights);
 
     const handleLowMotionChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const enabled = event.target.checked;
@@ -55,12 +57,32 @@ const App: React.FC = () => {
         settingsService.updateSetting('hapticsEnabled', enabled);
     }, []);
 
+    // Player Actions Hook
+    const triggerShake = useCallback((pieceCenter: number) => {
+        if (lowMotionEnabled) {
+            setShakeType('low-motion');
+            return;
+        }
+
+        const shakeVariation = Math.floor(Math.random() * 3) + 1;
+
+        // BOARD_WIDTH is 10.
+        // Left third: < 3.5, Center: 3.5-6.5, Right third: > 6.5
+        if (pieceCenter < 3.5) {
+            setShakeType(`left-${shakeVariation}` as ShakeType);
+        } else if (pieceCenter > 6.5) {
+            setShakeType(`right-${shakeVariation}` as ShakeType);
+        } else {
+            setShakeType(`center-${shakeVariation}` as ShakeType);
+        }
+    }, [lowMotionEnabled]);
+
     // Game State Hook
     const {
         board, player, pieceSuggestions, score, lines, level, gameState, dropTime,
-        gameOverData, recordMove,
-        setDropTime, startGame, updatePlayerPos, setPlayer, setGameState
-    } = useGameState({ physicsEnabled });
+        gameOverData, recordMove, setDropTime, setGameState, startGame, 
+        movePlayer, rotatePlayer, drop, hardDrop,
+    } = useGameState({ physicsEnabled, onHardDrop: triggerShake });
 
     // UI and Audio Hooks
     const {
@@ -151,32 +173,6 @@ const App: React.FC = () => {
         }
         fullStartGame();
     };
-
-    // Player Actions Hook
-    const triggerShake = useCallback((pieceCenter: number) => {
-        if (lowMotionEnabled) {
-            setShakeType('low-motion');
-            return;
-        }
-
-        const shakeVariation = Math.floor(Math.random() * 3) + 1;
-
-        // BOARD_WIDTH is 10.
-        // Left third: < 3.5, Center: 3.5-6.5, Right third: > 6.5
-        if (pieceCenter < 3.5) {
-            setShakeType(`left-${shakeVariation}` as ShakeType);
-        } else if (pieceCenter > 6.5) {
-            setShakeType(`right-${shakeVariation}` as ShakeType);
-        } else {
-            setShakeType(`center-${shakeVariation}` as ShakeType);
-        }
-    }, [lowMotionEnabled]);
-
-    const { movePlayer, rotatePlayer, drop, hardDrop } = usePlayerActions({
-        player, board, updatePlayerPos, setPlayer, gameState, isPaused, isSettingsOpen, isHighScoresOpen, dropTime,
-        onHardDrop: triggerShake,
-        recordMove,
-    });
 
     // Game Loop Hook
     useGameLoop(drop, dropTime, gameState, isPaused, isSettingsOpen, isHighScoresOpen);

@@ -219,3 +219,19 @@ export const freezeFallingBlocks = (board: MinoBoard): MinoBoard => {
     }
     return newBoard;
 };
+
+/**
+ * Calculates the position of the ghost piece.
+ * @param player The player object.
+ * @param board The current board.
+ * @returns The y position of the ghost piece.
+ */
+export const calculateGhostPosition = (player: Player, board: MinoBoard): number => {
+    let ghostY = player.pos.y;
+    if (player.mino.shape.some(row => row.some(cell => cell === 1))) {
+        while (!isColliding(player, board, { x: 0, y: ghostY - player.pos.y + 1 })) {
+            ghostY++;
+        }
+    }
+    return ghostY;
+};

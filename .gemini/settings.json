@@ -1,5 +1,6 @@
 {
   "autoAccept": true,
   "sandbox": "docker",
-  "theme": "ANSI"
+  "theme": "ANSI",
+  "contextFileName":"AGENTS.md"
 }

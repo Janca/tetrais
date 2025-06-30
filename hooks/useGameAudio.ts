@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { soundManager } from '../services/SoundManager';
-import { settingsService } from '../services/settingsService';
+import { soundManager, settingsService } from '../services';
 import { GameState } from '../App';
 
 export const useGameAudio = (

@@ -46,7 +46,7 @@ export const GameArea: React.FC<GameAreaProps> = ({
         player,
     });
 
-    const memoizedGameboard = useMemo(() => <Gameboard board={board} player={player} />, [board, player]);
+    const memoizedGameboard = useMemo(() => <Gameboard board={board} />, [board]);
     const memoizedGameboardBackground = useMemo(() => <GameboardBackground board={board} />, [board]);
     
     const shakeClassMap: Record<ShakeType, string> = {
