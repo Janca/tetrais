@@ -84,38 +84,23 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         const newPlayer: Player = { pos: spawnPos, mino: newPiece, collided: false };
 
         if (isColliding(newPlayer, currentBoard, { x: 0, y: 0 })) {
-            let isGameOver = false;
-            let gameOverReason = "Unknown";
-            newPlayer.mino.shape.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value !== 0) {
-                        if (newPlayer.pos.y + y < 0) {
-                            isGameOver = true;
-                            gameOverReason = "New piece spawned above visible board.";
-                        }
-                    }
-                });
-            });
-
-            if (isGameOver) {
-                const finalGameOverData = {
-                    timestamp: new Date().toISOString(),
-                    reason: gameOverReason,
-                    finalBoard: currentBoard,
-                    collidingPlayer: newPlayer,
-                    moveHistory: moveHistory.current,
-                    finalSuggestions: suggestions,
-                    finalScore: score,
-                    finalLines: lines,
-                    level,
-                };
-                setGameOverData(finalGameOverData);
-                logToFile(`gameover-${Date.now()}.json`, finalGameOverData);
-                setDropTime(null);
-                soundManager.playGameOverSound(true);
-                setGameState(settingsService.isHighScore(score) ? 'HIGH_SCORE_ENTRY' : 'GAME_OVER');
-                return;
-            }
+            const finalGameOverData = {
+                timestamp: new Date().toISOString(),
+                reason: "New piece spawned and immediately collided with existing blocks.",
+                finalBoard: currentBoard,
+                collidingPlayer: newPlayer,
+                moveHistory: moveHistory.current,
+                finalSuggestions: suggestions,
+                finalScore: score,
+                finalLines: lines,
+                level,
+            };
+            setGameOverData(finalGameOverData);
+            logToFile(`gameover-${Date.now()}.json`, finalGameOverData);
+            setDropTime(null);
+            soundManager.playGameOverSound(true);
+            setGameState(settingsService.isHighScore(score) ? 'HIGH_SCORE_ENTRY' : 'GAME_OVER');
+            return;
         }
         
         recordMove('newPiece', newPlayer, { suggestions });
