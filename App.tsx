@@ -131,6 +131,13 @@ const App: React.FC = () => {
         fullStartGame();
     };
 
+    const handleHighScoreSubmit = (name: string) => {
+        if (gameOverData) {
+            settingsService.addHighScore(name, gameOverData.finalScore, gameOverData.finalLines);
+            setGameState('GAME_OVER');
+        }
+    };
+
     // Game Loop Hook
     useGameLoop(drop, dropTime, gameState, isPaused, isSettingsOpen, isHighScoresOpen);
 
