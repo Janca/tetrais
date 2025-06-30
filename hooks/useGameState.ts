@@ -184,7 +184,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
 
     const handleLineClear = useCallback((boardWithPiece: MinoBoard) => {
         if (!physicsEnabled) {
-            const { newBoard, linesCleared } = clearLines(boardWithPiece, player);
+            const { newBoard, linesCleared } = clearLines(boardWithPiece);
             if (linesCleared > 0) {
                 soundManager.playLineClearSound();
                 const pointsEarned = [40, 100, 300, 1200][linesCleared - 1] * (level + 1);

@@ -83,41 +83,23 @@ export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard, spite: 
 };
 
 /**
- * Clears completed lines from the board with NES-style logic.
+ * Clears completed lines from the board.
  * @param board The board to process.
- * @param player The current player, to determine which rows to check.
  * @returns An object with the new board and the number of lines cleared.
  */
-export const clearLines = (board: MinoBoard, player: Player): { newBoard: MinoBoard; linesCleared: number } => {
+export const clearLines = (board: MinoBoard): { newBoard: MinoBoard; linesCleared: number } => {
+    const newBoard: MinoBoard = [];
     let linesCleared = 0;
-    let newBoard = board.map(row => row.map(cell => ({ ...cell })));
 
-    // In NES Tetris, line clear checks are centered around the piece's final position.
-    // It checks 4 rows: 2 above the piece's center, the center row, and 1 below.
-    // The "center" is the second block of the piece's internal 4x4 matrix.
-    const checkRowStart = Math.max(0, player.pos.y + 1 - 2);
-    const checkRowEnd = player.pos.y + 1 + 1;
+    const unClearedRows = board.filter(row => !row.every(cell => cell.state === 'merged'));
+    
+    linesCleared = BOARD_HEIGHT - unClearedRows.length;
 
-    for (let y = checkRowStart; y <= checkRowEnd && y < BOARD_HEIGHT; y++) {
-        const isFull = newBoard[y].every(cell => cell.state === 'merged');
-
-        if (isFull) {
-            linesCleared++;
-            
-            // This is the infamous NES bug. When row 0 (our row 2) is cleared,
-            // the memory copy operation is flawed and shifts the *entire* board data.
-            if (y === 2) { 
-                // Simulate the buggy shift for the top visible row
-                const shiftedBoard = newBoard.slice(1); // Drop the actual top row of the buffer
-                shiftedBoard.push(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false })); // Add a new empty row at the bottom
-                newBoard = shiftedBoard;
-            } else {
-                // Normal line clear for other rows
-                const clearedRow = newBoard.splice(y, 1)[0];
-                newBoard.unshift(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
-            }
-        }
+    for (let i = 0; i < linesCleared; i++) {
+        newBoard.push(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
     }
+
+    newBoard.push(...unClearedRows);
 
     return { newBoard, linesCleared };
 };
