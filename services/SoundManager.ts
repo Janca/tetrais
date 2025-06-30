@@ -1,6 +1,3 @@
-
-
-
 class SoundManager {
     private audioContext: AudioContext | null = null;
 
@@ -15,7 +12,7 @@ class SoundManager {
 
     // --- Music Properties ---
     private musicScheduler: number | null = null;
-    private isMusicPlaying: boolean = false;
+    private _isMusicPlaying: boolean = false;
     private musicStep: number = 0;
     private nextNoteTime: number = 0.0;
     private musicOscillators: AudioScheduledSourceNode[] = [];
@@ -292,23 +289,27 @@ class SoundManager {
         this.targetPlaybackRate = Math.min(1.5, speedMultiplier);
     }
 
+    public isMusicPlaying = (): boolean => {
+        return this._isMusicPlaying;
+    }
+
     public startMusic = () => {
-        if (this.isMusicPlaying) return;
+        if (this._isMusicPlaying) return;
         this.initialize();
         if (!this.audioContext || this.audioContext.state !== 'running') return;
 
         this.generatePercussionSequence(); // Generate a new random beat for this session
 
         this.activeLayers = new Set(['melody', 'bassline']);
-        this.isMusicPlaying = true;
+        this._isMusicPlaying = true;
         this.musicStep = 0;
         this.nextNoteTime = this.audioContext.currentTime;
         this.musicScheduler = window.setInterval(this.scheduler, this.scheduleAheadTime);
     }
     
     public stopMusic = () => {
-        if (!this.isMusicPlaying) return;
-        this.isMusicPlaying = false;
+        if (!this._isMusicPlaying) return;
+        this._isMusicPlaying = false;
         
         if (this.musicScheduler) {
             window.clearInterval(this.musicScheduler);

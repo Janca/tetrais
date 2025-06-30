@@ -188,13 +188,19 @@ const App: React.FC = () => {
 
     // Attach global event listeners
     useEffect(() => {
+        const handleFirstInteraction = () => {
+            handleUserInteraction();
+            window.removeEventListener('mousedown', handleFirstInteraction);
+        };
+        window.addEventListener('mousedown', handleFirstInteraction);
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
         return () => {
+            window.removeEventListener('mousedown', handleFirstInteraction);
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [handleKeyDown, handleKeyUp]);
+    }, [handleKeyDown, handleKeyUp, handleUserInteraction]);
 
     return (
         <div ref={appContainerRef} className="app-container" tabIndex={-1}>

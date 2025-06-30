@@ -104,7 +104,9 @@ export const useGameAudio = (
         const shouldPlayMusic = (canPlayMusic && !isPaused) || ((isSettingsOpen || isHighScoresOpen) && canPlayMusic);
 
         if (shouldPlayMusic) {
-            soundManager.startMusic();
+            if (!soundManager.isMusicPlaying()) {
+                soundManager.startMusic();
+            }
         } else {
             soundManager.stopMusic();
         }
