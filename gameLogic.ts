@@ -66,7 +66,7 @@ export const rotate = (shape: number[][], direction: 'cw' | 'ccw' = 'cw'): numbe
  * @param board The current board.
  * @returns A new board state with the player's piece merged.
  */
-export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard): MinoBoard => {
+export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard, spite: boolean = false): MinoBoard => {
     const newBoard = board.map(row => row.map(cell => ({ ...cell })));
     player.mino.shape.forEach((row, y) => {
         row.forEach((value, x) => {
@@ -74,7 +74,7 @@ export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard): MinoBo
                 const boardY = player.pos.y + y;
                 const boardX = player.pos.x + x;
                 if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
-                    newBoard[boardY][boardX] = { value: player.mino.key as PieceKey, state: 'merged', spite: false };
+                    newBoard[boardY][boardX] = { value: player.mino.key as PieceKey, state: 'merged', spite };
                 }
             }
         });

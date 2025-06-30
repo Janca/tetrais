@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { MinoBoard, Player, Mino, MoveRecord, MoveAction, MinoCellData, PieceKey } from '../types';
+import { MinoBoard, Player, Mino, MoveRecord, MoveAction, PieceKey } from '../types';
 import { createEmptyMinoBoard, BOARD_WIDTH, MINOS, BOARD_HEIGHT } from '../constants';
 import { getPieceSuggestions, selectBiasedPiece, calculateDropTime } from '../utils';
 import { settingsService, soundManager } from '../services';
@@ -29,6 +29,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
     const [gameOverData, setGameOverData] = useState<any>(null);
     const [displayBoard, setDisplayBoard] = useState<MinoBoard>(createEmptyMinoBoard());
 
+    const mostNeededPieceRef = useRef<PieceKey | null>(null);
     const cascadeTimerRef = useRef<number | null>(null);
     const cascadeTimeRef = useRef(0);
 
@@ -54,8 +55,20 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         const suggestions = getPieceSuggestions(currentBoard);
         setPieceSuggestions(suggestions);
 
-        const weights = settingsService.getSettings().pieceSuggestionWeights;
-        const newPiece = selectBiasedPiece(suggestions, weights);
+        const leastNeededPiece = suggestions[0];
+        let newPiece: Mino;
+        let spite = false;
+
+        if (mostNeededPieceRef.current && mostNeededPieceRef.current === leastNeededPiece.key) {
+            newPiece = MINOS[mostNeededPieceRef.current];
+            spite = true;
+        } else {
+            const weights = settingsService.getSettings().pieceSuggestionWeights;
+            newPiece = selectBiasedPiece(suggestions, weights);
+        }
+        
+        mostNeededPieceRef.current = suggestions[suggestions.length - 1].key as PieceKey;
+
         const spawnY = -newPiece.shape.filter(row => row.some(cell => cell !== 0)).length + 1;
         const spawnPos = { x: Math.floor(BOARD_WIDTH / 2) - 2, y: spawnY };
         
@@ -80,6 +93,12 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         }
         
         setPlayer(newPlayer);
+        if (spite) {
+            // This is a bit of a hack, but we need to merge the piece immediately
+            // to show the spiteful color.
+            setBoard(prevBoard => mergePlayerToMinoBoard(newPlayer, prevBoard, true));
+        }
+
     }, [score, lines, level, moveHistory]);
 
     const startGame = useCallback(() => {
@@ -91,6 +110,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         setDropTime(calculateDropTime(0));
         setMoveHistory([]);
         setGameOverData(null);
+        mostNeededPieceRef.current = null;
         resetPlayer(startBoard);
         setGameState('PLAYING');
     }, [resetPlayer]);
