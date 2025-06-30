@@ -276,7 +276,7 @@ const App: React.FC = () => {
                     </div>
                     <footer className="game-footer">
                         <button className="highscore-button" onClick={toggleHighScores}>[ High Scores ]</button>
-                        <button className="pause-button" onClick={togglePause}>[ Pause ]</button>
+                        <button className="pause-button" onClick={togglePause}>[ {isPaused ? 'Resume' : 'Pause'} ]</button>
                         <button className="settings-button" onClick={toggleSettings}>[ Settings ]</button>
                     </footer>
                 </div>
