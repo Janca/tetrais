@@ -100,6 +100,11 @@ class SettingsService {
         this.updateSetting('lastPlayerName', name);
         this.saveSettings();
     }
+
+    public clearHighScores(): void {
+        this.settings.highScores = [];
+        this.saveSettings();
+    }
 }
 
 export const settingsService = new SettingsService();

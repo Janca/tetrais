@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { OverlayContainer } from '../../ui/OverlayContainer/OverlayContainer';
 import { HighScoreTable } from '../../info/HighScoreTable/HighScoreTable';
 import { settingsService } from '../../../services/settingsService';
+import { MinimalButton } from '../../ui/MinimalButton/MinimalButton';
 import './styles.css';
 
 interface HighScoresOverlayProps {
@@ -9,15 +10,25 @@ interface HighScoresOverlayProps {
 }
 
 export const HighScoresOverlay: React.FC<HighScoresOverlayProps> = ({ onClose }) => {
-    const { highScores } = settingsService.getSettings();
+    const [scores, setScores] = useState(settingsService.getSettings().highScores);
+
+    const handleClearScores = () => {
+        settingsService.clearHighScores();
+        setScores([]);
+    };
 
     return (
         <OverlayContainer>
             <button onClick={onClose} className="close-button chromatic-text" aria-label="Close high scores">&times;</button>
             <h1 className="overlay-title chromatic-text">HIGH SCORES</h1>
             
-            {highScores && highScores.length > 0 ? (
-                 <HighScoreTable scores={highScores} />
+            {scores && scores.length > 0 ? (
+                 <>
+                    <HighScoreTable scores={scores} />
+                    <div className="clear-scores-container">
+                        <MinimalButton onClick={handleClearScores}>Clear High Scores</MinimalButton>
+                    </div>
+                 </>
             ) : (
                 <p className="overlay-subtitle" style={{marginTop: '1.5rem'}}>No high scores yet. Complete a game to set one!</p>
             )}
