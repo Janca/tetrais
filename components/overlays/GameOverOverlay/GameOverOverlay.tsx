@@ -10,9 +10,8 @@ export const GameOverOverlay: React.FC<{ score: number; onRestart: (event: React
     const handleRestartClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         if (event.shiftKey) {
             logToFile(`gameover-${Date.now()}.json`, gameOverData);
-        } else {
-            onRestart(event);
         }
+        onRestart(event);
     };
     
     return (
