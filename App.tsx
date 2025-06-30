@@ -39,6 +39,8 @@ const App: React.FC = () => {
     const [isHighScoresOpen, setIsHighScoresOpen] = useState(false);
     const appContainerRef = useRef<HTMLDivElement>(null);
 
+    const [finalScore, setFinalScore] = useState(0);
+
     // Persisted Settings State
     const [physicsEnabled] = useState(() => settingsService.getSettings().physicsEnabled);
     const [lowMotionEnabled, setLowMotionEnabled] = useState(() => settingsService.getSettings().lowMotionEnabled);
@@ -83,6 +85,14 @@ const App: React.FC = () => {
         gameOverData, recordMove, setDropTime, setGameState, startGame, 
         movePlayer, rotatePlayer, drop, hardDrop,
     } = useGameState({ physicsEnabled, onHardDrop: triggerShake });
+
+    useEffect(() => {
+        if (gameState === 'GAME_OVER' || gameState === 'HIGH_SCORE_ENTRY') {
+            if (gameOverData?.finalScore) {
+                setFinalScore(gameOverData.finalScore);
+            }
+        }
+    }, [gameState, gameOverData]);
 
     // UI and Audio Hooks
     const {
@@ -232,7 +242,7 @@ const App: React.FC = () => {
 
             {gameState === 'HIGH_SCORE_ENTRY' && gameOverData && (
                 <HighScoreEntryOverlay
-                    score={gameOverData.finalScore}
+                    score={finalScore}
                     onSubmit={handleHighScoreSubmit}
                 />
             )}
@@ -257,7 +267,7 @@ const App: React.FC = () => {
                             isSettingsOpen={isSettingsOpen}
                             board={board}
                             player={player}
-                            score={gameOverData?.finalScore ?? score}
+                            score={finalScore}
                             onStart={fullStartGame}
                             onRestart={handleRestart}
                             onUnpause={togglePause}
