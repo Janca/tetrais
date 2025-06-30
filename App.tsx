@@ -270,7 +270,7 @@ const App: React.FC = () => {
                             </div>
                         </div>
                         <div className="game-header-held-piece-container align-right">
-                            <div className="game-header-held-piece">
+                            <div className="minimal-panel">
                                 <HeldPiecePreview piece={heldPiece} />
                             </div>
                         </div>
