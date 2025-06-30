@@ -258,13 +258,21 @@ const App: React.FC = () => {
                 <h1 className="app-header chromatic-text-1">MiNOS</h1>
                 <div className="game-viewport">
                     <header className="game-header">
-                        <div className="game-header-item">
-                            <span className="game-header-label">SCORE</span>
-                            <span className="game-header-value chromatic-text-2">{score.toString().padStart(7, '0')}</span>
+                        <div className="game-header-scoreboard">
+                            <div className="game-header-item">
+                                <span className="game-header-label">SCORE</span>
+                                <span className="game-header-value chromatic-text-2">{score.toString().padStart(7, '0')}</span>
+                            </div>
+                            <div className="game-header-item align-right">
+                                <span className="game-header-label">LINES</span>
+                                <span className="game-header-value chromatic-text-2">{lines}</span>
+                            </div>
                         </div>
-                        <div className="game-header-item align-right">
-                            <span className="game-header-label">LINES</span>
-                            <span className="game-header-value chromatic-text-2">{lines}</span>
+                        <div className="game-header-held-piece-container align-right">
+                            <div className="game-header-held-piece">
+                                {/* TODO: This is where the held piece should reside */}
+                                {/* TODO: This element should be removed from DOM tree when empty to prevent a grid gap from appearing */}
+                            </div>
                         </div>
                     </header>
                     <div className="game-body">

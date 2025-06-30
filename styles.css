@@ -19,6 +19,10 @@
   --glitch-r-y2: 1.5px;
   --glitch-c-x2: 1.5px;
   --glitch-c-y2: -1.75px;
+  
+  --mino-color: var(--foreground);
+  --piece-preview-size: clamp(7px, 1dvw, 1rem);
+  --piece-grid-size: calc(4 * var(--piece-preview-size) + 3px);
 }
 
 @keyframes glitch-anim-intense {
@@ -231,11 +235,35 @@ body {
 
 .game-header {
   display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 0.5rem;
+  gap: 1.5rem;
+}
+
+.game-header-scoreboard {
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: baseline;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
+  width: 100%;
   border-bottom: 1px solid var(--foreground);
+  padding-bottom: 0.5rem;
+}
+
+.game-header-held-piece-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height:100%;
+  padding:1rem;
+  border:1px solid var(--foreground);
+}
+
+.game-header-held-piece {
+  width: var(--piece-grid-size);
+  height: var(--piece-grid-size);
 }
 
 .game-header-item {
