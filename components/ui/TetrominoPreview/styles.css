@@ -1,4 +1,3 @@
-
 .piece-preview {
     display: flex;
     flex-direction: column;
@@ -24,8 +23,8 @@
 }
 
 .piece-preview-cell {
-    width: 10px;
-    height: 10px;
+    width: var(--preview-grid-size);
+    height: var(--preview-grid-size);
 }
 
 .piece-preview-percentage {

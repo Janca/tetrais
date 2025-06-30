@@ -1,6 +1,6 @@
 {
   "sandbox": true,
   "autoAccept": true,
-  "theme": "ANSI",
-  "contextFileName":"AGENTS.md"
+  "theme": "Dracula",
+  "contextFileName": "AGENTS.md"
 }

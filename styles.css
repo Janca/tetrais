@@ -21,8 +21,8 @@
   --glitch-c-y2: -1.75px;
   
   --mino-color: var(--foreground);
-  --piece-preview-size: clamp(7px, 1dvw, 1rem);
-  --piece-grid-size: calc(4 * var(--piece-preview-size) + 3px);
+  --preview-grid-size: clamp(7px, 1dvw, 1rem);
+  --piece-grid-size: calc(4 * var(--preview-grid-size) + 3px);
 }
 
 @keyframes glitch-anim-intense {
