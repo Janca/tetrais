@@ -1,1 +1,1 @@
-export * from './Scoreboard';
+export * from '@components/info/Scoreboard/Scoreboard';

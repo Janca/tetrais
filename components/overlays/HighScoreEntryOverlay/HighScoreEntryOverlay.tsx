@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { OverlayContainer } from '../../ui/OverlayContainer/OverlayContainer';
-import { MinimalButton } from '../../ui/MinimalButton/MinimalButton';
-import { settingsService } from '../../../services/settingsService';
+import { OverlayContainer } from '@components/ui/OverlayContainer/OverlayContainer';
+import { MinimalButton } from '@components/ui/MinimalButton/MinimalButton';
+import { settingsService } from '@services/settingsService';
 import './styles.css';
 
 interface HighScoreEntryOverlayProps {

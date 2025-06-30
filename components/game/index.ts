@@ -1,3 +1,3 @@
-export * from './GameArea';
-export * from './Gameboard';
-export * from './GameboardBackground';
+export * from '@components/game/GameArea';
+export * from '@components/game/Gameboard';
+export * from '@components/game/GameboardBackground';

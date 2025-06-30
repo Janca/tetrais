@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { GameState } from '../App';
+import { GameState } from '@/App';
 
 export const useGameLoop = (
     drop: () => void,

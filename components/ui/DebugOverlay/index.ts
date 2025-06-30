@@ -1,1 +1,1 @@
-export * from './DebugOverlay';
+export * from '@components/ui/DebugOverlay/DebugOverlay';

@@ -1,1 +1,1 @@
-export * from './ControlsInfo';
+export * from '@components/info/ControlsInfo/ControlsInfo';

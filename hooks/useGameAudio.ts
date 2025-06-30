@@ -21,8 +21,8 @@
  *   It also allows music to continue playing during the `PROCESSING_BOARD` state.
  */
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { soundManager, settingsService } from '../services';
-import { GameState } from '../App';
+import { soundManager, settingsService } from '@services';
+import { GameState } from '@/App';
 
 export const useGameAudio = (
     gameState: GameState,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HighScoreEntry } from '../../../types';
+import { HighScoreEntry } from '@/types';
 import './styles.css';
 
 export const HighScoreTable: React.FC<{ scores: HighScoreEntry[] }> = ({ scores }) => {

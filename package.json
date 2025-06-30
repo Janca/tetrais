@@ -12,7 +12,8 @@
     "@google/genai": "^1.7.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "s": "^1.0.0"
+    "s": "^1.0.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

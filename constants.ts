@@ -1,4 +1,4 @@
-import { MinoBoard, Mino, PieceKey } from './types';
+import { MinoBoard, Mino, PieceKey } from '@/types';
 
 export const BOARD_WIDTH = 10;
 export const BOARD_HEIGHT = 22;

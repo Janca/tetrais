@@ -21,9 +21,9 @@
  *   the current piece.
  */
 
-import { MinoBoard, Player, Mino, PieceKey } from '../types';
-import { BOARD_WIDTH, BOARD_HEIGHT, PIECE_KEYS, MINOS } from '../constants';
-import { isColliding, rotate } from '../gameLogic';
+import { MinoBoard, Player, Mino, PieceKey } from '@/types';
+import { BOARD_WIDTH, BOARD_HEIGHT, PIECE_KEYS, MINOS } from '@/constants';
+import { isColliding, rotate } from '@/gameLogic';
 
 const getNegativeSpacePenalty = (board: MinoBoard): number => {
     let penalty = 0;

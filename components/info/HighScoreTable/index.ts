@@ -1,1 +1,1 @@
-export * from './HighScoreTable';
+export * from '@components/info/HighScoreTable/HighScoreTable';

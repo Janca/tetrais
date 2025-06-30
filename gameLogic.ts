@@ -1,7 +1,7 @@
 
 
-import { MinoBoard, Player, PieceKey, MinoCellData } from './types';
-import { BOARD_WIDTH, BOARD_HEIGHT, VISIBLE_BOARD_HEIGHT } from './constants';
+import { MinoBoard, Player, PieceKey, MinoCellData } from '@/types';
+import { BOARD_WIDTH, BOARD_HEIGHT, VISIBLE_BOARD_HEIGHT } from '@/constants';
 
 /**
  * Checks if a player's piece is colliding with board boundaries or merged cells.

@@ -1,1 +1,1 @@
-export * from './GameOverOverlay';
+export * from '@components/overlays/GameOverOverlay/GameOverOverlay';

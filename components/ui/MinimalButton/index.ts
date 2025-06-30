@@ -1,1 +1,1 @@
-export * from './MinimalButton';
+export * from '@components/ui/MinimalButton/MinimalButton';

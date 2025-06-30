@@ -1,1 +1,1 @@
-export * from './PieceSuggestionsPreview';
+export * from '@components/info/PieceSuggestionsPreview/PieceSuggestionsPreview';

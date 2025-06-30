@@ -7,7 +7,7 @@
  * preventing any visual misalignment.
  */
 import React from 'react';
-import { MinoBoard } from '../../../types';
+import { MinoBoard } from '@/types';
 import './styles.css';
 
 const EffectCell: React.FC = () => {

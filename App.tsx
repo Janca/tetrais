@@ -7,7 +7,7 @@ import {
     useGameLoop,
     useGameAudio,
     useGlitchEffect,
-} from './hooks';
+} from '@hooks';
 
 import {
     SettingsOverlay,
@@ -17,10 +17,10 @@ import {
     PieceSuggestionsPreview,
     ControlsInfo,
     DebugOverlay,
-} from './components';
-import { calculateDropTime } from './utils';
-import { settingsService, soundManager } from './services';
-import { MoveRecord, Mino } from './types';
+} from '@components';
+import { calculateDropTime } from '@utils';
+import { settingsService, soundManager } from '@services';
+import { MoveRecord, Mino } from '@/types';
 
 export type ShakeType =
     | 'none'

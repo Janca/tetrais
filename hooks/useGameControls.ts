@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { GameState } from '../App';
+import { GameState } from '@/App';
 
 interface GameControlProps {
     gameState: GameState;

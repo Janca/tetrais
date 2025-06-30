@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { OverlayContainer } from '../../ui/OverlayContainer/OverlayContainer';
-import { MinimalButton } from '../../ui/MinimalButton/MinimalButton';
+import { OverlayContainer } from '@components/ui/OverlayContainer/OverlayContainer';
+import { MinimalButton } from '@components/ui/MinimalButton/MinimalButton';
 import './styles.css';
 
 const DOUBLE_TAP_WINDOW_MS = 300;

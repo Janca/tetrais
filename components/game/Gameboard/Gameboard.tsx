@@ -9,7 +9,7 @@
  *    This creates a clean, unified look for the settled pieces, contrasting with the active piece.
  */
 import React from 'react';
-import { MinoBoard, MinoCellValue } from '../../../types';
+import { MinoBoard, MinoCellValue } from '@/types';
 import './styles.css';
 
 interface GameboardProps {

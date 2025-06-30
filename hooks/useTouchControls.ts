@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
-import { Player } from '../types';
+import { Player } from '@/types';
 
 interface TouchControlProps {
     targetRef: React.RefObject<HTMLElement>;

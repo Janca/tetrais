@@ -1,4 +1,4 @@
-import { HighScoreEntry } from "../types";
+import { HighScoreEntry } from "@/types";
 
 export interface AppSettings {
     musicVolume: number;

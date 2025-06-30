@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { Mino } from '../../../types';
-import { MiniBlock } from '../../ui/MiniBlock/MiniBlock';
+import { Mino } from '@/types';
+import { MiniBlock } from '@components/ui/MiniBlock/MiniBlock';
 import './styles.css';
 
 export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number[] }> = ({ pieces, weights }) => {

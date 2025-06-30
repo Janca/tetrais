@@ -1,1 +1,1 @@
-export * from './PauseOverlay';
+export * from '@components/overlays/PauseOverlay/PauseOverlay';
