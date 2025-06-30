@@ -1,4 +1,7 @@
 .next-piece-panel {
+    --piece-preview-size: clamp(7px, 1dvw, 1rem);
+    --piece-grid-size: calc(4 * var(--piece-preview-size) + 3px);
+
     padding: 1rem;
     display: flex;
     flex-direction: row;
@@ -31,7 +34,7 @@
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
-    width: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px);
+    width: var(--piece-grid-size);
 }
 
 .piece-preview {
@@ -42,8 +45,8 @@
 }
 
 .piece-grid-container {
-    width: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px);
-    height: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px);
+    width: var(--piece-grid-size);
+    height: var(--piece-grid-size);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,15 +55,16 @@
 .piece-preview-grid {
     display: grid;
     gap: 1px;
+    grid-template-columns: repeat(var(--piece-grid-cols), var(--piece-preview-size));
 }
 
 .piece-preview-cell {
-    width: clamp(1dvw, 1.5dvw, 0.75rem);
-    height: clamp(1dvw, 1.5dvw, 0.75rem);
+    width: var(--piece-preview-size);
+    height: var(--piece-preview-size);
 }
 
 .piece-preview-percentage {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 400;
     color: var(--foreground-light);
     margin: 0;
@@ -81,7 +85,7 @@
     .next-piece-panel {
         flex-direction: column;
         width: 100%;
-        height: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px + 2rem);
+        height: calc(var(--piece-grid-size) + 2rem);
         padding:0;
     }
 
