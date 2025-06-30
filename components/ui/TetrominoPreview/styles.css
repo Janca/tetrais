@@ -1,0 +1,35 @@
+
+.piece-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.piece-grid-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.piece-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--piece-grid-cols, 1), 1fr);
+    gap: 1px;
+    width: fit-content;
+}
+
+.piece-preview-cell {
+    width: 10px;
+    height: 10px;
+}
+
+.piece-preview-percentage {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #aaa;
+}

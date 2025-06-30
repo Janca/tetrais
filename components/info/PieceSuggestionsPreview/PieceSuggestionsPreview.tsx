@@ -1,20 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Mino } from '@/types';
-import { MiniBlock } from '@components/ui';
-import './styles.css';
+import { TetrominoPreview } from '@components/ui';
+import '@components/ui/TetrominoPreview/styles.css';
 
 export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number[] }> = ({ pieces, weights }) => {
-    const gridRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-    useEffect(() => {
-        pieces.forEach((piece, index) => {
-            if (gridRefs.current[index] && piece && piece.key !== '0') {
-                const gridCols = piece.shape[0]?.length || 0;
-                gridRefs.current[index]!.style.setProperty('--piece-grid-cols', gridCols.toString());
-            }
-        });
-    }, [pieces]);
-
     return (
         <div className="minimal-panel next-piece-panel">
             <div className="next-piece-container">
@@ -31,20 +20,7 @@ export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number
 
                         return (
                             <div key={piece.key} className="piece-preview">
-                                <div className="piece-grid-container">
-                                    <div
-                                        ref={el => gridRefs.current[index] = el}
-                                        className="piece-preview-grid"
-                                    >
-                                        {piece.shape.map((row, y) =>
-                                            row.map((cell, x) => (
-                                                <div key={`${y}-${x}`} className="piece-preview-cell">
-                                                    {cell !== 0 && <MiniBlock />}
-                                                </div>
-                                            ))
-                                        )}
-                                    </div>
-                                </div>
+                                <TetrominoPreview piece={piece} />
                                 <p className="piece-preview-percentage">{`${weightPercentage}%`}</p>
                             </div>
                         );

@@ -1,4 +1,5 @@
 {
+  "sandbox": true,
   "autoAccept": true,
   "theme": "ANSI",
   "contextFileName":"AGENTS.md"
