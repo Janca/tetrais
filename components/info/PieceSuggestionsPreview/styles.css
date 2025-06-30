@@ -1,3 +1,7 @@
+.next-piece-panel {
+    padding: 1rem;
+}
+
 .next-piece-container {
     display: flex;
     flex-flow: column nowrap;
@@ -6,7 +10,8 @@
     gap: 0.5rem;
     height:100%;
 
-    padding: 1rem;
+    width: var(--piece-grid-size);
+    min-height: var(--piece-grid-size);
 }
 
 .piece-odds-wrapper {
