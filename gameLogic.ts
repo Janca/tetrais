@@ -1,5 +1,3 @@
-
-
 import { MinoBoard, Player, PieceKey, MinoCellData } from '@/types';
 import { BOARD_WIDTH, BOARD_HEIGHT, VISIBLE_BOARD_HEIGHT } from '@/constants';
 
@@ -40,6 +38,36 @@ export const isColliding = (player: Player, board: MinoBoard, move: { x: number;
     }
     return false;
 };
+
+/**
+ * Checks if the game is over.
+ * The game is over if a new piece spawns and collides with existing blocks
+ * within the visible play area.
+ * @param player The player object with the new piece.
+ * @param board The game board.
+ * @returns True if the game is over, false otherwise.
+ */
+export const isGameOver = (player: Player, board: MinoBoard): boolean => {
+    const { mino, pos } = player;
+    const { shape } = mino;
+
+    for (let y = 0; y < shape.length; y++) {
+        for (let x = 0; x < shape[y].length; x++) {
+            if (shape[y][x] !== 0) {
+                const newX = pos.x + x;
+                const newY = pos.y + y;
+
+                if (newY >= 0 && board[newY]?.[newX]?.state !== 'clear') {
+                    if (newY >= (BOARD_HEIGHT - VISIBLE_BOARD_HEIGHT)) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+};
+
 
 /**
  * Rotates a 2D matrix (mino shape) 90 degrees.
