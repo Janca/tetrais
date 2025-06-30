@@ -1,3 +1,11 @@
+/**
+ * @file GameboardBackground.tsx
+ * @description
+ * This component renders the background layer of the game board. Its sole purpose is to create a "glitch" texture that appears behind the frozen blocks.
+ * It receives the full game board state but only renders an effect for cells that are in the "merged" state.
+ * By slicing the top two rows from the board state, it ensures the glitch effect aligns perfectly with the visible frozen blocks on the foreground layer,
+ * preventing any visual misalignment.
+ */
 import React from 'react';
 import { MinoBoard } from '../../../types';
 import './styles.css';

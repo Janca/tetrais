@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { MinoBoard, Player, Mino, MoveRecord, MoveAction, MinoCellData, PieceKey } from '../types';
 import { createEmptyMinoBoard, BOARD_WIDTH, MINOS, BOARD_HEIGHT } from '../constants';
-import { getPieceSuggestions, settingsService, soundManager } from '../services';
-import { selectBiasedPiece, calculateDropTime, logToFile } from '../utils';
+import { getPieceSuggestions, selectBiasedPiece, calculateDropTime, logToFile } from '../utils';
+import { settingsService, soundManager } from '../services';
 import { calculateGhostPosition, isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate } from '../gameLogic';
 import { GameState } from '../App';
 

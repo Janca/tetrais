@@ -1,3 +1,13 @@
+/**
+ * @file Gameboard.tsx
+ * @description
+ * Renders the main gameplay grid, which is the foreground layer of the game.
+ * This component is responsible for three key visual elements:
+ * 1. The active player's tetromino, which has a distinct "glitch" effect to make it stand out.
+ * 2. The "ghost" piece, a transparent outline showing where the active piece will land.
+ * 3. The "frozen" or "merged" blocks. These are styled to appear as a single, solid mass by dynamically removing the borders between adjacent cells.
+ *    This creates a clean, unified look for the settled pieces, contrasting with the active piece.
+ */
 import React from 'react';
 import { MinoBoard, MinoCellValue } from '../../../types';
 import './styles.css';

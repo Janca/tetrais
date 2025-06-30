@@ -1,3 +1,15 @@
+/**
+ * @file gameplay.ts
+ * @description
+ * This file contains stateless utility functions related to Tetris gameplay logic.
+ * It combines the functionality of the former `minosService.ts` and `gameHelpers.ts` files.
+ * The functions in this file are responsible for tasks such as:
+ * - Evaluating the game board state.
+ * - Providing piece suggestions based on board evaluation.
+ * - Calculating game-related values like score, level, and drop time.
+ * - Selecting pieces with a weighted bias.
+ */
+
 import { MinoBoard, Player, Mino, PieceKey } from '../types';
 import { BOARD_WIDTH, BOARD_HEIGHT, PIECE_KEYS, MINOS } from '../constants';
 import { isColliding, rotate } from '../gameLogic';
@@ -203,4 +215,51 @@ export const getPieceSuggestions = (board: MinoBoard): Mino[] => {
     pieceScores.sort((a, b) => a.score - b.score);
 
     return pieceScores.map(item => MINOS[item.pieceKey]);
+};
+
+export const selectBiasedPiece = (suggestions: Mino[], weights: number[]): Mino => {
+    if (!suggestions || suggestions.length === 0) {
+        const randomKey = PIECE_KEYS[Math.floor(Math.random() * PIECE_KEYS.length)];
+        return MINOS[randomKey];
+    }
+    
+    // Fallback if weights are not provided correctly
+    if (!weights || weights.length !== suggestions.length) {
+        console.warn('Piece suggestion weights are invalid. Falling back to random selection.');
+        const randomIndex = Math.floor(Math.random() * suggestions.length);
+        return suggestions[randomIndex];
+    }
+
+    let r = Math.random();
+    let cumulativeProbability = 0;
+    for (let i = 0; i < weights.length; i++) {
+        cumulativeProbability += weights[i];
+        if (r <= cumulativeProbability) {
+            return suggestions[i];
+        }
+    }
+
+    // Fallback in case of floating point inaccuracies or if weights don't sum to 1
+    return suggestions[suggestions.length - 1];
+};
+
+export const calculateDropTime = (linesCleared: number): number => {
+    const baseDropTime = 1000;
+    // Speed increases faster in the early game, then slightly slower
+    const firstPhaseLines = Math.min(linesCleared, 5);
+    const secondPhaseLines = Math.max(0, linesCleared - 5);
+    const speedMultiplier = Math.pow(1.01, firstPhaseLines) * Math.pow(1.0125, secondPhaseLines);
+    const newDropTime = baseDropTime / speedMultiplier;
+    // Cap the drop time at a minimum of 50ms
+    return Math.max(50, newDropTime);
+};
+
+
+export const calculateScore = (linesCleared: number, level: number): number => {
+    const linePoints = [0, 100, 300, 500, 800];
+    return linePoints[linesCleared] * (level + 1);
+};
+
+export const getLevel = (linesCleared: number): number => {
+    return Math.floor(linesCleared / 10);
 };

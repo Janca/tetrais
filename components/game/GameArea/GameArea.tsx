@@ -1,3 +1,14 @@
+/**
+ * @file GameArea.tsx
+ * @description
+ * This component serves as the central hub for the main gameplay screen. It orchestrates the rendering of two distinct, layered components:
+ * 1. `GameboardBackground`: Renders a subtle "glitch" effect behind where the frozen blocks are.
+ * 2. `Gameboard`: Renders the actual gameplay elements, including the active player piece, the ghost piece, and the frozen blocks.
+ *
+ * This two-layer approach is crucial for the desired visual aesthetic. We want the frozen blocks to appear as a single, solid, dark mass.
+ * The glitch effect from the background layer provides a subtle, stylized texture that is visible "through" this mass, while the active
+ * player piece has its own distinct glitch effect on the top layer to make it stand out.
+ */
 import React, { useMemo, useRef } from 'react';
 import Gameboard from '../Gameboard/Gameboard';
 import GameboardBackground from '../GameboardBackground/GameboardBackground';

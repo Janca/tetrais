@@ -38,14 +38,48 @@ The project follows a standard React structure. New files should be placed in th
 - Component-specific styles should be located in a `styles.css` file within the component's directory.
 - Use a consistent naming convention for CSS classes to maintain clarity and avoid conflicts.
 
-## Pull Request Guidelines
+## File Docblocks
 
-When creating a pull request, please ensure it:
+Every new source file (`.ts` or `.tsx`) must begin with a JSDoc-style docblock. This documentation is critical for maintaining context and helping other agents understand the file's purpose and implementation details.
 
-1.  Includes a clear and concise description of the changes.
-2.  References any related issues.
-3.  Includes screenshots or GIFs for any UI changes.
-4.  Remains focused on a single feature or fix.
+When creating or editing a file, ensure its docblock is present and up-to-date.
+
+### Docblock Content
+A good docblock should be concise yet informative, explaining:
+- **@file:** The name of the file.
+- **@description:** A clear explanation of the file's purpose.
+- **Why it exists:** The problem it solves or the feature it provides.
+- **How it works:** A brief overview of the implementation, especially for complex logic or visual effects.
+- **Visual Aesthetic (for UI components):** Describe the intended look and feel and how the code achieves it.
+
+### Example: A Complex UI Component (`GameArea.tsx`)
+```typescript
+/**
+ * @file GameArea.tsx
+ * @description
+ * This component serves as the central hub for the main gameplay screen. It orchestrates the rendering of two distinct, layered components:
+ * 1. `GameboardBackground`: Renders a subtle "glitch" effect behind where the frozen blocks are.
+ * 2. `Gameboard`: Renders the actual gameplay elements, including the active player piece, the ghost piece, and the frozen blocks.
+ *
+ * This two-layer approach is crucial for the desired visual aesthetic. We want the frozen blocks to appear as a single, solid, dark mass.
+ * The glitch effect from the background layer provides a subtle, stylized texture that is visible "through" this mass, while the active
+ * player piece has its own distinct glitch effect on the top layer to make it stand out.
+ */
+```
+
+### Example: A Component with Specific Styling Logic (`Gameboard.tsx`)
+```typescript
+/**
+ * @file Gameboard.tsx
+ * @description
+ * Renders the main gameplay grid, which is the foreground layer of the game.
+ * This component is responsible for three key visual elements:
+ * 1. The active player's tetromino, which has a distinct "glitch" effect to make it stand out.
+ * 2. The "ghost" piece, a transparent outline showing where the active piece will land.
+ * 3. The "frozen" or "merged" blocks. These are styled to appear as a single, solid mass by dynamically removing the borders between adjacent cells.
+ *    This creates a clean, unified look for the settled pieces, contrasting with the active piece.
+ */
+```
 
 ## Git Workflow
 
@@ -65,4 +99,6 @@ Before submitting changes, run the following commands to ensure code quality and
 npm run build
 ```
 
-All checks must pass before code can be merged.
+---
+
+When completed with your task, commit your changes.

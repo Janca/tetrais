@@ -1,2 +1,2 @@
-export * from './gameHelpers';
+export * from './gameplay';
 export * from './logging';
