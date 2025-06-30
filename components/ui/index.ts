@@ -1,6 +1,6 @@
 export * from './DebugOverlay';
 export * from './MiniBlock';
-export * from './MinimalButton';
+export * from './Button';
 export * from './OverlayContainer';
 export * from './Slider';
 export * from './ToggleSwitch';

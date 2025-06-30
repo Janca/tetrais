@@ -1,14 +1,3 @@
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 2.5rem;
-    cursor: pointer;
-    color: #fff;
-}
-
 .clear-scores-container {
     margin-top: 20px;
     text-align: center;

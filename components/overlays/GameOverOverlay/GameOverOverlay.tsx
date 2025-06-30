@@ -1,5 +1,5 @@
 import React from 'react';
-import { OverlayContainer, MinimalButton } from '@components/ui';
+import { OverlayContainer, Button } from '@components/ui';
 import { HighScoreTable } from '@components/info';
 import { settingsService } from '@services';
 
@@ -10,7 +10,7 @@ export const GameOverOverlay: React.FC<{ score: number; onRestart: (event: React
         <OverlayContainer>
             <h1 className="overlay-title game-over chromatic-glitch-text">GAME OVER</h1>
             <p className="overlay-subtitle">Final Score: {score.toLocaleString()}</p>
-            <MinimalButton onClick={onRestart}>RESTART</MinimalButton>
+            <Button onClick={onRestart}>RESTART</Button>
             {highScores && highScores.length > 0 && <HighScoreTable scores={highScores} />}
         </OverlayContainer>
     );

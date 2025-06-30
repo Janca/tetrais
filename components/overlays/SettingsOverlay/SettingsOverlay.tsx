@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { OverlayContainer, MinimalButton, Slider, ToggleSwitch } from '@components/ui';
+import { OverlayContainer, Button, Slider, ToggleSwitch } from '@components/ui';
 import './styles.css';
 
 interface SettingsOverlayProps {
@@ -138,7 +138,7 @@ export const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
                 />
             </div>
             
-            <MinimalButton onClick={() => onClose()}>OKAY</MinimalButton>
+            <Button onClick={() => onClose()}>OKAY</Button>
         </OverlayContainer>
     );
 };

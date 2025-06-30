@@ -16,7 +16,7 @@ import {
     GameArea,
     PieceSuggestionsPreview,
     ControlsInfo,
-    HeldPiecePreview,
+    MinoPreview,
     DebugOverlay,
 } from '@components';
 import { calculateDropTime } from '@utils';
@@ -270,7 +270,7 @@ const App: React.FC = () => {
                             </div>
                         </div>
                         <div className="game-header-held-piece-container align-right">
-                                <HeldPiecePreview piece={heldPiece} />
+                                <MinoPreview piece={heldPiece} />
                         </div>
                     </header>
                     <div className="game-body">

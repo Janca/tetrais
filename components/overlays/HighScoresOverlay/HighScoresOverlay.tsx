@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OverlayContainer, MinimalButton } from '@components/ui';
+import { OverlayContainer, Button } from '@components/ui';
 import { HighScoreTable } from '@components/info';
 import { settingsService } from '@services';
 import './styles.css';
@@ -25,7 +25,7 @@ export const HighScoresOverlay: React.FC<HighScoresOverlayProps> = ({ onClose })
                  <>
                     <HighScoreTable scores={scores} />
                     <div className="clear-scores-container">
-                        <MinimalButton onClick={handleClearScores}>Clear High Scores</MinimalButton>
+                        <Button onClick={handleClearScores}>Clear High Scores</Button>
                     </div>
                  </>
             ) : (

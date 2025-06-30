@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { OverlayContainer, MinimalButton } from '@components/ui';
+import { OverlayContainer, Button } from '@components/ui';
 import './styles.css';
 
 const DOUBLE_TAP_WINDOW_MS = 300;
@@ -37,7 +37,7 @@ export const PauseOverlay: React.FC<PauseOverlayProps> = ({ onUnpause, onRestart
         <OverlayContainer onTouchEnd={isMobile ? handleTap : undefined} onClick={!isMobile ? onUnpause : undefined}>
             <h1 className="overlay-title chromatic-text">PAUSED</h1>
             <div className="pause-overlay-buttons">
-                <MinimalButton onClick={handleRestartClick}>Restart</MinimalButton>
+                <Button onClick={handleRestartClick}>Restart</Button>
             </div>
             <p className="overlay-subtitle">
                 {isMobile ? 'Double-Tap to Resume' : "Press 'P' to resume."}

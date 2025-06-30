@@ -1,5 +1,5 @@
 import React from 'react';
-import { OverlayContainer, MinimalButton } from '@components/ui';
+import { OverlayContainer, Button } from '@components/ui';
 import { HighScoreTable } from '@components/info';
 import { settingsService } from '@services';
 
@@ -16,7 +16,7 @@ export const StartGameOverlay: React.FC<{ onStart: () => void }> = ({ onStart })
                 <p className="overlay-subtitle">Awaiting input.</p>
             )}
 
-            <MinimalButton onClick={() => onStart()}>START</MinimalButton>
+            <Button onClick={() => onStart()}>START</Button>
         </OverlayContainer>
     );
 };

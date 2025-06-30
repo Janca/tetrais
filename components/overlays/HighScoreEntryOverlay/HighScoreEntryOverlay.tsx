@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { OverlayContainer, MinimalButton } from '@components/ui';
+import { OverlayContainer, Button } from '@components/ui';
 import { settingsService } from '@services';
 import './styles.css';
 
@@ -41,7 +41,7 @@ export const HighScoreEntryOverlay: React.FC<HighScoreEntryOverlayProps> = ({ sc
                     maxLength={10}
                     aria-label="Enter your name"
                 />
-                <MinimalButton onClick={()=>{/* Handled by form onSubmit */}}>SUBMIT</MinimalButton>
+                <Button onClick={()=>{/* Handled by form onSubmit */}}>SUBMIT</Button>
             </form>
         </OverlayContainer>
     );

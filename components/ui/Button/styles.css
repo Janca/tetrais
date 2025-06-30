@@ -1,5 +1,4 @@
-.minimal-button {
-    font-family: 'Share Tech Mono', monospace;
+.button {
     background: transparent;
     border: 1px solid var(--foreground);
     color: var(--foreground);
@@ -14,7 +13,7 @@
       calc(var(--glitch-c-x2) * -1) calc(var(--glitch-c-y2) * -1) 0 var(--glitch-cyan);
 }
 
-.minimal-button:hover, .minimal-button:focus {
+.button:hover, .button:focus {
     background: var(--foreground);
     color: var(--background);
     text-shadow: 1px 1px 0px var(--glitch-red), -1px -1px 0px var(--glitch-cyan);
