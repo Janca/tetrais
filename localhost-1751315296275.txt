@@ -1,0 +1,115 @@
+react-dom_client.js?v=e5bcfdfb:18239 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+useGameState.ts:390 Uncaught ReferenceError: calculateGhostPosition is not defined
+    at useGameState.ts:390:24
+    at react-stack-bottom-frame (react-dom_client.js?v=e5bcfdfb:17730:20)
+    at runWithFiberInDEV (react-dom_client.js?v=e5bcfdfb:1737:72)
+    at commitHookEffectListMount (react-dom_client.js?v=e5bcfdfb:8712:122)
+    at commitHookPassiveMountEffects (react-dom_client.js?v=e5bcfdfb:8770:138)
+    at commitPassiveMountOnFiber (react-dom_client.js?v=e5bcfdfb:10139:29)
+    at recursivelyTraversePassiveMountEffects (react-dom_client.js?v=e5bcfdfb:10120:13)
+    at commitPassiveMountOnFiber (react-dom_client.js?v=e5bcfdfb:10236:13)
+    at recursivelyTraversePassiveMountEffects (react-dom_client.js?v=e5bcfdfb:10120:13)
+    at commitPassiveMountOnFiber (react-dom_client.js?v=e5bcfdfb:10151:13)
+(anonymous) @ useGameState.ts:390
+react-stack-bottom-frame @ react-dom_client.js?v=e5bcfdfb:17730
+runWithFiberInDEV @ react-dom_client.js?v=e5bcfdfb:1737
+commitHookEffectListMount @ react-dom_client.js?v=e5bcfdfb:8712
+commitHookPassiveMountEffects @ react-dom_client.js?v=e5bcfdfb:8770
+commitPassiveMountOnFiber @ react-dom_client.js?v=e5bcfdfb:10139
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=e5bcfdfb:10120
+commitPassiveMountOnFiber @ react-dom_client.js?v=e5bcfdfb:10236
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=e5bcfdfb:10120
+commitPassiveMountOnFiber @ react-dom_client.js?v=e5bcfdfb:10151
+flushPassiveEffects @ react-dom_client.js?v=e5bcfdfb:11554
+(anonymous) @ react-dom_client.js?v=e5bcfdfb:11312
+performWorkUntilDeadline @ react-dom_client.js?v=e5bcfdfb:31
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=e5bcfdfb:248
+(anonymous) @ index.tsx:15
+Show 13 more frames
+Show less
+index.tsx:15 An error occurred in the <App> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+defaultOnUncaughtError @ react-dom_client.js?v=e5bcfdfb:6481
+logUncaughtError @ react-dom_client.js?v=e5bcfdfb:6535
+runWithFiberInDEV @ react-dom_client.js?v=e5bcfdfb:1737
+lane.callback @ react-dom_client.js?v=e5bcfdfb:6563
+callCallback @ react-dom_client.js?v=e5bcfdfb:4349
+commitCallbacks @ react-dom_client.js?v=e5bcfdfb:4361
+runWithFiberInDEV @ react-dom_client.js?v=e5bcfdfb:1739
+commitLayoutEffectOnFiber @ react-dom_client.js?v=e5bcfdfb:9281
+flushLayoutEffects @ react-dom_client.js?v=e5bcfdfb:11426
+commitRoot @ react-dom_client.js?v=e5bcfdfb:11332
+commitRootWhenReady @ react-dom_client.js?v=e5bcfdfb:10764
+performWorkOnRoot @ react-dom_client.js?v=e5bcfdfb:10709
+performSyncWorkOnRoot @ react-dom_client.js?v=e5bcfdfb:11887
+flushSyncWorkAcrossRoots_impl @ react-dom_client.js?v=e5bcfdfb:11788
+flushPassiveEffects @ react-dom_client.js?v=e5bcfdfb:11563
+(anonymous) @ react-dom_client.js?v=e5bcfdfb:11312
+performWorkUntilDeadline @ react-dom_client.js?v=e5bcfdfb:31
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=e5bcfdfb:248
+(anonymous) @ index.tsx:15
+Show 18 more frames
+Show less
+useGameState.ts:390 Uncaught ReferenceError: calculateGhostPosition is not defined
+    at useGameState.ts:390:24
+    at react-stack-bottom-frame (react-dom_client.js?v=e5bcfdfb:17730:20)
+    at runWithFiberInDEV (react-dom_client.js?v=e5bcfdfb:1737:72)
+    at commitHookEffectListMount (react-dom_client.js?v=e5bcfdfb:8712:122)
+    at commitHookPassiveMountEffects (react-dom_client.js?v=e5bcfdfb:8770:138)
+    at reconnectPassiveEffects (react-dom_client.js?v=e5bcfdfb:10268:13)
+    at recursivelyTraverseReconnectPassiveEffects (react-dom_client.js?v=e5bcfdfb:10247:11)
+    at reconnectPassiveEffects (react-dom_client.js?v=e5bcfdfb:10306:13)
+    at doubleInvokeEffectsOnFiber (react-dom_client.js?v=e5bcfdfb:11713:207)
+    at runWithFiberInDEV (react-dom_client.js?v=e5bcfdfb:1737:72)
+(anonymous) @ useGameState.ts:390
+react-stack-bottom-frame @ react-dom_client.js?v=e5bcfdfb:17730
+runWithFiberInDEV @ react-dom_client.js?v=e5bcfdfb:1737
+commitHookEffectListMount @ react-dom_client.js?v=e5bcfdfb:8712
+commitHookPassiveMountEffects @ react-dom_client.js?v=e5bcfdfb:8770
+reconnectPassiveEffects @ react-dom_client.js?v=e5bcfdfb:10268
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=e5bcfdfb:10247
+reconnectPassiveEffects @ react-dom_client.js?v=e5bcfdfb:10306
+doubleInvokeEffectsOnFiber @ react-dom_client.js?v=e5bcfdfb:11713
+runWithFiberInDEV @ react-dom_client.js?v=e5bcfdfb:1737
+recursivelyTraverseAndDoubleInvokeEffectsInDEV @ react-dom_client.js?v=e5bcfdfb:11684
+commitDoubleInvokeEffectsInDEV @ react-dom_client.js?v=e5bcfdfb:11721
+flushPassiveEffects @ react-dom_client.js?v=e5bcfdfb:11561
+(anonymous) @ react-dom_client.js?v=e5bcfdfb:11312
+performWorkUntilDeadline @ react-dom_client.js?v=e5bcfdfb:31
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=e5bcfdfb:248
+(anonymous) @ index.tsx:15
+Show 15 more frames
+Show less
+index.tsx:15 An error occurred in the <App> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+defaultOnUncaughtError @ react-dom_client.js?v=e5bcfdfb:6481
+logUncaughtError @ react-dom_client.js?v=e5bcfdfb:6535
+runWithFiberInDEV @ react-dom_client.js?v=e5bcfdfb:1737
+lane.callback @ react-dom_client.js?v=e5bcfdfb:6563
+callCallback @ react-dom_client.js?v=e5bcfdfb:4349
+commitCallbacks @ react-dom_client.js?v=e5bcfdfb:4361
+runWithFiberInDEV @ react-dom_client.js?v=e5bcfdfb:1739
+commitLayoutEffectOnFiber @ react-dom_client.js?v=e5bcfdfb:9281
+flushLayoutEffects @ react-dom_client.js?v=e5bcfdfb:11426
+commitRoot @ react-dom_client.js?v=e5bcfdfb:11332
+commitRootWhenReady @ react-dom_client.js?v=e5bcfdfb:10764
+performWorkOnRoot @ react-dom_client.js?v=e5bcfdfb:10709
+performSyncWorkOnRoot @ react-dom_client.js?v=e5bcfdfb:11887
+flushSyncWorkAcrossRoots_impl @ react-dom_client.js?v=e5bcfdfb:11788
+flushPassiveEffects @ react-dom_client.js?v=e5bcfdfb:11563
+(anonymous) @ react-dom_client.js?v=e5bcfdfb:11312
+performWorkUntilDeadline @ react-dom_client.js?v=e5bcfdfb:31
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=e5bcfdfb:248
+(anonymous) @ index.tsx:15
+Show 18 more frames
+Show less

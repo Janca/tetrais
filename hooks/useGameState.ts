@@ -3,7 +3,7 @@ import { MinoBoard, Player, Mino, MoveRecord, MoveAction, PieceKey } from '@/typ
 import { createEmptyMinoBoard, BOARD_WIDTH, MINOS, BOARD_HEIGHT } from '@/constants';
 import { getPieceSuggestions, selectBiasedPiece, calculateDropTime } from '@utils';
 import { settingsService, soundManager } from '@services';
-import { isGameOver, isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate } from '@/gameLogic';
+import { isGameOver, isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate, calculateGhostPosition } from '@/gameLogic';
 import { GameState } from '@/App';
 import { logToFile } from '@/utils/logging';
 
