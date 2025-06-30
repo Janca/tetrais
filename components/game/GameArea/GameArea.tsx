@@ -34,11 +34,12 @@ interface GameAreaProps {
     softDropStart: () => void;
     softDropEnd: () => void;
     hapticsEnabled: boolean;
+    gameOverData: any;
 }
 
 export const GameArea: React.FC<GameAreaProps> = ({
     gameState, isPaused, isSettingsOpen, board, player, score, onStart, onRestart, onUnpause, shakeType,
-    movePlayer, rotatePlayer, hardDrop, softDropStart, softDropEnd, hapticsEnabled
+    movePlayer, rotatePlayer, hardDrop, softDropStart, softDropEnd, hapticsEnabled, gameOverData
 }) => {
     const gameAreaRef = useRef<HTMLDivElement>(null);
 
@@ -71,7 +72,7 @@ export const GameArea: React.FC<GameAreaProps> = ({
             <div className="game-area-container">
                  <div className={`gameboard-wrapper ${shakeClass}`}>
                     {gameState === 'IDLE' && <StartGameOverlay onStart={onStart} />}
-                    {gameState === 'GAME_OVER' && <GameOverOverlay score={score} onRestart={onRestart} />}
+                    {gameState === 'GAME_OVER' && <GameOverOverlay score={score} onRestart={onRestart} gameOverData={gameOverData} />}
                     {gameState === 'PLAYING' && isPaused && !isSettingsOpen && <PauseOverlay onUnpause={onUnpause} onRestart={onRestart} />}
                     
                     {memoizedGameboardBackground}

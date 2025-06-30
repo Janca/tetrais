@@ -5,6 +5,7 @@ import { getPieceSuggestions, selectBiasedPiece, calculateDropTime } from '@util
 import { settingsService, soundManager } from '@services';
 import { calculateGhostPosition, isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate } from '@/gameLogic';
 import { GameState } from '@/App';
+import { logToFile } from '@/utils/logging';
 
 
 interface UseGameStateProps {
@@ -27,7 +28,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
     const [level, setLevel] = useState(0);
     const [gameState, setGameState] = useState<GameState>('IDLE');
     const [dropTime, setDropTime] = useState<number | null>(1000);
-    const [moveHistory, setMoveHistory] = useState<MoveRecord[]>([]);
+    const moveHistory = useRef<MoveRecord[]>([]);
     const [gameOverData, setGameOverData] = useState<any>(null);
     const [displayBoard, setDisplayBoard] = useState<MinoBoard>(createEmptyMinoBoard());
 
@@ -43,12 +44,12 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
 
     const recordMove = useCallback((action: MoveAction, playerState: Player, details?: any) => {
         const playerCopy = JSON.parse(JSON.stringify(playerState));
-        setMoveHistory(prev => [...prev, {
+        moveHistory.current.push({
             gameTime: Date.now(),
             action,
             player: playerCopy,
             details,
-        }]);
+        });
     }, []);
 
     const updatePlayerPos = useCallback(({ x, y, collided }: { x?: number; y?: number; collided?: boolean }) => {
@@ -84,11 +85,13 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
 
         if (isColliding(newPlayer, currentBoard, { x: 0, y: 0 })) {
             let isGameOver = false;
+            let gameOverReason = "Unknown";
             newPlayer.mino.shape.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {
                         if (newPlayer.pos.y + y < 0) {
                             isGameOver = true;
+                            gameOverReason = "New piece spawned above visible board.";
                         }
                     }
                 });
@@ -97,15 +100,17 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
             if (isGameOver) {
                 const finalGameOverData = {
                     timestamp: new Date().toISOString(),
+                    reason: gameOverReason,
                     finalBoard: currentBoard,
                     collidingPlayer: newPlayer,
-                    moveHistory,
+                    moveHistory: moveHistory.current,
                     finalSuggestions: suggestions,
                     finalScore: score,
                     finalLines: lines,
                     level,
                 };
                 setGameOverData(finalGameOverData);
+                logToFile(`gameover-${Date.now()}.json`, finalGameOverData);
                 setDropTime(null);
                 soundManager.playGameOverSound(true);
                 setGameState(settingsService.isHighScore(score) ? 'HIGH_SCORE_ENTRY' : 'GAME_OVER');
@@ -113,6 +118,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
             }
         }
         
+        recordMove('newPiece', newPlayer, { suggestions });
         setPlayer(newPlayer);
         setHasSwapped(false);
         resetActionLock();
@@ -122,7 +128,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
             setBoard(prevBoard => mergePlayerToMinoBoard(newPlayer, prevBoard, true));
         }
 
-    }, [score, lines, level, moveHistory]);
+    }, [score, lines, level]);
 
     const startGame = useCallback(() => {
         const startBoard = createEmptyMinoBoard();
@@ -131,7 +137,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         setLines(0);
         setLevel(0);
         setDropTime(calculateDropTime(0));
-        setMoveHistory([]);
+        moveHistory.current = [];
         setGameOverData(null);
         mostNeededPieceRef.current = null;
         setHeldPiece(null);

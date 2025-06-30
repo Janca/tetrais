@@ -1,14 +1,1 @@
-# Tetrais Refactoring and Bug Fixes - DONE
-
-## Task 1: Debug and Fix Premature Game Over
-- [x] Investigated collision detection logic in `gameLogic.ts`.
-- [x] Analyzed how new pieces are spawned and checked in `useGameState.ts`.
-- [x] Refactored the game over condition in `useGameState.ts` to only trigger when a piece is locked outside the playing field.
-
-## Task 2: Control Body Scrollbar Based on Game State
-- [x] Identified all possible game states from `types.ts` and added a `PAUSED` state.
-- [x] Implemented an effect in `App.tsx` that toggles `document.body.style.overflow` based on the current game state. It is now 'hidden' for all states except 'IDLE'.
-
-## Task 3: Implement Movement Restrictions
-- [x] Modified `useGameControls.ts` to prevent horizontal movement during soft or hard drops using `isDropping` and `isRotating` refs.
-- [x] Added logic to `useGameControls.ts` to prevent rotation from being triggered by horizontal movement, and vice-versa.
+- [x] The game is declaring game over way before it is appropriate. We need to added logging and debugging to the game that captures player movement, as well as internal game state at the start of each tetromino draw, and the game state whenever the game is declared over, for any code setting gamestate as game_over, also include a variable that is a comment on why game over was declared, really there should be only one instance where a game should be declared over, but lets log all of it. It should output as a JSON dump, include or omit any information you may deem important for diagnosing. Your output should use @utils/logging.ts and download a `gameover-{timestamp}.json` whenever you shift click the "RESTART" button on the game over screen.

@@ -293,6 +293,7 @@ const App: React.FC = () => {
                             softDropStart={softDropStart}
                             softDropEnd={softDropEnd}
                             hapticsEnabled={hapticsEnabled}
+                            gameOverData={gameOverData}
                         />
                         <PieceSuggestionsPreview
                             pieces={pieceSuggestions}
