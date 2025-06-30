@@ -32,7 +32,7 @@ export const isColliding = (player: Player, board: MinoBoard, move: { x: number;
                 }
                 
                 // Board collision - only check within the board's vertical bounds
-                if (newY >= 0 && board[newY] && board[newY][newX] && board[newY][newX].state !== 'clear') {
+                if (newY >= 0 && board[newY]?.[newX]?.state !== 'clear') {
                     return true;
                 }
             }

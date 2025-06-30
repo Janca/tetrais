@@ -1,0 +1,6040 @@
+{
+  "timestamp": "2025-06-30T20:07:15.929Z",
+  "reason": "New piece spawned and immediately collided with existing blocks.",
+  "finalBoard": [
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "L",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "L",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": true
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": true
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": true
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": true
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "O",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "O",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "J",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "O",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "O",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "L",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": false
+      }
+    ],
+    [
+      {
+        "value": "J",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "J",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "J",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "J",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": 0,
+        "state": "clear",
+        "spite": false
+      },
+      {
+        "value": "L",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "L",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "L",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "T",
+        "state": "merged",
+        "spite": false
+      },
+      {
+        "value": "I",
+        "state": "merged",
+        "spite": false
+      }
+    ]
+  ],
+  "collidingPlayer": {
+    "pos": {
+      "x": 3,
+      "y": 0
+    },
+    "mino": {
+      "key": "I",
+      "shape": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "color": "#000000"
+    },
+    "collided": false
+  },
+  "moveHistory": [
+    {
+      "gameTime": 1751314012548,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314012559,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314013527,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314013808,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314013975,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314014219,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314014402,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 4,
+          "y": 0
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314014544,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 0
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314014581,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 1
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314014907,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 6,
+          "y": 1
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314015110,
+      "action": "hardDrop",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 1
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314015142,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 19
+        },
+        "mino": {
+          "key": "T",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    },
+    {
+      "gameTime": 1751314015186,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314015212,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314015594,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314015618,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314015810,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 2,
+          "y": -1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314015999,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": -1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314016235,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 0,
+          "y": -1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314016611,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 0,
+          "y": -1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314017206,
+      "action": "hardDrop",
+      "player": {
+        "pos": {
+          "x": 0,
+          "y": 0
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314017213,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 0,
+          "y": 20
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    },
+    {
+      "gameTime": 1751314017247,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314017272,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314017644,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314018059,
+      "action": "hardDrop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 1
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314018088,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 20
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    },
+    {
+      "gameTime": 1751314018143,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314018169,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314018711,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314019234,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314019498,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 4,
+          "y": -1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314019711,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": -1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314019789,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 0
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314020042,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 6,
+          "y": 0
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314020467,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 0
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314020711,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 0
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314020822,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314021123,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 6,
+          "y": 1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314021358,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314021533,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 4,
+          "y": 1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314021710,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 1
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314021754,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314022218,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 2,
+          "y": 2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314022434,
+      "action": "hardDrop",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 2
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314022443,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 20
+        },
+        "mino": {
+          "key": "J",
+          "shape": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    },
+    {
+      "gameTime": 1751314022478,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314022504,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314022744,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314022903,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314023366,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 4,
+          "y": -1
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314023602,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": -1
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314023744,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": -1
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314024090,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 0
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314024262,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 0
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314024744,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 0
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314025000,
+      "action": "hardDrop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 1
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314025026,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 20
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    },
+    {
+      "gameTime": 1751314025082,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314025099,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314025811,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 0
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314026496,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 1
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314026714,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 2,
+          "y": 1
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314026810,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 1
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314027050,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 2
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314027331,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 2,
+          "y": 2
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314027510,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 2
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314027681,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 4,
+          "y": 2
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314027811,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 2
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314027850,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 3
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314028263,
+      "action": "rotate",
+      "player": {
+        "pos": {
+          "x": 6,
+          "y": 3
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "direction": "cw"
+      }
+    },
+    {
+      "gameTime": 1751314028615,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 6,
+          "y": 3
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314028810,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 3
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314028979,
+      "action": "hardDrop",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 4
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314028999,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 18
+        },
+        "mino": {
+          "key": "I",
+          "shape": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    },
+    {
+      "gameTime": 1751314029041,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314029067,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314029363,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -1
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314029563,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 2,
+          "y": -1
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314029844,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": -1
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314030844,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 0
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314031844,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 1
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314031926,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 2
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314032318,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 0,
+          "y": 2
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314032498,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 1,
+          "y": 2
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314032658,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 2,
+          "y": 2
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314032844,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 2
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314032846,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": 2
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314033002,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 4,
+          "y": 3
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314033194,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 3
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314033415,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 6,
+          "y": 3
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314033610,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 3
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": 1
+      }
+    },
+    {
+      "gameTime": 1751314033830,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 8,
+          "y": 3
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314033853,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 3
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314034034,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 7,
+          "y": 4
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314034210,
+      "action": "move",
+      "player": {
+        "pos": {
+          "x": 6,
+          "y": 4
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "dir": -1
+      }
+    },
+    {
+      "gameTime": 1751314034844,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 4
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314034928,
+      "action": "hardDrop",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 5
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314034940,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 5,
+          "y": 19
+        },
+        "mino": {
+          "key": "O",
+          "shape": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    },
+    {
+      "gameTime": 1751314034969,
+      "action": "newPiece",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      },
+      "details": {
+        "suggestions": [
+          {
+            "key": "L",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "O",
+            "shape": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "I",
+            "shape": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "S",
+            "shape": [
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "T",
+            "shape": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "Z",
+            "shape": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "color": "#000000"
+          },
+          {
+            "key": "J",
+            "shape": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                1,
+                0
+              ]
+            ],
+            "color": "#000000"
+          }
+        ]
+      }
+    },
+    {
+      "gameTime": 1751314034996,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314035894,
+      "action": "drop",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": false
+      }
+    },
+    {
+      "gameTime": 1751314035904,
+      "action": "softDrop_end",
+      "player": {
+        "pos": {
+          "x": 3,
+          "y": -2
+        },
+        "mino": {
+          "key": "L",
+          "shape": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "color": "#000000"
+        },
+        "collided": true
+      }
+    }
+  ],
+  "finalSuggestions": [
+    {
+      "key": "L",
+      "shape": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "color": "#000000"
+    },
+    {
+      "key": "O",
+      "shape": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "color": "#000000"
+    },
+    {
+      "key": "I",
+      "shape": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "color": "#000000"
+    },
+    {
+      "key": "S",
+      "shape": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "color": "#000000"
+    },
+    {
+      "key": "T",
+      "shape": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "color": "#000000"
+    },
+    {
+      "key": "Z",
+      "shape": [
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "color": "#000000"
+    },
+    {
+      "key": "J",
+      "shape": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "color": "#000000"
+    }
+  ],
+  "finalScore": 40,
+  "finalLines": 1,
+  "level": 0
+}
