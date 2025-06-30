@@ -1,0 +1,17 @@
+.held-piece-preview {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1px;
+    width: 80px; /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.held-piece-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+}

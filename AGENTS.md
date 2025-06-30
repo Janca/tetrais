@@ -1,6 +1,9 @@
 # Project Agents.md Guide for Tetrais
 
 This Agents.md file provides comprehensive guidance for AI agents working with the Tetrais codebase.
+At the beginning of every run, read TODO.md and before any prior instructions complete the TODOs.
+As TODOs are completed, remove the request from TODO.md and create a write up in DONE.md; always append to DONE.md, never erase.
+Add your own TODOs as needed to refer to tasks to be done at a later point.
 
 ## Project Structure
 

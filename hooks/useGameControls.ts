@@ -12,11 +12,12 @@ interface GameControlProps {
     togglePause: () => void;
     softDropStart: () => void;
     softDropEnd: () => void;
+    holdPiece: () => void;
 }
 
 export const useGameControls = ({
     gameState, isPaused, isSettingsOpen, isHighScoresOpen, movePlayer, rotatePlayer,
-    hardDrop, togglePause, softDropStart, softDropEnd
+    hardDrop, togglePause, softDropStart, softDropEnd, holdPiece
 }: GameControlProps) => {
     const keysDown = useRef<Set<string>>(new Set());
 
@@ -63,8 +64,11 @@ export const useGameControls = ({
             case 'KeyW':
                 hardDrop();
                 break;
+            case 'KeyC':
+                holdPiece();
+                break;
         }
-    }, [gameState, isSettingsOpen, isHighScoresOpen, isPaused, togglePause, movePlayer, rotatePlayer, hardDrop, softDropStart]);
+    }, [gameState, isSettingsOpen, isHighScoresOpen, isPaused, togglePause, movePlayer, rotatePlayer, hardDrop, softDropStart, holdPiece]);
 
     const handleKeyUp = useCallback((event: KeyboardEvent) => {
         const { code } = event;

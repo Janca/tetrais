@@ -16,6 +16,7 @@ import {
     GameArea,
     PieceSuggestionsPreview,
     ControlsInfo,
+    HeldPiecePreview,
     DebugOverlay,
 } from '@components';
 import { calculateDropTime } from '@utils';
@@ -82,8 +83,8 @@ const App: React.FC = () => {
     // Game State Hook
     const {
         board, player, pieceSuggestions, score, lines, level, gameState, dropTime,
-        gameOverData, recordMove, setDropTime, setGameState, startGame, 
-        movePlayer, rotatePlayer, drop, hardDrop,
+        heldPiece, gameOverData, recordMove, setDropTime, setGameState, startGame, 
+        movePlayer, rotatePlayer, drop, hardDrop, holdPiece,
     } = useGameState({ physicsEnabled, onHardDrop: triggerShake });
 
     useEffect(() => {
@@ -176,7 +177,7 @@ const App: React.FC = () => {
     // Controls Hooks
     const { handleKeyDown, handleKeyUp } = useGameControls({
         gameState, isPaused, isSettingsOpen, isHighScoresOpen, movePlayer, rotatePlayer,
-        hardDrop, togglePause, softDropStart, softDropEnd,
+        hardDrop, togglePause, softDropStart, softDropEnd, holdPiece,
     });
 
     // Focus & Scroll Management
@@ -270,8 +271,7 @@ const App: React.FC = () => {
                         </div>
                         <div className="game-header-held-piece-container align-right">
                             <div className="game-header-held-piece">
-                                {/* TODO: This is where the held piece should reside */}
-                                {/* TODO: This element should be removed from DOM tree when empty to prevent a grid gap from appearing */}
+                                <HeldPiecePreview piece={heldPiece} />
                             </div>
                         </div>
                     </header>

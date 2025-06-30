@@ -19,6 +19,8 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         mino: MINOS['0'],
         collided: false,
     });
+    const [heldPiece, setHeldPiece] = useState<Mino | null>(null);
+    const [hasSwapped, setHasSwapped] = useState(false);
     const [pieceSuggestions, setPieceSuggestions] = useState<Mino[]>([]);
     const [score, setScore] = useState(0);
     const [lines, setLines] = useState(0);
@@ -93,6 +95,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         }
         
         setPlayer(newPlayer);
+        setHasSwapped(false);
         if (spite) {
             // This is a bit of a hack, but we need to merge the piece immediately
             // to show the spiteful color.
@@ -111,9 +114,43 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         setMoveHistory([]);
         setGameOverData(null);
         mostNeededPieceRef.current = null;
+        setHeldPiece(null);
+        setHasSwapped(false);
         resetPlayer(startBoard);
         setGameState('PLAYING');
     }, [resetPlayer]);
+
+    const holdPiece = useCallback(() => {
+        if (hasSwapped || gameState !== 'PLAYING') return;
+
+        setHasSwapped(true);
+        soundManager.playHoldSound();
+
+        if (!heldPiece) {
+            setHeldPiece(player.mino);
+            resetPlayer(board);
+        } else {
+            const tempPiece = player.mino;
+            const newPlayerPiece = heldPiece;
+            
+            const spawnY = -newPlayerPiece.shape.filter(row => row.some(cell => cell !== 0)).length + 1;
+            const spawnPos = { x: Math.floor(BOARD_WIDTH / 2) - 2, y: spawnY };
+            
+            const newPlayer: Player = { pos: spawnPos, mino: newPlayerPiece, collided: false };
+
+            if (isColliding(newPlayer, board, { x: 0, y: 0 })) {
+                // This is a rare edge case where swapping would cause an immediate game over.
+                // To prevent this, we can either revert the swap or just end the game.
+                // For simplicity, we'll revert the swap.
+                setHasSwapped(false); // Revert the hasSwapped flag
+                soundManager.playErrorSound(); // Optional: play an error sound
+                return;
+            }
+
+            setPlayer(newPlayer);
+            setHeldPiece(tempPiece);
+        }
+    }, [hasSwapped, gameState, heldPiece, player.mino, board, resetPlayer]);
 
     // Player Actions
     const movePlayer = useCallback((dir: -1 | 1) => {
@@ -373,7 +410,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
     return {
         board: displayBoard,
         player, pieceSuggestions, score, lines, level, gameState, dropTime,
-        gameOverData, recordMove, setDropTime, setGameState, startGame, 
-        movePlayer, rotatePlayer, drop, hardDrop,
+        heldPiece, gameOverData, recordMove, setDropTime, setGameState, startGame, 
+        movePlayer, rotatePlayer, drop, hardDrop, holdPiece,
     };
 };
