@@ -1,1 +1,1 @@
-export * from '@components/info/SidePanel/SidePanel';
+export * from './SidePanel';

@@ -1,1 +1,1 @@
-export * from '@components/game/GameArea/GameArea';
+export * from './GameArea';

@@ -1,1 +1,1 @@
-export * from '@components/overlays/HighScoreEntryOverlay/HighScoreEntryOverlay';
+export * from './HighScoreEntryOverlay';

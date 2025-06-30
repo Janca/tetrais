@@ -20,7 +20,7 @@ const EffectCell: React.FC = () => {
     return <div style={style}></div>;
 };
 
-const GameboardBackground: React.FC<{ board: MinoBoard }> = ({ board }) => {
+export const GameboardBackground: React.FC<{ board: MinoBoard }> = ({ board }) => {
     const visibleBoard = board.slice(2); // Slice the board to align with the foreground
     const cells = visibleBoard.flatMap((row, y) =>
         row.map((cell, x) => {
@@ -39,4 +39,3 @@ const GameboardBackground: React.FC<{ board: MinoBoard }> = ({ board }) => {
     );
 };
 
-export default GameboardBackground;

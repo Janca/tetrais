@@ -52,7 +52,7 @@ const Cell: React.FC<{ type: MinoCellValue; state: string; spite: boolean; y: nu
     return <div style={style} className={`gameboard-cell ${state} mino-${type}`}></div>;
 });
 
-const Gameboard: React.FC<GameboardProps> = ({ board }) => {
+export const Gameboard: React.FC<GameboardProps> = ({ board }) => {
     const visibleBoard = board.slice(2);
 
     return (
@@ -69,4 +69,4 @@ const Gameboard: React.FC<GameboardProps> = ({ board }) => {
     );
 };
 
-export default Gameboard;
+

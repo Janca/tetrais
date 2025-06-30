@@ -1,1 +1,1 @@
-export * from '@components/overlays/SettingsOverlay/SettingsOverlay';
+export * from './SettingsOverlay';

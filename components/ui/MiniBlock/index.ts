@@ -1,1 +1,1 @@
-export * from '@components/ui/MiniBlock/MiniBlock';
+export * from './MiniBlock';

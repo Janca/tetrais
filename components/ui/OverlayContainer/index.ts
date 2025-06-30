@@ -1,1 +1,1 @@
-export * from '@components/ui/OverlayContainer/OverlayContainer';
+export * from './OverlayContainer';
