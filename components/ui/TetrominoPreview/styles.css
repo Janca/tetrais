@@ -3,8 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
+    
+    width: var(--piece-grid-size);
+    height: var(--piece-grid-size);
 }
 
 .piece-grid-container {
@@ -25,10 +26,4 @@
 .piece-preview-cell {
     width: var(--preview-grid-size);
     height: var(--preview-grid-size);
-}
-
-.piece-preview-percentage {
-    margin-top: 5px;
-    font-size: 0.8rem;
-    color: #aaa;
 }

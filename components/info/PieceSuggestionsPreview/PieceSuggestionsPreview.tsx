@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mino } from '@/types';
 import { TetrominoPreview } from '@components/ui';
-import '@components/ui/TetrominoPreview/styles.css';
+import './styles.css';
 
 export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number[] }> = ({ pieces, weights }) => {
     return (
@@ -19,9 +19,9 @@ export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number
                         const weightPercentage = weights?.[index] ? (weights[index] * 100).toFixed(1) : '...';
 
                         return (
-                            <div key={piece.key} className="piece-preview">
+                            <div key={piece.key} className="piece-odds-wrapper">
                                 <TetrominoPreview piece={piece} />
-                                <p className="piece-preview-percentage">{`${weightPercentage}%`}</p>
+                                <span className="piece-odds-percentage">{`${weightPercentage}%`}</span>
                             </div>
                         );
                     })
