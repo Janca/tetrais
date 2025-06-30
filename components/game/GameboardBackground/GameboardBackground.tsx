@@ -25,7 +25,7 @@ const GameboardBackground: React.FC<{ board: MinoBoard }> = ({ board }) => {
     const cells = visibleBoard.flatMap((row, y) =>
         row.map((cell, x) => {
             const coordKey = `${y}-${x}`;
-            if (cell[1] === 'merged') {
+            if (cell.state === 'merged') {
                 return <EffectCell key={coordKey} />;
             }
             return <div key={coordKey}></div>; // Render an empty div to keep the grid structure

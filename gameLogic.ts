@@ -32,7 +32,7 @@ export const isColliding = (player: Player, board: MinoBoard, move: { x: number;
                 }
                 
                 // Board collision - only check within the board's vertical bounds
-                if (newY >= 0 && board[newY] && board[newY][newX] && board[newY][newX][1] !== 'clear') {
+                if (newY >= 0 && board[newY] && board[newY][newX] && board[newY][newX].state !== 'clear') {
                     return true;
                 }
             }
@@ -67,14 +67,14 @@ export const rotate = (shape: number[][], direction: 'cw' | 'ccw' = 'cw'): numbe
  * @returns A new board state with the player's piece merged.
  */
 export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard): MinoBoard => {
-    const newBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    const newBoard = board.map(row => row.map(cell => ({ ...cell })));
     player.mino.shape.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
                 const boardY = player.pos.y + y;
                 const boardX = player.pos.x + x;
                 if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
-                    newBoard[boardY][boardX] = [player.mino.key as PieceKey, 'merged'];
+                    newBoard[boardY][boardX] = { value: player.mino.key as PieceKey, state: 'merged', spite: false };
                 }
             }
         });
@@ -90,7 +90,7 @@ export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard): MinoBo
  */
 export const clearLines = (board: MinoBoard, player: Player): { newBoard: MinoBoard; linesCleared: number } => {
     let linesCleared = 0;
-    let newBoard = board.map(row => [...row] as MinoCellData[]);
+    let newBoard = board.map(row => row.map(cell => ({ ...cell })));
 
     // In NES Tetris, line clear checks are centered around the piece's final position.
     // It checks 4 rows: 2 above the piece's center, the center row, and 1 below.
@@ -99,7 +99,7 @@ export const clearLines = (board: MinoBoard, player: Player): { newBoard: MinoBo
     const checkRowEnd = player.pos.y + 1 + 1;
 
     for (let y = checkRowStart; y <= checkRowEnd && y < BOARD_HEIGHT; y++) {
-        const isFull = newBoard[y].every(cell => cell[1] === 'merged');
+        const isFull = newBoard[y].every(cell => cell.state === 'merged');
 
         if (isFull) {
             linesCleared++;
@@ -109,12 +109,12 @@ export const clearLines = (board: MinoBoard, player: Player): { newBoard: MinoBo
             if (y === 2) { 
                 // Simulate the buggy shift for the top visible row
                 const shiftedBoard = newBoard.slice(1); // Drop the actual top row of the buffer
-                shiftedBoard.push(Array(BOARD_WIDTH).fill([0, 'clear'])); // Add a new empty row at the bottom
+                shiftedBoard.push(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false })); // Add a new empty row at the bottom
                 newBoard = shiftedBoard;
             } else {
                 // Normal line clear for other rows
                 const clearedRow = newBoard.splice(y, 1)[0];
-                newBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
+                newBoard.unshift(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
             }
         }
     }
@@ -129,13 +129,13 @@ export const clearLines = (board: MinoBoard, player: Player): { newBoard: MinoBo
  * @returns A new board with floating blocks marked.
  */
 export const markFloatingBlocks = (board: MinoBoard): MinoBoard => {
-    const newBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    const newBoard = board.map(row => row.map(cell => ({ ...cell })));
     const supported = new Set<string>();
     const queue: {x: number, y: number}[] = [];
 
     // 1. Find all blocks resting on the floor.
     for (let x = 0; x < BOARD_WIDTH; x++) {
-        if (newBoard[BOARD_HEIGHT - 1][x][1] === 'merged') {
+        if (newBoard[BOARD_HEIGHT - 1][x].state === 'merged') {
             const key = `${x},${BOARD_HEIGHT - 1}`;
             if (!supported.has(key)) {
                 supported.add(key);
@@ -158,7 +158,7 @@ export const markFloatingBlocks = (board: MinoBoard): MinoBoard => {
 
         for (const { nx, ny } of neighbors) {
             if (nx >= 0 && nx < BOARD_WIDTH && ny >= 0 && ny < BOARD_HEIGHT) {
-                if (newBoard[ny][nx][1] === 'merged') {
+                if (newBoard[ny][nx].state === 'merged') {
                     const key = `${nx},${ny}`;
                     if (!supported.has(key)) {
                         supported.add(key);
@@ -172,8 +172,8 @@ export const markFloatingBlocks = (board: MinoBoard): MinoBoard => {
     // 3. Mark all non-supported 'merged' blocks as 'falling'.
     for (let y = 0; y < BOARD_HEIGHT; y++) {
         for (let x = 0; x < BOARD_WIDTH; x++) {
-            if (newBoard[y][x][1] === 'merged' && !supported.has(`${x},${y}`)) {
-                newBoard[y][x][1] = 'falling';
+            if (newBoard[y][x].state === 'merged' && !supported.has(`${x},${y}`)) {
+                newBoard[y][x].state = 'falling';
             }
         }
     }
@@ -187,15 +187,15 @@ export const markFloatingBlocks = (board: MinoBoard): MinoBoard => {
  * @returns An object with the new board and a flag indicating if any blocks moved.
  */
 export const stepCascade = (board: MinoBoard): { nextBoard: MinoBoard, moved: boolean } => {
-    const nextBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    const nextBoard = board.map(row => row.map(cell => ({ ...cell })));
     let moved = false;
     
     // Iterate from the bottom up to prevent blocks from moving more than once per step
     for (let y = BOARD_HEIGHT - 2; y >= 0; y--) {
         for (let x = 0; x < BOARD_WIDTH; x++) {
-            if (nextBoard[y][x][1] === 'falling' && nextBoard[y + 1][x][1] === 'clear') {
+            if (nextBoard[y][x].state === 'falling' && nextBoard[y + 1][x].state === 'clear') {
                 nextBoard[y + 1][x] = nextBoard[y][x];
-                nextBoard[y][x] = [0, 'clear'];
+                nextBoard[y][x] = { value: 0, state: 'clear', spite: false };
                 moved = true;
             }
         }
@@ -209,11 +209,11 @@ export const stepCascade = (board: MinoBoard): { nextBoard: MinoBoard, moved: bo
  * @returns A new board with all falling blocks settled.
  */
 export const freezeFallingBlocks = (board: MinoBoard): MinoBoard => {
-    const newBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+    const newBoard = board.map(row => row.map(cell => ({ ...cell })));
     for (let y = 0; y < BOARD_HEIGHT; y++) {
         for (let x = 0; x < BOARD_WIDTH; x++) {
-            if (newBoard[y][x][1] === 'falling') {
-                newBoard[y][x][1] = 'merged';
+            if (newBoard[y][x].state === 'falling') {
+                newBoard[y][x].state = 'merged';
             }
         }
     }

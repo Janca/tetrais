@@ -1,7 +1,11 @@
 export type PieceKey = 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
 export type MinoCellValue = 0 | PieceKey;
 export type CellState = 'clear' | 'merged' | 'ghost' | 'falling' | 'player';
-export type MinoCellData = [MinoCellValue, CellState];
+export type MinoCellData = {
+    value: MinoCellValue;
+    state: CellState;
+    spite: boolean;
+};
 export type MinoBoard = MinoCellData[][];
 
 export interface Mino {

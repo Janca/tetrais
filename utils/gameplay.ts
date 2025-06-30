@@ -30,7 +30,7 @@ const getNegativeSpacePenalty = (board: MinoBoard): number => {
     // Only penalize blocks in the top two rows (the "negative" space)
     for (let y = 0; y < 2; y++) {
         for (let x = 0; x < BOARD_WIDTH; x++) {
-            if (board[y][x][1] === 'merged') {
+            if (board[y][x].state === 'merged') {
                 // Apply a smaller penalty for using the negative space
                 penalty += 0.1;
             }
@@ -43,7 +43,7 @@ const getAggregateHeight = (board: MinoBoard): number => {
     let totalHeight = 0;
     for (let x = 0; x < BOARD_WIDTH; x++) {
         for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
-            if (board[y][x][1] === 'merged') {
+            if (board[y][x].state === 'merged') {
                 totalHeight += (BOARD_HEIGHT - y);
                 break;
             }
@@ -57,9 +57,9 @@ const getHoles = (board: MinoBoard): number => {
     for (let x = 0; x < BOARD_WIDTH; x++) {
         let blockFound = false;
         for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
-            if (board[y][x][1] === 'merged') {
+            if (board[y][x].state === 'merged') {
                 blockFound = true;
-            } else if (blockFound && board[y][x][1] === 'clear') {
+            } else if (blockFound && board[y][x].state === 'clear') {
                 holes++;
             }
         }
@@ -73,7 +73,7 @@ const getBumpiness = (board: MinoBoard): number => {
     for (let x = 0; x < BOARD_WIDTH; x++) {
         let height = 0;
         for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
-            if (board[y][x][1] === 'merged') {
+            if (board[y][x].state === 'merged') {
                 height = BOARD_HEIGHT - y;
                 break;
             }
@@ -89,7 +89,7 @@ const getBumpiness = (board: MinoBoard): number => {
 
 const getLinesCleared = (board: MinoBoard): number => {
     return board.reduce((acc, row) => {
-        if (row.every(cell => cell[1] === 'merged')) {
+        if (row.every(cell => cell.state === 'merged')) {
             return acc + 1;
         }
         return acc;
@@ -101,7 +101,7 @@ const getWells = (board: MinoBoard): number => {
     const heights = Array(BOARD_WIDTH).fill(0);
     for (let x = 0; x < BOARD_WIDTH; x++) {
         for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
-            if (board[y][x][1] === 'merged') {
+            if (board[y][x].state === 'merged') {
                 heights[x] = BOARD_HEIGHT - y;
                 break;
             }
@@ -125,7 +125,7 @@ const getWells = (board: MinoBoard): number => {
 const getTopRowClearBonus = (board: MinoBoard): number => {
     // Check if the top visible row (row 2) is one block away from being full
     const topVisibleRow = board[2];
-    const blocksInRow = topVisibleRow.filter(cell => cell[1] === 'merged').length;
+    const blocksInRow = topVisibleRow.filter(cell => cell.state === 'merged').length;
     if (blocksInRow === BOARD_WIDTH - 1) {
         // This is a huge bonus because it can lead to a buggy Tetris
         return 50;
@@ -188,7 +188,7 @@ export const getPieceSuggestions = (board: MinoBoard): Mino[] => {
                 }
                 
                 // Create a temporary board with the piece placed
-                const tempBoard: MinoBoard = board.map(row => row.map(cell => [...cell]));
+                const tempBoard: MinoBoard = board.map(row => row.map(cell => ({ ...cell })));
                 
                 let placementPossible = true;
                 for (let row = 0; row < currentPieceShape.length; row++) {
@@ -196,12 +196,12 @@ export const getPieceSuggestions = (board: MinoBoard): Mino[] => {
                         if (currentPieceShape[row][col] !== 0) {
                             const newY = row + y;
                             const newX = col + x;
-                            if(newY >= BOARD_HEIGHT || newX < 0 || newX >= BOARD_WIDTH || (tempBoard[newY] && tempBoard[newY][newX][1] === 'merged')) {
+                            if(newY >= BOARD_HEIGHT || newX < 0 || newX >= BOARD_WIDTH || (tempBoard[newY] && tempBoard[newY][newX].state === 'merged')) {
                                 placementPossible = false;
                                 break;
                             }
                             if(tempBoard[newY] && tempBoard[newY][newX]) {
-                                tempBoard[newY][newX] = [pieceKey, 'merged'];
+                                tempBoard[newY][newX] = { value: pieceKey, state: 'merged', spite: false };
                             }
                         }
                     }

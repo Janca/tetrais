@@ -183,7 +183,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
 
         let clearedRowsIndexes: number[] = [];
         boardWithPiece.forEach((row, y) => {
-            if (row.every(cell => cell[1] === 'merged')) clearedRowsIndexes.push(y);
+            if (row.every(cell => cell.state === 'merged')) clearedRowsIndexes.push(y);
         });
         const linesCleared = clearedRowsIndexes.length;
 
@@ -196,18 +196,18 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
             setLevel(Math.floor(newTotalLines / 5));
             
             const boardWithEmptyRows = boardWithPiece.map((row, y) => 
-                clearedRowsIndexes.includes(y) ? Array(BOARD_WIDTH).fill([0, 'clear'] as MinoCellData) : row
+                clearedRowsIndexes.includes(y) ? Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }) : row
             );
             
             const boardToCascade = markFloatingBlocks(boardWithEmptyRows);
-            if (boardToCascade.some(row => row.some(cell => cell[1] === 'falling'))) {
+            if (boardToCascade.some(row => row.some(cell => cell.state === 'falling'))) {
                 setBoard(boardToCascade);
                 setPlayer(prev => ({...prev, mino: MINOS['0']}));
                 setGameState('CASCADING');
             } else {
-                const compactedBoard = boardWithEmptyRows.filter(row => row.some(cell => cell[1] !== 'clear'));
+                const compactedBoard = boardWithEmptyRows.filter(row => row.some(cell => cell.state !== 'clear'));
                 while(compactedBoard.length < BOARD_HEIGHT) {
-                    compactedBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
+                    compactedBoard.unshift(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
                 }
                 setBoard(compactedBoard as MinoBoard);
                 resetPlayer(compactedBoard as MinoBoard);
@@ -246,7 +246,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
             const frozenBoard = freezeFallingBlocks(steppedBoard);
             let clearedRowsIndexes: number[] = [];
             frozenBoard.forEach((row, y) => {
-                if (row.every(cell => cell[1] === 'merged')) clearedRowsIndexes.push(y);
+                if (row.every(cell => cell.state === 'merged')) clearedRowsIndexes.push(y);
             });
             const linesCleared = clearedRowsIndexes.length;
     
@@ -259,25 +259,25 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
                 setLevel(Math.floor(newTotalLines / 5));
     
                 const boardWithEmptyRows = frozenBoard.map((row, y) => 
-                    clearedRowsIndexes.includes(y) ? Array(BOARD_WIDTH).fill([0, 'clear'] as MinoCellData) : row
+                    clearedRowsIndexes.includes(y) ? Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }) : row
                 );
     
                 const boardToCascadeAgain = markFloatingBlocks(boardWithEmptyRows);
-                if (boardToCascadeAgain.some(row => row.some(cell => cell[1] === 'falling'))) {
+                if (boardToCascadeAgain.some(row => row.some(cell => cell.state === 'falling'))) {
                     return boardToCascadeAgain;
                 } else {
-                    const compactedBoard = boardWithEmptyRows.filter(row => row.some(cell => cell[1] !== 'clear'));
+                    const compactedBoard = boardWithEmptyRows.filter(row => row.some(cell => cell.state !== 'clear'));
                     while (compactedBoard.length < BOARD_HEIGHT) {
-                        compactedBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
+                        compactedBoard.unshift(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
                     }
                     setGameState('PLAYING');
                     resetPlayer(compactedBoard as MinoBoard);
                     return compactedBoard as MinoBoard;
                 }
             } else {
-                const compactedBoard = frozenBoard.filter(row => row.some(cell => cell[1] !== 'clear'));
+                const compactedBoard = frozenBoard.filter(row => row.some(cell => cell.state !== 'clear'));
                 while (compactedBoard.length < BOARD_HEIGHT) {
-                    compactedBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
+                    compactedBoard.unshift(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
                 }
                 setGameState('PLAYING');
                 resetPlayer(compactedBoard as MinoBoard);
@@ -315,7 +315,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
     }, [gameState, runCascade]);
 
     useEffect(() => {
-        const newDisplayBoard = board.map(row => row.map(cell => [...cell] as MinoCellData));
+        const newDisplayBoard = board.map(row => row.map(cell => ({ ...cell })));
         const ghostY = calculateGhostPosition(player, board);
 
         if (gameState === 'PLAYING') {
@@ -326,8 +326,8 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
                         const boardY = ghostY + y;
                         const boardX = player.pos.x + x;
                         if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
-                            if (newDisplayBoard[boardY][boardX][1] === 'clear') {
-                                newDisplayBoard[boardY][boardX] = [player.mino.key as PieceKey, 'ghost'];
+                            if (newDisplayBoard[boardY][boardX].state === 'clear') {
+                                newDisplayBoard[boardY][boardX] = { value: player.mino.key as PieceKey, state: 'ghost', spite: false };
                             }
                         }
                     }
@@ -341,7 +341,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
                         const boardY = player.pos.y + y;
                         const boardX = player.pos.x + x;
                         if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
-                            newDisplayBoard[boardY][boardX] = [player.mino.key as PieceKey, 'player'];
+                            newDisplayBoard[boardY][boardX] = { value: player.mino.key as PieceKey, state: 'player', spite: false };
                         }
                     }
                 });

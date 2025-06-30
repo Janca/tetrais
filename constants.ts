@@ -5,9 +5,9 @@ export const BOARD_HEIGHT = 22;
 
 export const VISIBLE_BOARD_HEIGHT = 20;
 
-export const createEmptyMinoBoard = (): MinoBoard => 
-    Array.from({ length: BOARD_HEIGHT }, (): [0, 'clear'][] => 
-        Array(BOARD_WIDTH).fill([0, 'clear'])
+export const createEmptyMinoBoard = (): MinoBoard =>
+    Array.from({ length: BOARD_HEIGHT }, () =>
+        Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false })
     );
 
 type MinoCollection = {

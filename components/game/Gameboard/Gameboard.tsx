@@ -16,7 +16,7 @@ interface GameboardProps {
     board: MinoBoard;
 }
 
-const Cell: React.FC<{ type: MinoCellValue; state: string; y: number; x: number; board: MinoBoard }> = React.memo(({ type, state, y, x, board }) => {
+const Cell: React.FC<{ type: MinoCellValue; state: string; spite: boolean; y: number; x: number; board: MinoBoard }> = React.memo(({ type, state, spite, y, x, board }) => {
     const style: React.CSSProperties = {
         width: '100%',
         height: '100%',
@@ -28,15 +28,15 @@ const Cell: React.FC<{ type: MinoCellValue; state: string; y: number; x: number;
         style.backgroundColor = 'rgba(0, 0, 0, 0.05)'
     } else if (type !== 0) {
         if (state === 'player' || state === 'merged') {
-            style.backgroundColor = 'var(--foreground)';
+            style.backgroundColor = spite ? '#f00' : 'var(--foreground)';
         }
         
         if (state === 'merged') {
             // Check adjacent cells to remove borders and create a solid mass
-            const isAboveMerged = y > 0 && board[y - 1][x][1] === 'merged';
-            const isBelowMerged = y < board.length - 1 && board[y + 1][x][1] === 'merged';
-            const isLeftMerged = x > 0 && board[y][x - 1][1] === 'merged';
-            const isRightMerged = x < board[0].length - 1 && board[y][x + 1][1] === 'merged';
+            const isAboveMerged = y > 0 && board[y - 1][x].state === 'merged';
+            const isBelowMerged = y < board.length - 1 && board[y + 1][x].state === 'merged';
+            const isLeftMerged = x > 0 && board[y][x - 1].state === 'merged';
+            const isRightMerged = x < board[0].length - 1 && board[y][x + 1].state === 'merged';
 
             if (isAboveMerged) style.borderTop = 'none';
             if (isBelowMerged) style.borderBottom = 'none';
@@ -60,9 +60,8 @@ const Gameboard: React.FC<GameboardProps> = ({ board }) => {
             {visibleBoard.map((row, y) => (
                 <React.Fragment key={y}>
                     {row.map((cell, x) => {
-                        const minoKey = cell[0];
-                        const cellState = cell[1];
-                        return <Cell key={`${y}-${x}`} type={minoKey} state={cellState} y={y} x={x} board={visibleBoard} />;
+                        const { value: minoKey, state: cellState, spite } = cell;
+                        return <Cell key={`${y}-${x}`} type={minoKey} state={cellState} spite={spite} y={y} x={x} board={visibleBoard} />;
                     })}
                 </React.Fragment>
             ))}
