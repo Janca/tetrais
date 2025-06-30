@@ -1,3 +1,29 @@
+/**
+ * @file SoundManager.ts
+ * @description
+ * This file contains the SoundManager class, which is responsible for all audio
+ * playback in the game. It uses the Web Audio API to generate and control all
+ * sounds and music.
+ *
+ * Why it exists:
+ * - To encapsulate all audio-related code in a single, reusable class.
+ * - To provide a simple interface for playing sounds and music from other parts
+ *   of the application.
+ * - To manage the complexities of the Web Audio API, such as scheduling and
+ *   managing audio nodes.
+ *
+ * How it works:
+ * - The SoundManager is a singleton class, meaning there is only one instance
+ *   of it throughout the application.
+ * - It uses a scheduler to play the background music, which is composed of
+ *   several layers (melody, bassline, percussion, etc.).
+ * - The `startMusic` and `stopMusic` methods control the playback of the
+ *   background music.
+ * - The `isMusicPlaying` method allows other parts of the application to check
+ *   if the music is currently playing.
+ * - Various `play...` methods are provided to play sound effects for different
+ *   game events (e.g., `playLockSound`, `playLineClearSound`).
+ */
 class SoundManager {
     private audioContext: AudioContext | null = null;
 

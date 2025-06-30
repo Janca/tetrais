@@ -1,3 +1,25 @@
+/**
+ * @file useGameAudio.ts
+ * @description
+ * This hook manages all audio-related logic for the game. It is responsible for
+ * initializing the sound manager, handling volume changes, and controlling the
+ * background music based on the game state.
+ *
+ * Why it exists:
+ * - To centralize all audio logic in one place, making it easier to manage and
+ *   debug.
+ * - To separate audio concerns from the main game logic and UI components.
+ *
+ * How it works:
+ * - It uses the `soundManager` service to play and stop sounds and music.
+ * - It initializes the sound manager with the user's saved volume settings.
+ * - It provides callback functions to handle volume changes from the UI.
+ * - A `useEffect` hook monitors the game state and other UI flags (e.g., `isPaused`,
+ *   `isSettingsOpen`) to determine whether the background music should be playing.
+ * - To prevent the music from restarting unnecessarily (e.g., when a piece is
+ *   locked), the hook checks if the music is already playing before starting it.
+ *   It also allows music to continue playing during the `PROCESSING_BOARD` state.
+ */
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { soundManager, settingsService } from '../services';
 import { GameState } from '../App';

@@ -2,12 +2,23 @@
  * @file gameplay.ts
  * @description
  * This file contains stateless utility functions related to Tetris gameplay logic.
- * It combines the functionality of the former `minosService.ts` and `gameHelpers.ts` files.
- * The functions in this file are responsible for tasks such as:
- * - Evaluating the game board state.
- * - Providing piece suggestions based on board evaluation.
- * - Calculating game-related values like score, level, and drop time.
- * - Selecting pieces with a weighted bias.
+ * It was created by combining the former `minosService.ts` and `gameHelpers.ts` files
+ * to centralize core gameplay calculations and logic.
+ *
+ * Why it exists:
+ * - To provide a single, authoritative source for gameplay-related functions.
+ * - To ensure that all core gameplay logic is stateless and easily testable.
+ * - To separate gameplay calculations from the state management and rendering logic
+ *   in the React components and hooks.
+ *
+ * How it works:
+ * - The file exports a collection of functions that take the current game state
+ *   (e.g., the board, player, etc.) as input and return calculated values.
+ * - The `evaluateBoard` function uses a weighted heuristic to score the current
+ *   board state, which is then used by `getPieceSuggestions` to determine the
+ *   "best" and "worst" pieces to offer the player.
+ * - Other functions calculate the player's score, level, and the drop time of
+ *   the current piece.
  */
 
 import { MinoBoard, Player, Mino, PieceKey } from '../types';
