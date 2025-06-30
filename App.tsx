@@ -85,6 +85,7 @@ const App: React.FC = () => {
         board, player, pieceSuggestions, score, lines, level, gameState, dropTime,
         heldPiece, gameOverData, recordMove, setDropTime, setGameState, startGame, 
         movePlayer, rotatePlayer, drop, hardDrop, holdPiece,
+        isActionLocked, resetActionLock,
     } = useGameState({ physicsEnabled, onHardDrop: triggerShake });
 
     useEffect(() => {
@@ -178,6 +179,7 @@ const App: React.FC = () => {
     const { handleKeyDown, handleKeyUp } = useGameControls({
         gameState, isPaused, isSettingsOpen, isHighScoresOpen, movePlayer, rotatePlayer,
         hardDrop, togglePause, softDropStart, softDropEnd, holdPiece,
+        isActionLocked, resetActionLock,
     });
 
     // Focus & Scroll Management

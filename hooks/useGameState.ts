@@ -35,6 +35,12 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
     const cascadeTimerRef = useRef<number | null>(null);
     const cascadeTimeRef = useRef(0);
 
+    const [isActionLocked, setIsActionLocked] = useState(false);
+
+    const resetActionLock = useCallback(() => {
+        setIsActionLocked(false);
+    }, []);
+
     const recordMove = useCallback((action: MoveAction, playerState: Player, details?: any) => {
         const playerCopy = JSON.parse(JSON.stringify(playerState));
         setMoveHistory(prev => [...prev, {
@@ -109,6 +115,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         
         setPlayer(newPlayer);
         setHasSwapped(false);
+        resetActionLock();
         if (spite) {
             // This is a bit of a hack, but we need to merge the piece immediately
             // to show the spiteful color.
@@ -167,16 +174,16 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
 
     // Player Actions
     const movePlayer = useCallback((dir: -1 | 1) => {
-        if (gameState !== 'PLAYING') return;
+        if (gameState !== 'PLAYING' || isActionLocked) return;
         if (!isColliding(player, board, { x: dir, y: 0 })) {
             recordMove('move', player, { dir });
             updatePlayerPos({ x: dir });
             soundManager.playMoveSound();
         }
-    }, [gameState, player, board, updatePlayerPos, recordMove]);
+    }, [gameState, player, board, updatePlayerPos, recordMove, isActionLocked]);
 
     const rotatePlayer = useCallback((direction: 'cw' | 'ccw') => {
-        if (gameState !== 'PLAYING') return;
+        if (gameState !== 'PLAYING' || isActionLocked) return;
         
         const prospectivePlayer = { ...player, mino: { ...player.mino, shape: rotate(player.mino.shape, direction) } };
         let offset = 1;
@@ -187,9 +194,10 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         }
         
         recordMove('rotate', player, { direction });
+        setIsActionLocked(true);
         setPlayer(prospectivePlayer);
         soundManager.playRotateSound();
-    }, [gameState, player, board, setPlayer, recordMove]);
+    }, [gameState, player, board, setPlayer, recordMove, isActionLocked]);
 
     const drop = useCallback(() => {
         if (gameState !== 'PLAYING') return;
@@ -205,12 +213,13 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
     }, [gameState, player, board, updatePlayerPos, dropTime, recordMove]);
 
     const hardDrop = useCallback(() => {
-        if (gameState !== 'PLAYING') return;
+        if (gameState !== 'PLAYING' || isActionLocked) return;
         let y = 0;
         while (!isColliding(player, board, { x: 0, y: y + 1 })) y++;
         
         recordMove('hardDrop', player);
         soundManager.playHardLockSound();
+        setIsActionLocked(true);
         updatePlayerPos({ y, collided: true });
 
         const shape = player.mino.shape;
@@ -425,5 +434,6 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         player, pieceSuggestions, score, lines, level, gameState, dropTime,
         heldPiece, gameOverData, recordMove, setDropTime, setGameState, startGame, 
         movePlayer, rotatePlayer, drop, hardDrop, holdPiece,
+        isActionLocked, resetActionLock,
     };
 };
