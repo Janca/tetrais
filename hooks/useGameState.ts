@@ -77,21 +77,34 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         const newPlayer: Player = { pos: spawnPos, mino: newPiece, collided: false };
 
         if (isColliding(newPlayer, currentBoard, { x: 0, y: 0 })) {
-            const finalGameOverData = {
-                timestamp: new Date().toISOString(),
-                finalBoard: currentBoard,
-                collidingPlayer: newPlayer,
-                moveHistory,
-                finalSuggestions: suggestions,
-                finalScore: score,
-                finalLines: lines,
-                level,
-            };
-            setGameOverData(finalGameOverData);
-            setDropTime(null);
-            soundManager.playGameOverSound(true);
-            setGameState(settingsService.isHighScore(score) ? 'HIGH_SCORE_ENTRY' : 'GAME_OVER');
-            return;
+            let isGameOver = false;
+            newPlayer.mino.shape.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        if (newPlayer.pos.y + y < 0) {
+                            isGameOver = true;
+                        }
+                    }
+                });
+            });
+
+            if (isGameOver) {
+                const finalGameOverData = {
+                    timestamp: new Date().toISOString(),
+                    finalBoard: currentBoard,
+                    collidingPlayer: newPlayer,
+                    moveHistory,
+                    finalSuggestions: suggestions,
+                    finalScore: score,
+                    finalLines: lines,
+                    level,
+                };
+                setGameOverData(finalGameOverData);
+                setDropTime(null);
+                soundManager.playGameOverSound(true);
+                setGameState(settingsService.isHighScore(score) ? 'HIGH_SCORE_ENTRY' : 'GAME_OVER');
+                return;
+            }
         }
         
         setPlayer(newPlayer);

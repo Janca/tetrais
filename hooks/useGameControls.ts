@@ -20,15 +20,14 @@ export const useGameControls = ({
     hardDrop, togglePause, softDropStart, softDropEnd, holdPiece
 }: GameControlProps) => {
     const keysDown = useRef<Set<string>>(new Set());
+    const isDropping = useRef(false);
+    const isRotating = useRef(false);
 
     const handleKeyDown = useCallback((event: KeyboardEvent) => {
         if (isSettingsOpen || isHighScoresOpen) return;
         const { code } = event;
 
-        // Use a ref to prevent multiple triggers for hold-down keys
-        if (keysDown.current.has(code)) {
-            return;
-        }
+        if (keysDown.current.has(code)) return;
 
         if (code === 'KeyP') {
             togglePause();
@@ -43,26 +42,38 @@ export const useGameControls = ({
         switch (code) {
             case 'KeyA':
             case 'ArrowLeft':
-                movePlayer(-1);
+                if (!isDropping.current && !isRotating.current) movePlayer(-1);
                 break;
             case 'KeyD':
             case 'ArrowRight':
-                movePlayer(1);
+                if (!isDropping.current && !isRotating.current) movePlayer(1);
                 break;
             case 'KeyS':
             case 'ArrowDown':
-                softDropStart();
+                if (!isDropping.current) {
+                    isDropping.current = true;
+                    softDropStart();
+                }
                 break;
             case 'KeyQ':
-                rotatePlayer('ccw');
+                if (!isRotating.current && !isDropping.current) {
+                    isRotating.current = true;
+                    rotatePlayer('ccw');
+                }
                 break;
             case 'KeyE':
             case 'ArrowUp':
-                rotatePlayer('cw');
+                if (!isRotating.current && !isDropping.current) {
+                    isRotating.current = true;
+                    rotatePlayer('cw');
+                }
                 break;
             case 'Space':
             case 'KeyW':
-                hardDrop();
+                if (!isDropping.current) {
+                    isDropping.current = true;
+                    hardDrop();
+                }
                 break;
             case 'KeyC':
                 holdPiece();
@@ -76,8 +87,21 @@ export const useGameControls = ({
 
         if (isSettingsOpen || isHighScoresOpen || gameState !== 'PLAYING' || isPaused) return;
 
-        if (code === 'KeyS' || code === 'ArrowDown') {
-            softDropEnd();
+        switch (code) {
+            case 'KeyS':
+            case 'ArrowDown':
+                isDropping.current = false;
+                softDropEnd();
+                break;
+            case 'KeyQ':
+            case 'KeyE':
+            case 'ArrowUp':
+                isRotating.current = false;
+                break;
+            case 'Space':
+            case 'KeyW':
+                isDropping.current = false;
+                break;
         }
     }, [isSettingsOpen, isHighScoresOpen, gameState, isPaused, softDropEnd]);
     

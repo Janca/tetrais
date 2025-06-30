@@ -30,7 +30,7 @@ export type ShakeType =
     | 'left-2' | 'center-2' | 'right-2'
     | 'left-3' | 'center-3' | 'right-3';
 
-export type GameState = 'IDLE' | 'PLAYING' | 'GAME_OVER' | 'CASCADING' | 'HIGH_SCORE_ENTRY' | 'PROCESSING_BOARD';
+export type GameState = 'IDLE' | 'PLAYING' | 'PAUSED' | 'GAME_OVER' | 'CASCADING' | 'HIGH_SCORE_ENTRY' | 'PROCESSING_BOARD';
 
 const App: React.FC = () => {
     // UI State
@@ -183,7 +183,7 @@ const App: React.FC = () => {
     // Focus & Scroll Management
     useEffect(() => {
         const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-        const isLocked = gameState === 'PLAYING' && !isPaused && !isSettingsOpen && !isHighScoresOpen;
+        const isLocked = gameState !== 'IDLE';
 
         document.body.style.overflow = (isLocked || isMobile) ? 'hidden' : 'auto';
 

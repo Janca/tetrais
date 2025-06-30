@@ -1,17 +1,14 @@
-# Refactoring Summary
+# Tetrais Refactoring and Bug Fixes - DONE
 
-I have completed a comprehensive refactoring of the Tetris codebase. The following changes were made:
+## Task 1: Debug and Fix Premature Game Over
+- [x] Investigated collision detection logic in `gameLogic.ts`.
+- [x] Analyzed how new pieces are spawned and checked in `useGameState.ts`.
+- [x] Refactored the game over condition in `useGameState.ts` to only trigger when a piece is locked outside the playing field.
 
-## Component Refactoring
+## Task 2: Control Body Scrollbar Based on Game State
+- [x] Identified all possible game states from `types.ts` and added a `PAUSED` state.
+- [x] Implemented an effect in `App.tsx` that toggles `document.body.style.overflow` based on the current game state. It is now 'hidden' for all states except 'IDLE'.
 
-*   **`MinimalButton` replaced with `Button`**: The `MinimalButton` component was replaced with a more generic `Button` component to improve reusability. All instances of `MinimalButton` were updated to use the new `Button` component.
-*   **Removed unused components**: The `HeldPiecePreview`, `Scoreboard`, and `SidePanel` components were removed from the codebase as they were either unused or provided no additional functionality over their native counterparts.
-*   **Consolidated `MinoPreview`**: The `HeldPiecePreview` component was a simple wrapper around the `MinoPreview` component. It has been removed and `MinoPreview` is now used directly.
-
-## CSS Refactoring
-
-*   **Moved overlay styles to `styles.css`**: The styles for the `OverlayContainer` component were moved to the main `styles.css` file to improve consistency and reduce code duplication.
-*   **Moved `close-button` styles to `styles.css`**: The styles for the `.close-button` class were moved to the main `styles.css` file.
-*   **Removed duplicate styles**: Duplicate `panel-title` and `font-family` styles were removed from component-specific stylesheets.
-
-These changes have resulted in a more streamlined and maintainable codebase.
+## Task 3: Implement Movement Restrictions
+- [x] Modified `useGameControls.ts` to prevent horizontal movement during soft or hard drops using `isDropping` and `isRotating` refs.
+- [x] Added logic to `useGameControls.ts` to prevent rotation from being triggered by horizontal movement, and vice-versa.
