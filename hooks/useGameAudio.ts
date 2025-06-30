@@ -100,7 +100,7 @@ export const useGameAudio = (
     useEffect(() => {
         if (!userInteracted) return;
 
-        const canPlayMusic = gameState === 'PLAYING' || gameState === 'IDLE' || gameState === 'CASCADING';
+        const canPlayMusic = gameState === 'PLAYING' || gameState === 'IDLE' || gameState === 'CASCADING' || gameState === 'PROCESSING_BOARD';
         const shouldPlayMusic = (canPlayMusic && !isPaused) || ((isSettingsOpen || isHighScoresOpen) && canPlayMusic);
 
         if (shouldPlayMusic) {
