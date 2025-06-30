@@ -31,7 +31,7 @@
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
-    width: calc(4 * 0.75rem + 3px);
+    width: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px);
 }
 
 .piece-preview {
@@ -42,8 +42,8 @@
 }
 
 .piece-grid-container {
-    width: calc(4 * 0.75rem + 3px);
-    height: calc(4 * 0.75rem + 3px);
+    width: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px);
+    height: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,8 +55,8 @@
 }
 
 .piece-preview-cell {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: clamp(1dvw, 1.5dvw, 0.75rem);
+    height: clamp(1dvw, 1.5dvw, 0.75rem);
 }
 
 .piece-preview-percentage {
@@ -81,7 +81,7 @@
     .next-piece-panel {
         flex-direction: column;
         width: 100%;
-        height: calc(4 * 0.75rem + 3px + 2rem);
+        height: calc(4 * clamp(1dvw, 1.5dvw, 0.75rem) + 3px + 2rem);
         padding:0;
     }
 

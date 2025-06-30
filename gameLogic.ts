@@ -1,7 +1,7 @@
 
 
 import { MinoBoard, Player, PieceKey, MinoCellData } from './types';
-import { BOARD_WIDTH, BOARD_HEIGHT } from './constants';
+import { BOARD_WIDTH, BOARD_HEIGHT, VISIBLE_BOARD_HEIGHT } from './constants';
 
 /**
  * Checks if a player's piece is colliding with board boundaries or merged cells.
@@ -10,20 +10,29 @@ import { BOARD_WIDTH, BOARD_HEIGHT } from './constants';
  * @param move The attempted move coordinates.
  * @returns True if there is a collision, false otherwise.
  */
-export const isColliding = (player: Player, board: MinoBoard, { x: moveX, y: moveY }: { x: number; y: number }): boolean => {
-    for (let y = 0; y < player.mino.shape.length; y += 1) {
-        for (let x = 0; x < player.mino.shape[y].length; x += 1) {
-            if (player.mino.shape[y][x] !== 0) {
-                const newY = y + player.pos.y + moveY;
-                const newX = x + player.pos.x + moveX;
+export const isColliding = (player: Player, board: MinoBoard, move: { x: number; y: number }): boolean => {
+    const { mino, pos } = player;
+    const { shape } = mino;
+    const { x: moveX, y: moveY } = move;
 
-                if (
-                    newY < 0 || // Off-screen top
-                    newY >= BOARD_HEIGHT || // Off-screen bottom
-                    newX < 0 || // Off-screen left
-                    newX >= BOARD_WIDTH || // Off-screen right
-                    (board[newY] && board[newY][newX][1] !== 'clear') // Piece collision
-                ) {
+    for (let y = 0; y < shape.length; y++) {
+        for (let x = 0; x < shape[y].length; x++) {
+            if (shape[y][x] !== 0) {
+                const newX = pos.x + x + moveX;
+                const newY = pos.y + y + moveY;
+
+                // Wall collision
+                if (newX < 0 || newX >= BOARD_WIDTH) {
+                    return true;
+                }
+                
+                // Floor collision
+                if (newY >= BOARD_HEIGHT) {
+                    return true;
+                }
+                
+                // Board collision - only check within the board's vertical bounds
+                if (newY >= 0 && board[newY] && board[newY][newX] && board[newY][newX][1] !== 'clear') {
                     return true;
                 }
             }
@@ -74,21 +83,42 @@ export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard): MinoBo
 };
 
 /**
- * Clears completed lines from the board.
+ * Clears completed lines from the board with NES-style logic.
  * @param board The board to process.
+ * @param player The current player, to determine which rows to check.
  * @returns An object with the new board and the number of lines cleared.
  */
-export const clearLines = (board: MinoBoard): { newBoard: MinoBoard; linesCleared: number } => {
+export const clearLines = (board: MinoBoard, player: Player): { newBoard: MinoBoard; linesCleared: number } => {
     let linesCleared = 0;
-    const newBoard = board.reduce((ack, row) => {
-        if (row.every(cell => cell[1] === 'merged')) {
+    let newBoard = board.map(row => [...row] as MinoCellData[]);
+
+    // In NES Tetris, line clear checks are centered around the piece's final position.
+    // It checks 4 rows: 2 above the piece's center, the center row, and 1 below.
+    // The "center" is the second block of the piece's internal 4x4 matrix.
+    const checkRowStart = Math.max(0, player.pos.y + 1 - 2);
+    const checkRowEnd = player.pos.y + 1 + 1;
+
+    for (let y = checkRowStart; y <= checkRowEnd && y < BOARD_HEIGHT; y++) {
+        const isFull = newBoard[y].every(cell => cell[1] === 'merged');
+
+        if (isFull) {
             linesCleared++;
-            ack.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
-            return ack;
+            
+            // This is the infamous NES bug. When row 0 (our row 2) is cleared,
+            // the memory copy operation is flawed and shifts the *entire* board data.
+            if (y === 2) { 
+                // Simulate the buggy shift for the top visible row
+                const shiftedBoard = newBoard.slice(1); // Drop the actual top row of the buffer
+                shiftedBoard.push(Array(BOARD_WIDTH).fill([0, 'clear'])); // Add a new empty row at the bottom
+                newBoard = shiftedBoard;
+            } else {
+                // Normal line clear for other rows
+                const clearedRow = newBoard.splice(y, 1)[0];
+                newBoard.unshift(Array(BOARD_WIDTH).fill([0, 'clear']));
+            }
         }
-        ack.push(row);
-        return ack;
-    }, [] as MinoBoard);
+    }
+
     return { newBoard, linesCleared };
 };
 

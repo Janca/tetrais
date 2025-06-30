@@ -4,6 +4,7 @@ import { createEmptyMinoBoard, BOARD_WIDTH, MINOS, BOARD_HEIGHT } from '../const
 import { getPieceSuggestions } from '../services/minosService';
 import { selectBiasedPiece, calculateDropTime } from '../utils/gameHelpers';
 import { soundManager } from '../services/SoundManager';
+import { logToFile } from '../utils/logging';
 import { isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks } from '../gameLogic';
 import { settingsService } from '../services/settingsService';
 import { GameState } from '../App';
@@ -57,17 +58,23 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
 
         const weights = settingsService.getSettings().pieceSuggestionWeights;
         const newPiece = selectBiasedPiece(suggestions, weights);
+
+        // Adjust spawn position to be fully in the "negative" space
+        const spawnY = -newPiece.shape.filter(row => row.some(cell => cell !== 0)).length + 1;
+        const spawnPos = { x: Math.floor(BOARD_WIDTH / 2) - 2, y: spawnY };
+        
         const newPlayer: Player = {
-            pos: { x: Math.floor(BOARD_WIDTH / 2) - 2, y: 0 },
+            pos: spawnPos,
             mino: newPiece,
             collided: false,
         };
 
+        // If the new piece collides immediately, it's game over.
         if (isColliding(newPlayer, currentBoard, { x: 0, y: 0 })) {
             const finalGameOverData = {
                 timestamp: new Date().toISOString(),
                 finalBoard: currentBoard,
-                collidingPlayer: player, // The piece that ended the game
+                collidingPlayer: newPlayer,
                 moveHistory,
                 finalSuggestions: suggestions,
                 finalScore: score,
@@ -75,6 +82,12 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
                 level,
             };
             setGameOverData(finalGameOverData);
+
+            logToFile('game_over.debug', {
+                newPlayer,
+                currentBoard,
+            });
+            logToFile('move_history.debug', moveHistory);
             
             setDropTime(null);
             soundManager.playGameOverSound(true);
@@ -84,10 +97,12 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
             } else {
                 setGameState('GAME_OVER');
             }
-        } else {
-            setPlayer(newPlayer);
+            return;
         }
-    }, [score, lines, level, player, moveHistory]);
+        
+        setPlayer(newPlayer);
+
+    }, [score, lines, level, moveHistory]);
 
     const startGame = useCallback(() => {
         const startBoard = createEmptyMinoBoard();
@@ -102,10 +117,10 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
         setGameState('PLAYING');
     }, [resetPlayer]);
 
-    const handleLineClear = useCallback((boardWithPiece: MinoBoard) => {
+    const handleLineClear = useCallback((boardWithPiece: MinoBoard, player: Player) => {
         if (!physicsEnabled) {
             // --- Traditional Gameplay ---
-            const { newBoard, linesCleared } = clearLines(boardWithPiece);
+            const { newBoard, linesCleared } = clearLines(boardWithPiece, player);
             if (linesCleared > 0) {
                 soundManager.playLineClearSound();
                 const linePoints = [40, 100, 300, 1200];
@@ -180,7 +195,7 @@ export const useGameState = ({ physicsEnabled }: UseGameStateProps) => {
             return;
         }
         const boardWithPiece = mergePlayerToMinoBoard(player, board);
-        handleLineClear(boardWithPiece);
+        handleLineClear(boardWithPiece, player);
 
     }, [player.collided, gameState, board, handleLineClear]);
     

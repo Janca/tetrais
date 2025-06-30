@@ -11,8 +11,11 @@ export interface AppSettings {
     pieceSuggestionWeights: number[];
     physicsEnabled: boolean;
     lowMotionEnabled: boolean;
+    hapticsEnabled: boolean;
     highScores: HighScoreEntry[];
     lastPlayerName: string;
+    ghostPiece: boolean;
+    autoRestart: boolean;
 }
 
 const STORAGE_KEY = 'tetrais-settings';
@@ -31,8 +34,11 @@ class SettingsService {
         pieceSuggestionWeights: [0.60, 0.15, 0.10, 0.05, 0.05, 0.025, 0.025],
         physicsEnabled: false,
         lowMotionEnabled: false,
+        hapticsEnabled: true,
         highScores: [],
-        lastPlayerName: 'Player'
+        lastPlayerName: 'Player',
+        ghostPiece: true,
+        autoRestart: false
     };
 
     constructor() {

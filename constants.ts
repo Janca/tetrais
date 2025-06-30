@@ -1,7 +1,9 @@
 import { MinoBoard, Mino, PieceKey } from './types';
 
 export const BOARD_WIDTH = 10;
-export const BOARD_HEIGHT = 20;
+export const BOARD_HEIGHT = 22;
+
+export const VISIBLE_BOARD_HEIGHT = 20;
 
 export const createEmptyMinoBoard = (): MinoBoard => 
     Array.from({ length: BOARD_HEIGHT }, (): [0, 'clear'][] => 

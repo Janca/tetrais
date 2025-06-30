@@ -1,0 +1,1610 @@
+[
+  {
+    "gameTime": 1751228224212,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "O",
+        "shape": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228224890,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "O",
+        "shape": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228224955,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 2,
+        "y": 0
+      },
+      "mino": {
+        "key": "O",
+        "shape": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228225135,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 2,
+        "y": 1
+      },
+      "mino": {
+        "key": "O",
+        "shape": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228225316,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "mino": {
+        "key": "O",
+        "shape": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228225547,
+    "action": "hardDrop",
+    "player": {
+      "pos": {
+        "x": 0,
+        "y": 1
+      },
+      "mino": {
+        "key": "O",
+        "shape": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228225554,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 0,
+        "y": 18
+      },
+      "mino": {
+        "key": "O",
+        "shape": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228225564,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228225956,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228226227,
+    "action": "rotate",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "direction": "cw"
+    }
+  },
+  {
+    "gameTime": 1751228226936,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228226958,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 2,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228227295,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 2,
+        "y": 2
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228227577,
+    "action": "hardDrop",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 2
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228227586,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 17
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228227596,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228227960,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228228150,
+    "action": "rotate",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "direction": "cw"
+    }
+  },
+  {
+    "gameTime": 1751228228434,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228228631,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 2,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228228961,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228228965,
+    "action": "hardDrop",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228228972,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 16
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228228980,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228229466,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": 1
+    }
+  },
+  {
+    "gameTime": 1751228229962,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 4,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228230541,
+    "action": "rotate",
+    "player": {
+      "pos": {
+        "x": 4,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "direction": "cw"
+    }
+  },
+  {
+    "gameTime": 1751228230753,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 4,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228230964,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228230969,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 2
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228231230,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 2,
+        "y": 2
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": -1
+    }
+  },
+  {
+    "gameTime": 1751228231465,
+    "action": "hardDrop",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 2
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228231473,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 1,
+        "y": 14
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228231482,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228231754,
+    "action": "move",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "dir": 1
+    }
+  },
+  {
+    "gameTime": 1751228231965,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 4,
+        "y": 0
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228232181,
+    "action": "rotate",
+    "player": {
+      "pos": {
+        "x": 4,
+        "y": 1
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    },
+    "details": {
+      "direction": "cw"
+    }
+  },
+  {
+    "gameTime": 1751228232866,
+    "action": "hardDrop",
+    "player": {
+      "pos": {
+        "x": 4,
+        "y": 1
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228232874,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 4,
+        "y": 17
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228232882,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228232967,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228233968,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228234969,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 2
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228235739,
+    "action": "hardDrop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 3
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228235746,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 12
+      },
+      "mino": {
+        "key": "S",
+        "shape": [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228235755,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228235960,
+    "action": "hardDrop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  },
+  {
+    "gameTime": 1751228235968,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 10
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228235977,
+    "action": "drop",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 10
+      },
+      "mino": {
+        "key": "Z",
+        "shape": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": true
+    }
+  },
+  {
+    "gameTime": 1751228235977,
+    "action": "softDrop_end",
+    "player": {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "mino": {
+        "key": "I",
+        "shape": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "color": "#000000"
+      },
+      "collided": false
+    }
+  }
+]

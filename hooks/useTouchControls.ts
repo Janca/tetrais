@@ -1,4 +1,5 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
+import { Player } from '../types';
 
 interface TouchControlProps {
     targetRef: React.RefObject<HTMLElement>;
@@ -6,20 +7,47 @@ interface TouchControlProps {
     movePlayer: (dir: -1 | 1) => void;
     rotatePlayer: (direction: 'cw' | 'ccw') => void;
     hardDrop: () => void;
+    drop: () => void;
     softDropStart: () => void;
     softDropEnd: () => void;
+    hapticsEnabled: boolean;
+    player: Player;
 }
 
-// --- Gesture Timing & Sensitivity Settings ---
-// The minimum pixel distance to qualify as a swipe.
-const SWIPE_THRESHOLD_PX = 40;
-// The maximum duration in ms for a gesture to be considered a tap.
-const TAP_TIME_THRESHOLD_MS = 200;
-// The maximum pixel distance a touch can move to still be a tap.
-const TAP_DISTANCE_THRESHOLD_PX = 20;
-// The time window in ms after a downward swipe where a tap will trigger a hard drop.
-const HARD_DROP_TAP_WINDOW_MS = 300;
+const MOVEMENT_INTERVAL_MS = 50;
+const SWIPE_DISTANCE_THRESHOLD = 30;
+const TAP_DURATION_THRESHOLD = 200;
+const TAP_DISTANCE_THRESHOLD = 20;
 
+const triggerHapticFeedback = (enabled: boolean) => {
+    if (!enabled || typeof navigator === 'undefined' || !navigator.vibrate) return;
+    navigator.vibrate(50);
+};
+
+/**
+ * KEEP THIS COMMENT
+ *
+ * This implementation provides touch controls for the game, including piece movement, rotation, soft drop, and hard drop.
+ * It is written from scratch without external gesture libraries, using React hooks and native touch events.
+ *
+ * HOW TOUCH CONTROLS WORK
+ *
+ * Piece Strafing (Left-Right Movement)
+ * Strafing is initiated by dragging horizontally. Once initiated, the piece moves based on the drag distance.
+ *
+ * Piece Rotation
+ * Rotation is performed by a single, short tap on the play area, rotating the piece clockwise.
+ *
+ * Piece Hard Drop
+ * A quick swipe up triggers a hard drop, instantly placing the piece. This is a fire-once-per-gesture action.
+ *
+ * Piece Soft Drop
+ * A downward swipe initiates a soft drop. Holding the touch continues the drop at 50ms intervals. This is ignored if already strafing.
+ *
+ * The pause functionality has been decoupled from gestures and is intended to be handled by a UI button.
+ */
+
+export type GestureDebugMode = 'N' | 'L' | 'R' | 'D' | 'H' | 'T'; // None, Left, Right, Drop, Hard-Drop, Tap
 
 export const useTouchControls = ({
     targetRef,
@@ -27,140 +55,159 @@ export const useTouchControls = ({
     movePlayer,
     rotatePlayer,
     hardDrop,
+    drop,
     softDropStart,
     softDropEnd,
+    hapticsEnabled,
+    player
 }: TouchControlProps) => {
-    const touchStartX = useRef(0);
-    const touchStartY = useRef(0);
-    const touchStartTime = useRef(0);
-    const isSwipingDown = useRef(false);
-    const justSwipedDown = useRef(false);
-    const hardDropTimeout = useRef<number | null>(null);
+    const blockWidth = useRef(0);
+    const movementInterval = useRef<number | null>(null);
+    const [gestureMode, setGestureMode] = useState<GestureDebugMode>('N');
+
+    const touchState = useRef({
+        touchStartTime: 0,
+        touchStartPos: { x: 0, y: 0 },
+        lastMovePos: { x: 0, y: 0 },
+        hardDropFired: false,
+    });
+
+    const resetTouchState = useCallback(() => {
+        stopMovementInterval();
+        setGestureMode('N');
+
+        touchState.current = {
+            touchStartTime: 0,
+            touchStartPos: { x: 0, y: 0 },
+            lastMovePos: { x: 0, y: 0 },
+            hardDropFired: false,
+        }
+    }, []);
+
+    const stopMovementInterval = useCallback(() => {
+        softDropEnd();
+        if (movementInterval.current) {
+            clearInterval(movementInterval.current);
+            movementInterval.current = null;
+        }
+    }, []);
 
     const handleTouchStart = useCallback((e: TouchEvent) => {
-        if (!enabled || e.touches.length !== 1) return;
-        
-        // If a tap occurs shortly after a downward swipe, trigger a hard drop.
-        if (justSwipedDown.current) {
-            e.preventDefault();
-            hardDrop();
-            justSwipedDown.current = false;
-            if (hardDropTimeout.current) clearTimeout(hardDropTimeout.current);
-            return;
-        }
+        if (!enabled) return;
+        if (e.cancelable) e.preventDefault();
 
-        // Record initial touch properties.
-        touchStartX.current = e.touches[0].clientX;
-        touchStartY.current = e.touches[0].clientY;
-        touchStartTime.current = new Date().getTime();
-        isSwipingDown.current = false;
-
-    }, [enabled, hardDrop]);
+        stopMovementInterval();
+        const touch = e.touches[0];
+        touchState.current = {
+            touchStartTime: Date.now(),
+            touchStartPos: { x: touch.clientX, y: touch.clientY },
+            lastMovePos: { x: touch.clientX, y: touch.clientY },
+            hardDropFired: false,
+        };
+        setGestureMode('N');
+    }, [enabled, stopMovementInterval]);
 
     const handleTouchMove = useCallback((e: TouchEvent) => {
-        if (!enabled || e.touches.length !== 1) return;
-        
-        const deltaX = e.touches[0].clientX - touchStartX.current;
-        const deltaY = e.touches[0].clientY - touchStartY.current;
+        if (!enabled || touchState.current.touchStartTime === 0) return;
+        if (e.cancelable) e.preventDefault();
 
-        // If moving down significantly more than horizontally, start a soft drop.
-        if (deltaY > SWIPE_THRESHOLD_PX && deltaY > Math.abs(deltaX)) {
-             if (!isSwipingDown.current) {
-                isSwipingDown.current = true;
-                softDropStart();
-            }
-        }
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - touchState.current.touchStartPos.x;
+        const deltaY = touch.clientY - touchState.current.touchStartPos.y;
 
-        // Prevent page scroll while swiping on the game area.
-        if (isSwipingDown.current || Math.abs(deltaX) > TAP_DISTANCE_THRESHOLD_PX || Math.abs(deltaY) > TAP_DISTANCE_THRESHOLD_PX) {
-            e.preventDefault();
-        }
-
-    }, [enabled, softDropStart]);
-
-    const handleTouchEnd = useCallback((e: TouchEvent) => {
-        if (!enabled || e.changedTouches.length !== 1) return;
-
-        // Clean up any pending hard drop state.
-        if (hardDropTimeout.current) clearTimeout(hardDropTimeout.current);
-        hardDropTimeout.current = null;
-        
-        // This is reset later by a timer, but good to clear here too.
-        if (!justSwipedDown.current) {
-             justSwipedDown.current = false;
-        }
-        
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-        const touchEndTime = new Date().getTime();
-
-        const deltaX = touchEndX - touchStartX.current;
-        const deltaY = touchEndY - touchStartY.current;
-        const deltaTime = touchEndTime - touchStartTime.current;
-
-        // If we were swiping down, end the soft drop and start hard drop timer.
-        if (isSwipingDown.current) {
-            softDropEnd();
-            isSwipingDown.current = false;
-            
-            justSwipedDown.current = true;
-            hardDropTimeout.current = window.setTimeout(() => {
-                justSwipedDown.current = false;
-            }, HARD_DROP_TAP_WINDOW_MS);
-            return;
-        }
-
-        // Tap Detection: If move time and distance are small.
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        if (deltaTime < TAP_TIME_THRESHOLD_MS && distance < TAP_DISTANCE_THRESHOLD_PX) {
-            rotatePlayer('cw');
-            return;
-        }
-
-        // Swipe Detection: If move distance is large.
-        if (deltaTime < 500) { // Ignore slow drags
-            if (Math.abs(deltaX) > Math.abs(deltaY)) { // Horizontal swipe
-                if (deltaX > SWIPE_THRESHOLD_PX) {
-                    movePlayer(1); // Right
-                } else if (deltaX < -SWIPE_THRESHOLD_PX) {
-                    movePlayer(-1); // Left
+        if (gestureMode === 'N') {
+            if (Math.abs(deltaX) > SWIPE_DISTANCE_THRESHOLD || Math.abs(deltaY) > SWIPE_DISTANCE_THRESHOLD) {
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    setGestureMode(deltaX > 0 ? 'R' : 'L');
+                } else {
+                    if (deltaY > 0) {
+                        setGestureMode('D');
+                        softDropStart();
+                    } else {
+                        setGestureMode('H');
+                    }
                 }
             }
-            // Vertical swipes up are ignored. Downward handled by touchMove/isSwipingDown.
+            return;
         }
 
-    }, [enabled, softDropEnd, rotatePlayer, movePlayer]);
+        switch (gestureMode) {
+            case 'L':
+            case 'R':
+                if (blockWidth.current > 0) {
+                    const moves = Math.trunc((touch.clientX - touchState.current.lastMovePos.x) / blockWidth.current);
+                    if (moves !== 0) {
+                        movePlayer(moves > 0 ? 1 : -1);
+                        touchState.current.lastMovePos.x = touch.clientX;
+                    }
+                }
+                break;
+            case 'D':
+                // if (!movementInterval.current) {
+                //     drop(); // Initial drop
+                //     movementInterval.current = window.setInterval(drop, MOVEMENT_INTERVAL_MS);
+                // }
+                break;
+            case 'H':
+                if (!touchState.current.hardDropFired) {
+                    hardDrop();
+                    triggerHapticFeedback(hapticsEnabled);
+                    touchState.current.hardDropFired = true;
+                }
+                break;
+        }
+    }, [enabled, gestureMode, movePlayer, drop, hardDrop, hapticsEnabled]);
 
-     const handleTouchCancel = useCallback(() => {
+    const handleTouchEnd = useCallback((e: TouchEvent) => {
         if (!enabled) return;
+        if (e.cancelable) e.preventDefault()
+            
+        softDropEnd();
+        stopMovementInterval();
 
-        // Ensure state is reset if the touch is interrupted (e.g., by system UI).
-        if (isSwipingDown.current) {
-            softDropEnd();
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - touchState.current.touchStartTime;
+        const touch = e.changedTouches[0];
+        const deltaX = touch.clientX - touchState.current.touchStartPos.x;
+        const deltaY = touch.clientY - touchState.current.touchStartPos.y;
+
+        if (gestureMode === 'N' && touchDuration < TAP_DURATION_THRESHOLD && Math.abs(deltaX) < TAP_DISTANCE_THRESHOLD && Math.abs(deltaY) < TAP_DISTANCE_THRESHOLD) {
+            setGestureMode('T');
+            rotatePlayer('cw');
+            triggerHapticFeedback(hapticsEnabled);
         }
-        isSwipingDown.current = false;
-        justSwipedDown.current = false;
-        if (hardDropTimeout.current) clearTimeout(hardDropTimeout.current);
 
-    }, [enabled, softDropEnd]);
+        resetTouchState();
+    }, [enabled, gestureMode, rotatePlayer, hapticsEnabled, stopMovementInterval]);
 
     useEffect(() => {
         const targetElement = targetRef.current;
-        if (!targetElement) return;
+        if (targetElement && enabled) {
+            blockWidth.current = targetElement.getBoundingClientRect().width / 10;
+            targetElement.style.touchAction = 'none';
 
-        // Use passive: false to allow preventDefault() to stop scrolling.
-        const options = { passive: false };
+            targetElement.addEventListener('touchstart', handleTouchStart, { passive: false });
+            targetElement.addEventListener('touchmove', handleTouchMove, { passive: false });
+            targetElement.addEventListener('touchend', handleTouchEnd, { passive: false });
+            targetElement.addEventListener('touchcancel', handleTouchEnd, { passive: false });
 
-        targetElement.addEventListener('touchstart', handleTouchStart, options);
-        targetElement.addEventListener('touchmove', handleTouchMove, options);
-        targetElement.addEventListener('touchend', handleTouchEnd);
-        targetElement.addEventListener('touchcancel', handleTouchCancel);
+            return () => {
+                if (targetElement) {
+                    targetElement.style.touchAction = '';
+                    targetElement.removeEventListener('touchstart', handleTouchStart);
+                    targetElement.removeEventListener('touchmove', handleTouchMove);
+                    targetElement.removeEventListener('touchend', handleTouchEnd);
+                    targetElement.removeEventListener('touchcancel', handleTouchEnd);
+                }
+                stopMovementInterval();
+            };
+        }
+    }, [targetRef, enabled, handleTouchStart, handleTouchMove, handleTouchEnd, stopMovementInterval]);
 
-        return () => {
-            targetElement.removeEventListener('touchstart', handleTouchStart);
-            targetElement.removeEventListener('touchmove', handleTouchMove);
-            targetElement.removeEventListener('touchend', handleTouchEnd);
-            targetElement.removeEventListener('touchcancel', handleTouchCancel);
-        };
-    }, [targetRef, enabled, handleTouchStart, handleTouchMove, handleTouchEnd, handleTouchCancel]);
+    useEffect(() => {
+        softDropEnd();
+        resetTouchState();
+    }, [player.mino.key, player.collided]);
+
+    return { gestureMode };
 };

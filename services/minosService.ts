@@ -2,10 +2,24 @@ import { MinoBoard, Player, Mino, PieceKey } from '../types';
 import { BOARD_WIDTH, BOARD_HEIGHT, PIECE_KEYS, MINOS } from '../constants';
 import { isColliding, rotate } from '../gameLogic';
 
+const getNegativeSpacePenalty = (board: MinoBoard): number => {
+    let penalty = 0;
+    // Only penalize blocks in the top two rows (the "negative" space)
+    for (let y = 0; y < 2; y++) {
+        for (let x = 0; x < BOARD_WIDTH; x++) {
+            if (board[y][x][1] === 'merged') {
+                // Apply a smaller penalty for using the negative space
+                penalty += 0.1;
+            }
+        }
+    }
+    return penalty;
+};
+
 const getAggregateHeight = (board: MinoBoard): number => {
     let totalHeight = 0;
     for (let x = 0; x < BOARD_WIDTH; x++) {
-        for (let y = 0; y < BOARD_HEIGHT; y++) {
+        for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
             if (board[y][x][1] === 'merged') {
                 totalHeight += (BOARD_HEIGHT - y);
                 break;
@@ -19,7 +33,7 @@ const getHoles = (board: MinoBoard): number => {
     let holes = 0;
     for (let x = 0; x < BOARD_WIDTH; x++) {
         let blockFound = false;
-        for (let y = 0; y < BOARD_HEIGHT; y++) {
+        for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
             if (board[y][x][1] === 'merged') {
                 blockFound = true;
             } else if (blockFound && board[y][x][1] === 'clear') {
@@ -35,7 +49,7 @@ const getBumpiness = (board: MinoBoard): number => {
     const heights = [];
     for (let x = 0; x < BOARD_WIDTH; x++) {
         let height = 0;
-        for (let y = 0; y < BOARD_HEIGHT; y++) {
+        for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
             if (board[y][x][1] === 'merged') {
                 height = BOARD_HEIGHT - y;
                 break;
@@ -63,7 +77,7 @@ const getWells = (board: MinoBoard): number => {
     let wellScore = 0;
     const heights = Array(BOARD_WIDTH).fill(0);
     for (let x = 0; x < BOARD_WIDTH; x++) {
-        for (let y = 0; y < BOARD_HEIGHT; y++) {
+        for (let y = 2; y < BOARD_HEIGHT; y++) { // Start from the visible board
             if (board[y][x][1] === 'merged') {
                 heights[x] = BOARD_HEIGHT - y;
                 break;
@@ -85,29 +99,36 @@ const getWells = (board: MinoBoard): number => {
 };
 
 
+const getTopRowClearBonus = (board: MinoBoard): number => {
+    // Check if the top visible row (row 2) is one block away from being full
+    const topVisibleRow = board[2];
+    const blocksInRow = topVisibleRow.filter(cell => cell[1] === 'merged').length;
+    if (blocksInRow === BOARD_WIDTH - 1) {
+        // This is a huge bonus because it can lead to a buggy Tetris
+        return 50;
+    }
+    return 0;
+};
+
 const evaluateBoard = (board: MinoBoard): number => {
     const height = getAggregateHeight(board);
     const holes = getHoles(board);
     const bumpiness = getBumpiness(board);
     const lines = getLinesCleared(board);
     const wells = getWells(board);
+    const negativeSpacePenalty = getNegativeSpacePenalty(board);
+    const topRowClearBonus = getTopRowClearBonus(board);
 
-    // Weights adjusted to maximize "pain" by heavily penalizing bad board states.
-    return (lines * 8) - (height * 0.6) - (holes * 5) - (bumpiness * 0.3) - (wells * 2);
+    // Weights adjusted to maximize "pain" by heavily penalizing bad board states,
+    // but also recognizing the strategic value of the new mechanics.
+    return (lines * 8) - (height * 0.6) - (holes * 5) - (bumpiness * 0.3) - (wells * 2) - negativeSpacePenalty + topRowClearBonus;
 };
 
 export const getPieceSuggestions = (board: MinoBoard): Mino[] => {
     const pieceScores: { pieceKey: PieceKey; score: number }[] = [];
 
-    const isBoardEmpty = board.every(row => row.every(cell => cell[1] === 'clear'));
-    
     for (const pieceKey of PIECE_KEYS) {
         const piece = MINOS[pieceKey];
-         if (isBoardEmpty) {
-            pieceScores.push({ pieceKey, score: 0 });
-            continue;
-        }
-
         let bestScoreForThisPiece = -Infinity;
         
         let currentPieceShape = piece.shape;
@@ -177,13 +198,9 @@ export const getPieceSuggestions = (board: MinoBoard): Mino[] => {
         pieceScores.push({ pieceKey, score: bestScoreForThisPiece });
     }
     
-    if (isBoardEmpty) {
-        pieceScores.sort(() => Math.random() - 0.5);
-    } else {
-        // Sort from worst score (lowest) to best score (highest).
-        // This makes index 0 the "least efficient" piece.
-        pieceScores.sort((a, b) => a.score - b.score);
-    }
+    // Sort from worst score (lowest) to best score (highest).
+    // This makes index 0 the "least efficient" piece.
+    pieceScores.sort((a, b) => a.score - b.score);
 
     return pieceScores.map(item => MINOS[item.pieceKey]);
 };

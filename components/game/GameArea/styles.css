@@ -19,8 +19,27 @@
         var(--glitch-c-x2) var(--glitch-c-y2) 0px var(--glitch-cyan);
     transition: box-shadow 50ms ease-in-out;
 }
+
+.gameboard-wrapper > .gameboard-grid,
+.gameboard-wrapper > .gameboard-background-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gameboard-wrapper > .gameboard-background-effects {
+    z-index: 1;
+}
+
+.gameboard-wrapper > .gameboard-grid {
+    z-index: 2;
+}
+
 .settings-button,
-.highscore-button {
+.highscore-button,
+.pause-button {
     background: none;
     border: none;
     font-family: 'Share Tech Mono', monospace;
@@ -36,7 +55,8 @@
     margin-top: 1rem;
 }
 .settings-button:hover, .settings-button:focus,
-.highscore-button:hover, .highscore-button:focus {
+.highscore-button:hover, .highscore-button:focus,
+.pause-button:hover, .pause-button:focus {
     color: var(--foreground);
     border-color: var(--foreground);
     outline: none;

@@ -6,7 +6,7 @@
 }
 
 .highscore-title {
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: center;
     letter-spacing: 0.2em;
     margin-bottom: 1rem;
@@ -17,18 +17,26 @@
 .highscore-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .highscore-table th, .highscore-table td {
-    padding: 0.5rem;
-    text-align: center;
+    padding: 0.25rem;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+.highscore-table th:first-child, .highscore-table td:first-child {
+    text-align: left;
+}
+
+.highscore-table th:nth-child(2), .highscore-table td:nth-child(2) {
+    text-align: left;
 }
 
 .highscore-table th {
     font-weight: normal;
     color: var(--foreground-light);
-    font-size: 0.8rem;
     letter-spacing: 0.1em;
 }
 
@@ -37,9 +45,5 @@
 }
 
 .highscore-table td:nth-child(2) {
-    text-align: left;
     font-weight: bold;
-}
-.highscore-table td:nth-child(3) {
-    text-align: right;
 }

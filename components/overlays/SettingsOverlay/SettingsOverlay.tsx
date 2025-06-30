@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { OverlayContainer } from '../../ui/OverlayContainer/OverlayContainer';
 import { MinimalButton } from '../../ui/MinimalButton/MinimalButton';
 import { Slider } from '../../ui/Slider/Slider';
@@ -23,6 +23,8 @@ interface SettingsOverlayProps {
     onOtherVolumeChange: (value: number) => void;
     lowMotionEnabled: boolean;
     onLowMotionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    hapticsEnabled: boolean;
+    onHapticsChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
@@ -43,7 +45,29 @@ export const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
     onOtherVolumeChange,
     lowMotionEnabled,
     onLowMotionChange,
+    hapticsEnabled,
+    onHapticsChange,
 }) => {
+    const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement);
+
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+        };
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    }, []);
+
+    const handleFullscreenToggle = () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    };
+
     return (
         <OverlayContainer>
             <button onClick={onClose} className="close-button chromatic-text" aria-label="Close settings">&times;</button>
@@ -55,6 +79,18 @@ export const SettingsOverlay: React.FC<SettingsOverlayProps> = ({
                     checked={lowMotionEnabled}
                     onChange={onLowMotionChange}
                     id="low-motion-toggle"
+                />
+                <ToggleSwitch
+                    label="Haptics"
+                    checked={hapticsEnabled}
+                    onChange={onHapticsChange}
+                    id="haptics-toggle"
+                />
+                <ToggleSwitch
+                    label="Fullscreen"
+                    checked={isFullscreen}
+                    onChange={handleFullscreenToggle}
+                    id="fullscreen-toggle"
                 />
             </div>
 

@@ -22,7 +22,7 @@ export const PieceSuggestionsPreview: React.FC<{ pieces: Mino[], weights: number
                             <div className="piece-grid-container">
                                 <div
                                     className="piece-preview-grid"
-                                    style={{ gridTemplateColumns: `repeat(${gridCols}, 0.75rem)` }}
+                                    style={{ gridTemplateColumns: `repeat(${gridCols}, clamp(1dvw, 1.5dvw, 0.75rem))` }}
                                 >
                                     {piece.shape.map((row, y) =>
                                         row.map((cell, x) => (

@@ -22,19 +22,23 @@
 
 .settings-section {
     width: 80%;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: 1.5rem;
+    padding-top: 1rem;
 }
 
 .settings-section:first-of-type {
     border-top: none;
     margin-top: 0;
     padding-top: 0;
+}
+
+.settings-section .toggle-switch-container {
+    margin-bottom: 4px;
 }
 
 

@@ -7,7 +7,6 @@ import { useGameControls } from './hooks/useGameControls';
 import { useGameLoop } from './hooks/useGameLoop';
 import { useGameAudio } from './hooks/useGameAudio';
 import { useGlitchEffect } from './hooks/useGlitchEffect';
-import { useTouchControls } from './hooks/useTouchControls';
 
 import { SettingsOverlay } from './components/overlays/SettingsOverlay/SettingsOverlay';
 import { HighScoreEntryOverlay } from './components/overlays/HighScoreEntryOverlay/HighScoreEntryOverlay';
@@ -15,12 +14,19 @@ import { HighScoresOverlay } from './components/overlays/HighScoresOverlay/HighS
 import { GameArea } from './components/game/GameArea/GameArea';
 import { PieceSuggestionsPreview } from './components/info/PieceSuggestionsPreview/PieceSuggestionsPreview';
 import { ControlsInfo } from './components/info/ControlsInfo/ControlsInfo';
+import DebugOverlay from './components/ui/DebugOverlay/DebugOverlay';
 import { calculateDropTime } from './utils/gameHelpers';
 import { settingsService } from './services/settingsService';
 import { soundManager } from './services/SoundManager';
 import { MoveRecord, Mino } from './types';
 
-export type ShakeType = 'none' | 'left' | 'center' | 'right' | 'low-motion';
+export type ShakeType =
+    | 'none'
+    | 'low-motion'
+    | 'left-1' | 'center-1' | 'right-1'
+    | 'left-2' | 'center-2' | 'right-2'
+    | 'left-3' | 'center-3' | 'right-3';
+
 export type GameState = 'IDLE' | 'PLAYING' | 'GAME_OVER' | 'CASCADING' | 'HIGH_SCORE_ENTRY';
 
 const App: React.FC = () => {
@@ -29,17 +35,24 @@ const App: React.FC = () => {
     const [isPaused, setIsPaused] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isHighScoresOpen, setIsHighScoresOpen] = useState(false);
-    const gameContainerRef = useRef<HTMLDivElement>(null);
+    const appContainerRef = useRef<HTMLDivElement>(null);
 
     // Persisted Settings State
     const [pieceSuggestionWeights] = useState(() => settingsService.getSettings().pieceSuggestionWeights);
     const [physicsEnabled] = useState(() => settingsService.getSettings().physicsEnabled);
     const [lowMotionEnabled, setLowMotionEnabled] = useState(() => settingsService.getSettings().lowMotionEnabled);
+    const [hapticsEnabled, setHapticsEnabled] = useState(() => settingsService.getSettings().hapticsEnabled);
 
     const handleLowMotionChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const enabled = event.target.checked;
         setLowMotionEnabled(enabled);
         settingsService.updateSetting('lowMotionEnabled', enabled);
+    }, []);
+
+    const handleHapticsChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        const enabled = event.target.checked;
+        setHapticsEnabled(enabled);
+        settingsService.updateSetting('hapticsEnabled', enabled);
     }, []);
 
     // Game State Hook
@@ -57,13 +70,13 @@ const App: React.FC = () => {
         handleMelodyVolumeChange, handleBassVolumeChange, handlePercussionVolumeChange, handlePadVolumeChange, handleOtherVolumeChange
     } = useGameAudio(gameState, isPaused, isSettingsOpen, isHighScoresOpen);
     useGlitchEffect(lowMotionEnabled);
-    
+
     const toggleSettings = () => {
         handleUserInteraction();
         setIsSettingsOpen(prev => !prev);
     };
 
-    const toggleHighScores = () => {
+    const toggleHighScores = ()=> {
         handleUserInteraction();
         setIsHighScoresOpen(prev => !prev);
     };
@@ -113,7 +126,7 @@ const App: React.FC = () => {
         };
 
         const jsonString = JSON.stringify(debugData, null, 2);
-        
+
         const blob = new Blob([jsonString], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -145,26 +158,29 @@ const App: React.FC = () => {
             setShakeType('low-motion');
             return;
         }
+
+        const shakeVariation = Math.floor(Math.random() * 3) + 1;
+
         // BOARD_WIDTH is 10.
         // Left third: < 3.5, Center: 3.5-6.5, Right third: > 6.5
         if (pieceCenter < 3.5) {
-            setShakeType('left');
+            setShakeType(`left-${shakeVariation}` as ShakeType);
         } else if (pieceCenter > 6.5) {
-            setShakeType('right');
+            setShakeType(`right-${shakeVariation}` as ShakeType);
         } else {
-            setShakeType('center');
+            setShakeType(`center-${shakeVariation}` as ShakeType);
         }
     }, [lowMotionEnabled]);
-    
+
     const { movePlayer, rotatePlayer, drop, hardDrop } = usePlayerActions({
         player, board, updatePlayerPos, setPlayer, gameState, isPaused, isSettingsOpen, isHighScoresOpen, dropTime,
         onHardDrop: triggerShake,
         recordMove,
     });
-    
+
     // Game Loop Hook
     useGameLoop(drop, dropTime, gameState, isPaused, isSettingsOpen, isHighScoresOpen);
-    
+
     // Shared drop logic for keyboard and touch
     const resetDropTime = useCallback(() => {
         if (gameState === 'PLAYING') {
@@ -185,7 +201,7 @@ const App: React.FC = () => {
             resetDropTime();
         }
     }, [gameState, isPaused, isSettingsOpen, isHighScoresOpen, player, recordMove, resetDropTime]);
-    
+
     // Auto-adjust drop time and music speed when level changes (lines are updated)
     useEffect(() => {
         const isSoftDropping = dropTime !== null && dropTime <= 50;
@@ -196,37 +212,29 @@ const App: React.FC = () => {
             }
         }
     }, [lines, gameState, isPaused, isSettingsOpen, isHighScoresOpen, dropTime, resetDropTime]);
-    
+
     // Controls Hooks
     const { handleKeyDown, handleKeyUp } = useGameControls({
         gameState, isPaused, isSettingsOpen, isHighScoresOpen, movePlayer, rotatePlayer,
         hardDrop, togglePause, softDropStart, softDropEnd,
     });
 
-    useTouchControls({
-        targetRef: gameContainerRef,
-        enabled: gameState === 'PLAYING' && !isPaused && !isSettingsOpen && !isHighScoresOpen,
-        movePlayer,
-        rotatePlayer,
-        hardDrop,
-        softDropStart,
-        softDropEnd,
-    });
-
     // Focus & Scroll Management
     useEffect(() => {
+        const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
         const isLocked = gameState === 'PLAYING' && !isPaused && !isSettingsOpen && !isHighScoresOpen;
-        document.body.style.overflow = isLocked ? 'hidden' : 'auto';
+
+        document.body.style.overflow = (isLocked || isMobile) ? 'hidden' : 'auto';
 
         if (isLocked) {
-            gameContainerRef.current?.focus();
+            appContainerRef.current?.focus();
         }
-        
+
         return () => {
-             document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto';
         }
     }, [gameState, isPaused, isSettingsOpen, isHighScoresOpen]);
-    
+
     // Shake effect timer
     useEffect(() => {
         if (shakeType !== 'none') {
@@ -246,9 +254,9 @@ const App: React.FC = () => {
     }, [handleKeyDown, handleKeyUp]);
 
     return (
-        <div ref={gameContainerRef} className="app-container" tabIndex={-1}>
+        <div ref={appContainerRef} className="app-container" tabIndex={-1}>
             {isSettingsOpen && (
-                <SettingsOverlay 
+                <SettingsOverlay
                     onClose={toggleSettings}
                     musicVolume={musicVolume}
                     onMusicVolumeChange={handleMusicVolumeChange}
@@ -266,11 +274,13 @@ const App: React.FC = () => {
                     onOtherVolumeChange={handleOtherVolumeChange}
                     lowMotionEnabled={lowMotionEnabled}
                     onLowMotionChange={handleLowMotionChange}
+                    hapticsEnabled={hapticsEnabled}
+                    onHapticsChange={handleHapticsChange}
                 />
             )}
 
             {isHighScoresOpen && <HighScoresOverlay onClose={toggleHighScores} />}
-            
+
             {gameState === 'HIGH_SCORE_ENTRY' && gameOverData && (
                 <HighScoreEntryOverlay
                     score={gameOverData.finalScore}
@@ -286,7 +296,7 @@ const App: React.FC = () => {
                             <span className="game-header-label">SCORE</span>
                             <span className="game-header-value chromatic-text-2">{score.toString().padStart(7, '0')}</span>
                         </div>
-                         <div className="game-header-item align-right">
+                        <div className="game-header-item align-right">
                             <span className="game-header-label">LINES</span>
                             <span className="game-header-value chromatic-text-2">{lines}</span>
                         </div>
@@ -301,15 +311,23 @@ const App: React.FC = () => {
                             score={gameOverData?.finalScore ?? score}
                             onStart={fullStartGame}
                             onRestart={handleRestart}
+                            onUnpause={togglePause}
                             shakeType={shakeType}
+                            movePlayer={movePlayer}
+                            rotatePlayer={rotatePlayer}
+                            hardDrop={hardDrop}
+                            softDropStart={softDropStart}
+                            softDropEnd={softDropEnd}
+                            hapticsEnabled={hapticsEnabled}
                         />
                         <PieceSuggestionsPreview
                             pieces={pieceSuggestions}
                             weights={pieceSuggestionWeights}
                         />
                     </div>
-                     <footer className="game-footer">
+                    <footer className="game-footer">
                         <button className="highscore-button" onClick={toggleHighScores}>[ High Scores ]</button>
+                        <button className="pause-button" onClick={togglePause}>[ Pause ]</button>
                         <button className="settings-button" onClick={toggleSettings}>[ Settings ]</button>
                     </footer>
                 </div>

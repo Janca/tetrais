@@ -1,20 +1,33 @@
-.gameboard-background-effects {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-.gameboard-foreground {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-}
 .gameboard-grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(20, 1fr);
     height: 100%;
     width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--foreground);
 }
+
+.gameboard-cell {
+    width: 100%;
+    height: 100%;
+}
+
+.gameboard-cell.merged {
+    background-color: #888;
+}
+
+.player-piece {
+    background-color: black;
+    border: 1px solid var(--foreground);
+    box-shadow: 1px 1px 0 var(--glitch-red), -1px -1px 0 var(--glitch-cyan);
+}
+
+.mino-I { background-color: #00ffff; }
+.mino-J { background-color: #0000ff; }
+.mino-L { background-color: #ff7f00; }
+.mino-O { background-color: #ffff00; }
+.mino-S { background-color: #00ff00; }
+.mino-T { background-color: #800080; }
+.mino-Z { background-color: #ff0000; }
+.mino-0 { background-color: transparent; }
