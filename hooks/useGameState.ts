@@ -236,7 +236,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
             setBoard(boardWithPiece);
             resetPlayer(boardWithPiece);
         }
-    }, [lines, level, physicsEnabled, resetPlayer, player]);
+    }, [lines, level, physicsEnabled, resetPlayer]);
 
     useEffect(() => {
         if (!player.collided || gameState !== 'PLAYING') return;

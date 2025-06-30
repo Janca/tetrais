@@ -88,18 +88,19 @@ export const mergePlayerToMinoBoard = (player: Player, board: MinoBoard, spite: 
  * @returns An object with the new board and the number of lines cleared.
  */
 export const clearLines = (board: MinoBoard): { newBoard: MinoBoard; linesCleared: number } => {
-    const newBoard: MinoBoard = [];
+    let newBoard = board.map(row => row.map(cell => ({ ...cell })));
     let linesCleared = 0;
 
-    const unClearedRows = board.filter(row => !row.every(cell => cell.state === 'merged'));
-    
-    linesCleared = BOARD_HEIGHT - unClearedRows.length;
-
-    for (let i = 0; i < linesCleared; i++) {
-        newBoard.push(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
+    for (let y = newBoard.length - 1; y >= 0; y--) {
+        if (newBoard[y].every(cell => cell.state === 'merged')) {
+            linesCleared++;
+            newBoard.splice(y, 1);
+        }
     }
 
-    newBoard.push(...unClearedRows);
+    for (let i = 0; i < linesCleared; i++) {
+        newBoard.unshift(Array(BOARD_WIDTH).fill({ value: 0, state: 'clear', spite: false }));
+    }
 
     return { newBoard, linesCleared };
 };
