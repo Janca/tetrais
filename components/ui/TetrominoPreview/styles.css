@@ -17,7 +17,7 @@
 
 .piece-preview-grid {
     display: grid;
-    grid-template-columns: repeat(var(--piece-grid-cols, 1), 1fr);
+    grid-template-columns: repeat(var(--piece-grid-cols, 1), var(--preview-grid-size));
     gap: 1px;
     width: fit-content;
 }
