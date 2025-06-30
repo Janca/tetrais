@@ -3,7 +3,7 @@ import { MinoBoard, Player, Mino, MoveRecord, MoveAction, PieceKey } from '@/typ
 import { createEmptyMinoBoard, BOARD_WIDTH, MINOS, BOARD_HEIGHT } from '@/constants';
 import { getPieceSuggestions, selectBiasedPiece, calculateDropTime } from '@utils';
 import { settingsService, soundManager } from '@services';
-import { isGameOver, isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate, calculateGhostPosition } from '@/gameLogic';
+import { isColliding, mergePlayerToMinoBoard, clearLines, markFloatingBlocks, stepCascade, freezeFallingBlocks, rotate, calculateGhostPosition } from '@/gameLogic';
 import { GameState } from '@/App';
 import { logToFile } from '@/utils/logging';
 
@@ -84,7 +84,7 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         
         const newPlayer: Player = { pos: spawnPos, mino: newPiece, collided: false };
 
-        if (isGameOver(newPlayer, currentBoard)) {
+        if (isColliding(newPlayer, currentBoard, { x: 0, y: 0 })) {
             const finalGameOverData = {
                 timestamp: new Date().toISOString(),
                 reason: "New piece spawned and immediately collided with existing blocks in the visible play area.",
