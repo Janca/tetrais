@@ -78,7 +78,8 @@ export const useGameState = ({ physicsEnabled, onHardDrop }: UseGameStateProps) 
         
         mostNeededPieceRef.current = suggestions[suggestions.length - 1].key as PieceKey;
 
-        const spawnY = -newPiece.shape.filter(row => row.some(cell => cell !== 0)).length + 1;
+        const firstBlockRow = newPiece.shape.findIndex(row => row.some(cell => cell !== 0));
+        const spawnY = -firstBlockRow;
         const spawnPos = { x: Math.floor(BOARD_WIDTH / 2) - 2, y: spawnY };
         
         const newPlayer: Player = { pos: spawnPos, mino: newPiece, collided: false };
