@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { OverlayContainer } from '@components/ui/OverlayContainer/OverlayContainer';
-import { MinimalButton } from '@components/ui/MinimalButton/MinimalButton';
-import { Slider } from '@components/ui/Slider/Slider';
-import { ToggleSwitch } from '@components/ui/ToggleSwitch/ToggleSwitch';
+import { OverlayContainer, MinimalButton, Slider, ToggleSwitch } from '@components/ui';
 import './styles.css';
 
 interface SettingsOverlayProps {

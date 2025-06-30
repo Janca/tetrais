@@ -1,2 +1,2 @@
-export * from '@utils/gameplay';
-export * from '@utils/logging';
+export * from './gameplay';
+export * from './logging';

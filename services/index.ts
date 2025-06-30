@@ -1,2 +1,2 @@
-export * from '@services/settingsService';
-export * from '@services/SoundManager';
+export * from './settingsService';
+export * from './SoundManager';

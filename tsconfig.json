@@ -24,11 +24,15 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
+      "@components": ["./components"],
       "@components/*": ["./components/*"],
+      "@hooks": ["./hooks"],
       "@hooks/*": ["./hooks/*"],
+      "@services": ["./services"],
       "@services/*": ["./services/*"],
+      "@utils": ["./utils"],
       "@utils/*": ["./utils/*"],
-      "@/*" :  ["./*"]
+      "@/*": ["./*"]
     }
   }
 }

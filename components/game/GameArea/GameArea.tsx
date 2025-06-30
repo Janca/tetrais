@@ -10,11 +10,9 @@
  * player piece has its own distinct glitch effect on the top layer to make it stand out.
  */
 import React, { useMemo, useRef } from 'react';
-import Gameboard from '@components/game/Gameboard/Gameboard';
-import GameboardBackground from '@components/game/GameboardBackground/GameboardBackground';
-import { StartGameOverlay } from '@components/overlays/StartGameOverlay/StartGameOverlay';
-import { GameOverOverlay } from '@components/overlays/GameOverOverlay/GameOverOverlay';
-import { PauseOverlay } from '@components/overlays/PauseOverlay/PauseOverlay';
+import { Gameboard } from '@components/game';
+import { GameboardBackground } from '@components/game';
+import { StartGameOverlay, GameOverOverlay, PauseOverlay } from '@components/overlays';
 import { MinoBoard, Player } from '@/types';
 import { ShakeType, GameState } from '@/App';
 import { useTouchControls } from '@hooks/useTouchControls';

@@ -1,8 +1,7 @@
 import React from 'react';
-import { OverlayContainer } from '@components/ui/OverlayContainer/OverlayContainer';
-import { MinimalButton } from '@components/ui/MinimalButton/MinimalButton';
-import { HighScoreTable } from '@components/info/HighScoreTable/HighScoreTable';
-import { settingsService } from '@services/settingsService';
+import { OverlayContainer, MinimalButton } from '@components/ui';
+import { HighScoreTable } from '@components/info';
+import { settingsService } from '@services';
 
 export const GameOverOverlay: React.FC<{ score: number; onRestart: (event: React.MouseEvent<HTMLButtonElement>) => void }> = ({ score, onRestart }) => {
     const { highScores } = settingsService.getSettings();

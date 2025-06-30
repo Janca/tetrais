@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { OverlayContainer } from '@components/ui/OverlayContainer/OverlayContainer';
-import { HighScoreTable } from '@components/info/HighScoreTable/HighScoreTable';
-import { settingsService } from '@services/settingsService';
-import { MinimalButton } from '@components/ui/MinimalButton/MinimalButton';
+import { OverlayContainer, MinimalButton } from '@components/ui';
+import { HighScoreTable } from '@components/info';
+import { settingsService } from '@services';
 import './styles.css';
 
 interface HighScoresOverlayProps {
