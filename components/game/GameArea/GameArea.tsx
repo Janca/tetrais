@@ -75,7 +75,7 @@ export const GameArea: React.FC<GameAreaProps> = ({
                  <div className={`gameboard-wrapper ${shakeClass}`}>
                     {gameState === 'IDLE' && <StartGameOverlay onStart={onStart} />}
                     {gameState === 'GAME_OVER' && <GameOverOverlay score={score} onRestart={onRestart} />}
-                    {gameState === 'PLAYING' && isPaused && !isSettingsOpen && <PauseOverlay onUnpause={onUnpause} />}
+                    {gameState === 'PLAYING' && isPaused && !isSettingsOpen && <PauseOverlay onUnpause={onUnpause} onRestart={onRestart} />}
                     
                     {memoizedGameboardBackground}
                     {memoizedGameboard}
